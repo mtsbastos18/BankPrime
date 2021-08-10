@@ -13,7 +13,7 @@ class CreateProfissaoCompradorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('profissao_compradors', function (Blueprint $table) {
+        Schema::create('profissao_compradores', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateProfissaoCompradorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profissao_compradors');
+        Schema::dropIfExists('profissao_compradores');
     }
 }

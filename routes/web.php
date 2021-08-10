@@ -20,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/nova-proposta',[App\Http\Controllers\PropostaController::class,'index'])->name('nova-proposta');

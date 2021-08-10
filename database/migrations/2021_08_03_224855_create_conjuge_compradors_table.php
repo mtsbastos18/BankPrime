@@ -26,6 +26,6 @@ class CreateConjugeCompradorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conjuge_compradors');
+        Schema::dropIfExists('conjuge_compradores');
     }
 }

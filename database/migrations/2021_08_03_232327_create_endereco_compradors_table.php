@@ -37,6 +37,6 @@ class CreateEnderecoCompradorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endereco_compradors');
+        Schema::dropIfExists('endereco_comprador');
     }
 }

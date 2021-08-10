@@ -26,6 +26,6 @@ class CreateImovelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imovels');
+        Schema::dropIfExists('imoveis');
     }
 }

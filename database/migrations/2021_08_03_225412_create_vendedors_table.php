@@ -26,6 +26,6 @@ class CreateVendedorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendedors');
+        Schema::dropIfExists('vendedores');
     }
 }

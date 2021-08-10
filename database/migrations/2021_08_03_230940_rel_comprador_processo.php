@@ -18,7 +18,7 @@ class RelCompradorProcesso extends Migration
             $table->unsignedBigInteger('id_processo');
             $table->foreign('id_processo')->references('id')->on('processos');
             $table->unsignedBigInteger('id_comprador');
-            $table->foreign('id_comprador')->references('id')->on('id_comprador');
+            $table->foreign('id_comprador')->references('id')->on('compradores');
             $table->timestamps();
         });
     }

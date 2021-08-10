@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sistema Tudo Azul - @yield('title')</title>
+  <title>Bank Prime - @yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
 </head>
@@ -203,6 +203,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{{ route('home') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Minhas Propostas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('nova-proposta') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Nova Proposta</p>
                 </a>
               </li>
               <li class="nav-item">

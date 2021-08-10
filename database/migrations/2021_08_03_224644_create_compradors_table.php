@@ -42,6 +42,6 @@ class CreateCompradorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compradors');
+        Schema::dropIfExists('compradores');
     }
 }
