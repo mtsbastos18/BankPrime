@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link text-center">
-      <span class="brand-text font-weight-light">Sistema Tudo Azul</span>
+      <span class="brand-text font-weight-light">Bank Prime</span>
     </a>
 
     <!-- Sidebar -->
@@ -194,7 +194,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
-                Associados
+                Dashboards
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -202,17 +202,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Nova Adesão</p>
+                  <p>Minhas Propostas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Buscar Associado</p>
+                  <p>Administrativo</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
+                  <p>Parceiros</p>
+                </a>
+              </li>
           
         </ul>
       </nav>
