@@ -9,6 +9,11 @@
  <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-12 col-md-2">
+                <a href="{{ route('nova-proposta') }}" class="btn btn-block btn-outline-primary">Nova Proposta</a>
+            </div>
+        </div>
         <div class="row mt-3">
             <div class="col-12">
                 <div class="card card-navy ">

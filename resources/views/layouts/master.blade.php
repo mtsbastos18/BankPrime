@@ -203,20 +203,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              
+            </ul>
+          </li>
+          <li class="nav-item">
                 <a href="{{ route('propostas') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Minhas Propostas</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('nova-proposta') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Nova Proposta</p>
-                </a>
-              </li>
-              
-            </ul>
           </li>
           <li class="nav-item manu-open">
                 <a href="#" class="nav-link">
