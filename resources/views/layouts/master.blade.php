@@ -11,6 +11,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Bank Prime - @yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -200,7 +204,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('home') }}" class="nav-link">
+                <a href="{{ route('propostas') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Minhas Propostas</p>
                 </a>
@@ -211,21 +215,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Nova Proposta</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Administrativo</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item manu-open">
                 <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-file"></i>
-                  <p>Parceiros</p>
+                <i class="nav-icon fas fa-tools"></i> 
+                  <p> Administrativo</p>
+                  <i class="right fas fa-angle-left"></i>
                 </a>
-              </li>
-          
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('parceiros') }}" class="nav-link">
+                    <i class="nav-icon fas fa-file"></i>
+                      <p>Parceiros</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('usuarios') }}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                      <p>Usuários</p>
+                    </a>
+                  </li>
+                </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

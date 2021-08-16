@@ -23,12 +23,12 @@ class CreateProcessosTable extends Migration
             $table->decimal('recursos_proprios');
             $table->decimal('fgts');
             $table->decimal('valor_total_financiado');
+            $table->decimal('valor_total_entrada');
             $table->double('ltv');
             $table->smallInteger('tipo_imovel');
             $table->integer('meses_financiamento');
             $table->string('estado');
-            $table->unsignedBigInteger('id_vendedor');
-            $table->foreign('id_vendedor')->references('id')->on('vendedores');
+            $table->integer('id_vendedor')->nullable();
             $table->unsignedBigInteger('id_imovel');
             $table->foreign('id_imovel')->references('id')->on('imoveis');
             $table->unsignedBigInteger('id_usuario_criacao');

@@ -5,12 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Imovel extends Model
+class Parceiro extends Model
 {
     use HasFactory;
 
-    protected $table = "imoveis";
     protected $fillable = [
+        'tipo',
+        'cnpj',
+        'cpf',
+        'apelido',
+        'nome_fantasia',
+        'razao_social',
+        'email',
+        'email_financeiro',
+        'telefone',
+        'celular',
+        'nome_contato',
         'cep',
         'endereco',
         'numero',
@@ -18,7 +28,8 @@ class Imovel extends Model
         'bairro',
         'cidade',
         'estado',
-        "vagas",
-        'contato_avaliacao',
+        'status'
     ];
+
+
 }

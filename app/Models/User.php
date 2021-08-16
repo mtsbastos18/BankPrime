@@ -19,8 +19,24 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'login',
+        'cpf',
+        'data_nascimento',
+        'sexo',
+        'telefone',
+        'celular',
+        'cep',
+        'endereco',
+        'numero',
+        'complemento',
+        'bairro',
+        'cidade',
+        'uf',
         'password',
+        'id_permissao',
+        'id_parceiro'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,4 +56,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function permissao() {
+        return $this->hasOne(PermissaoUsuario::class,'id','id_permissao');
+    }
 }

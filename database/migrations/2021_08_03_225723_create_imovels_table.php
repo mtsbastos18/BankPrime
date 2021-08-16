@@ -15,6 +15,15 @@ class CreateImovelsTable extends Migration
     {
         Schema::create('imoveis', function (Blueprint $table) {
             $table->id();
+            $table->string('cep');
+            $table->string('endereco');
+            $table->string('numero');
+            $table->string('complemento');
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('estado');
+            $table->integer("vagas");
+            $table->string('contato_avaliacao');
             $table->timestamps();
         });
     }
