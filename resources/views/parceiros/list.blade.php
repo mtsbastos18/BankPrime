@@ -49,6 +49,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($parceiros as $p)
+                                        @if ($p->id != 1)
                                         <tr>
                                             <td>@if ($p->tipo == 1)
                                             Pessoa Física
@@ -72,6 +73,7 @@
                                                 <a href="{{ route('editar-parceiro',$p->id) }}"><i class="far fa-edit"></i> Editar</a>
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
