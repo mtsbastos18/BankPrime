@@ -36,4 +36,5 @@ Route::post('/atualizar-parceiro/{IdParceiro}',[App\Http\Controllers\ParceiroCon
 Route::get('/usuarios', [App\Http\Controllers\UserController::class,'index'])->name('usuarios');
 Route::get('/novo-usuario',[App\Http\Controllers\UserController::class,'create'])->name('novo-usuario');
 Route::post('/novo-usuario',[App\Http\Controllers\UserController::class,'store'])->name('novo-usuario');
-
+Route::get('/vincular-usuario/{IdUsuario}',[App\Http\Controllers\UserController::class,'vincularGerente'])->name('vincular-usuario');
+Route::post('/salvar-vinculo/{IdUsuario}', [App\Http\Controllers\UserController::class,'salvarVinculo'])->name('salvar-vinculo');

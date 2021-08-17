@@ -49,17 +49,6 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="row mt-2" id="row-gerentes">
-                                <div class="col-12">
-                                    <label>Parceiro</label>
-                                    <select name="id_parceiro" id="id_parceiro" class="custom-select form-control form-control-border"  required>
-                                        <option value="">Selecione</option>
-                                        @foreach ($parceiros as $p)
-                                            <option value="{{$p->id}}">{{$p->apelido}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-6">
                                     <label>Nome</label>

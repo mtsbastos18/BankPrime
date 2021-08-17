@@ -8,8 +8,10 @@ use App\Models\PermissaoUsuario;
 use App\Models\User;
 use App\Models\Parceiro;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models;
+use App\Models\RelCorretorGerente;
 use DateTime;
+use RelCompradorProcesso;
 
 class UserController extends Controller
 {
@@ -78,6 +80,9 @@ class UserController extends Controller
         ]);
     }
 
+
+   
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -106,6 +111,10 @@ class UserController extends Controller
 
             $usuario = User::create($data);
             
+            if ($usuario['id_permissao'] == 3) {
+                return redirect('vincular-usuario/' . $usuario['id']);
+            }
+
             return redirect('usuarios')->with('success','Usuário criado com sucesso');
             
 
@@ -115,6 +124,42 @@ class UserController extends Controller
         // }
 
 
+    }
+
+    public function vincularGerente($IdUsuario) 
+    {
+        $usuario = User::find($IdUsuario);
+        if ($usuario['id_permissao'] == 3) {
+            $gerentes = User::where('id_permissao',2)->where('id_parceiro', $usuario['id_parceiro'])->get();
+
+            return view('usuarios.vincular',['gerentes'=> $gerentes,'idUsuario' => $IdUsuario]);
+        }
+
+        return redirect('usuarios')->with('error','Usuário não pode ser vinculado à um gerente');    
+    }
+
+    public function salvarVinculo($IdUsuario, Request $request) 
+    {
+        $data = $request->all();
+        if ($IdUsuario == $data['idUsuario']) {
+            $relCorretorGerente = [
+                "id_corretor" => $IdUsuario,
+                "id_gerente" => $data['id_gerente']
+            ];
+
+            // try {
+                RelCorretorGerente::where('id_corretor', $IdUsuario)->where('id_gerente',$data['id_gerente'])->delete();
+
+                RelCorretorGerente::create($relCorretorGerente);
+                
+                return redirect('usuarios')->with('success','Usuário vinculado com sucesso');
+            // } catch (\Throwable $th) {
+            //     return redirect('usuarios')->with('error','Erro ao vincular usuário ao gerente'); 
+            // }
+            
+        }
+
+        return redirect('usuarios')->with('error','Erro ao vincular usuário ao gerente'); 
     }
 
     /**
