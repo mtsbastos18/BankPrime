@@ -15,6 +15,15 @@ class CreateProfissaoCompradorsTable extends Migration
     {
         Schema::create('profissao_compradores', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_comprador');
+            $table->foreign('id_comprador')->references('id')->on('compradores');
+            $table->string('nome_empresa');
+            $table->integer('contratacao');
+            $table->date('admissao');
+            $table->string('cargo');
+            $table->string('renda_mensal');
+            $table->string('outra_renda_mensal');
+            $table->string('origem_renda');
             $table->timestamps();
         });
     }

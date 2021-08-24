@@ -27,7 +27,7 @@
                                     <select name="tipo" onchange="tipoParceiro()" id="tipo-parceiro" class="custom-select form-control form-control-border"  required>
                                         <option value="">Selecione</option>
                                         <option value="1">Pessoa Física</option>
-                                        <option value="2" selected>Pessoa Jurídica</option>
+                                        <option value="2">Pessoa Jurídica</option>
                                     </select>
                                 </div>
                                 

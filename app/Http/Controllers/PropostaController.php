@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Parceiro;
 use App\Models\Comprador;
+use App\Models\ConjugeComprador;
 use App\Models\EnderecoComprador;
+use App\Models\EstadoCivil;
 use App\Models\Imovel;
 use App\Models\Processo;
+use App\Models\ProfissaoComprador;
 use App\Models\RelCompradorProcesso;
+use App\Models\Uf;
+use App\Models\Vendedor;
 use DB;
 
 class PropostaController extends Controller
@@ -70,16 +75,29 @@ class PropostaController extends Controller
         $enderecoCompradorData = $data['endereco_comprador'];
         $processoData = $data['processo'];
         $imovelData = $data['imovel'];
+        $profissaoCompradorData = $data['profissao_comprador'];
+        $conjugeData = $data['conjuge'];
+        $vendedorData = $data['vendedor'];
 
         $comprador = Comprador::create($compradorData);
 
         $enderecoCompradorData['id_comprador'] = $comprador['id'];
         $enderecoComprador = EnderecoComprador::create($enderecoCompradorData);
 
+        $profissaoCompradorData['id_comprador'] = $comprador['id'];
+        $profissaoComprador = ProfissaoComprador::create($profissaoCompradorData);
+
+        $conjugeData['id_comprador'] = $comprador['id'];
+        $conjuge = ConjugeComprador::create($conjugeData);
+
         $imovel = Imovel::create($imovelData);
+
+        $vendedor = Vendedor::create($vendedorData);
+
 
         $processoData['id_imovel'] = $imovel['id'];
         $processoData['id_usuario_criacao'] = auth()->user()->id;
+        $processoData['id_vendedor'] = $vendedor['id'];
 
         $processo = Processo::create($processoData);
 
@@ -111,7 +129,32 @@ class PropostaController extends Controller
      */
     public function edit($id)
     {
-        //
+        if ($id > 0) {
+            $processo = Processo::find($id);
+            $imovel = Imovel::find($processo['id_imovel']);
+            $vendedor = Vendedor::find($processo['id_vendedor']);
+
+            $idComprador = RelCompradorProcesso::where('id_processo',$processo['id'])->select('id_comprador')->first();
+            $comprador = Comprador::find($idComprador['id_comprador']);
+
+
+            $enderecoComprador = EnderecoComprador::where('id_comprador',$comprador['id'])->first();
+            $profissaoComprador = ProfissaoComprador::where('id_comprador',$comprador['id'])->first();
+            
+            $conjugeComprador = ConjugeComprador::where('id_comprador',$comprador['id'])->first();
+
+            return view('proposta.edit',[
+                'estadoCivil' => EstadoCivil::getEstadoCivil(),
+                'ufs' => Uf::getEstados(),
+                'processo' => $processo,
+                'imovel' => $imovel,
+                'vendedor' => $vendedor,
+                'comprador' => $comprador,
+                'enderecoComprador' => $enderecoComprador,
+                'profissaoComprador' => $profissaoComprador,
+                'conjugeComprador' => $conjugeComprador,
+            ]);
+        }
     }
 
     /**
@@ -123,7 +166,43 @@ class PropostaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $compradorData = $data['comprador'];
+        $enderecoCompradorData = $data['endereco_comprador'];
+        $processoData = $data['processo'];
+        $imovelData = $data['imovel'];
+        $profissaoCompradorData = $data['profissao_comprador'];
+        $conjugeData = $data['conjuge'];
+        $vendedorData = $data['vendedor'];
+
+        try {
+            $processo = Processo::findOrFail($processoData['id']);
+            $processo->update($processoData);
+
+            $comprador = Comprador::findOrFail($compradorData['id']);
+            $comprador->update($compradorData);
+
+            $enderecoComprador = EnderecoComprador::findOrFail($enderecoCompradorData['id']);
+            $enderecoComprador->update($enderecoCompradorData);
+
+            $imovel = Imovel::findOrFail($imovelData['id']);
+            $imovel->update($imovelData);
+
+            $profissaoComprador = ProfissaoComprador::findOrFail($profissaoCompradorData['id']);
+            $profissaoComprador->update($profissaoCompradorData);
+
+            $conjuge = ConjugeComprador::findOrFail($conjugeData['id']);
+            $conjuge->update($conjugeData);
+
+            $vendedor = Vendedor::findOrFail($vendedorData['id']);
+            $vendedor->update($vendedorData);
+
+            return Redirect('propostas')->with('message','Proposta atualizada com sucesso');
+        } catch (\Throwable $th) {
+            return Redirect('propostas')->with('message','Erro ao atualizar proposta');
+        }
+
     }
 
     /**

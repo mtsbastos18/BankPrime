@@ -15,6 +15,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+    <script src="{{ asset('js/app.js') }}"></script>
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -148,6 +151,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" role="button">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+          {{ csrf_field() }}
+      </form>
+
+      </li>
       {{-- <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
@@ -160,8 +173,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link text-center">
-      <span class="brand-text font-weight-light">Bank Prime</span>
+    <a class="brand-link text-center">
+      <img src="{{ asset('images/logo-bank-prime.png') }}" style="max-width: 100%;" class="img-responsive">
     </a>
 
     <!-- Sidebar -->
@@ -174,7 +187,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <div class="info">
           <a href="#" class="d-block">{{auth()->user()->name}}</a>
+
         </div>
+        
       </div>
 
       <!-- SidebarSearch Form -->
@@ -195,7 +210,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-tag"></i>
               <p>
                 Dashboards
@@ -280,6 +295,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 
-<script src=" {{ asset('js/app.js') }}"></script>
 </body>
 </html>

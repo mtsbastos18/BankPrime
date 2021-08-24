@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <label>CPF</label>
-                                    <input type="text" name="cpf" placeholder="CPF"  class="form-control form-control-border" required>
+                                    <input type="text" name="cpf" placeholder="CPF"  class="form-control form-control-border cpf" required>
                                 </div>
                                 <div class="col-9">
                                     <label>Permissão</label>
@@ -102,7 +102,7 @@
                             <div class="row mt-2">
                                 <div class="col-6">
                                     <label>Complemento</label>
-                                    <input type="text" name="complemento" placeholder="Complemento"  class="form-control form-control-border" required>
+                                    <input type="text" name="complemento" placeholder="Complemento"  class="form-control form-control-border" >
                                 </div>
                                 <div class="col-6">
                                     <label>Bairro</label>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label>Estado</label>
-                                    <select name="estado" id="uf" class="custom-select form-control form-control-border"  required>
+                                    <select name="uf" id="uf" class="custom-select form-control form-control-border"  required>
                                         @foreach ($ufs as $k => $v)
                                             <option value="{{$k}}">{{$v}}</option> 
                                         @endforeach

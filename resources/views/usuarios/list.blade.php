@@ -9,10 +9,35 @@
  <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-between">
             <div class="col-12 col-md-2">
                 <a href="{{ route('novo-usuario') }}" class="btn btn-block btn-outline-primary">Novo usuário</a>
             </div>
+           
+            @if (auth()->user()->id_parceiro == 1)
+                <div class="col-12 col-md-7 d-flex">
+                    <div class="col-4 text-right pr-0">
+                    <p>Filtrar por parceiro:</p>
+                    </div>
+                        <div class="col-5">
+                        <select name="id_parceiro" id="id_parceiro" class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
+                            @foreach ($parceiros as $p)
+                                @if ($idParceiro == $p->id) 
+                                    <option value="{{$p->id}}" selected>{{$p->apelido}}</option>
+                                @else 
+                                    <option value="{{$p->id}}">{{$p->apelido}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn btn-block btn-outline-primary" id="filtra-busca">Filtrar</a>
+                        </div>
+                    </form>
+                </div>
+            
+            @endif
         </div>
         <div class="row mt-3">
             <div class="col-12">
@@ -43,6 +68,7 @@
                                         <th>Telefone</th>
                                         <th>Permissão</th>
                                         <th>Data cadastro</th>
+                                        <th>Status</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -54,8 +80,13 @@
                                             <td>{{$u->telefone}}</td>
                                             <td>{{$u->permissao->permissao}}</td>
                                             <td>{{date_format(new DateTime($u->created_at),'d-m-Y')}}</td>
+                                            @if ($u->status == 1) 
+                                                <td class="badge bg-success">Ativo</td>
+                                            @else 
+                                                <td class="badge bg-danger">Inativo</td>
+                                            @endif
                                             <td>
-                                                <a href=""><i class="far fa-edit"></i> Editar</a>
+                                                <a  href="{{ route('editar-usuario',$u->id) }}"><i class="far fa-edit"></i> Editar</a>
                                             </td>
                                         </tr>    
                                     @endforeach
@@ -72,8 +103,7 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-@endsection
-<style>
+    <style>
 .card-header{ 
     padding-bottom: 0 !important;
 }
@@ -85,3 +115,11 @@ label {
 }
 </style>
 
+<script>
+$("#id_parceiro").on('change',function(){
+    let filtro = $(this).val();
+
+    $("#filtra-busca").attr('href','/usuarios/' + filtro);
+})
+</script>
+@endsection

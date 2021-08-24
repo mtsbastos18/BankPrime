@@ -41,7 +41,6 @@
                                         <th>CPF</th>
                                         <th>Cliente</th>
                                         <th>Valor</th>
-                                        <th>Status</th>
                                         <th>Situação</th>
                                         <th>Criado em</th>
                                         <th>Atualizado em</th>
@@ -54,12 +53,44 @@
                                         <td>{{$l->cpf}}</td>
                                         <td>{{$l->nome}}</td>
                                         <td>R$ {{$l->valor_financiar}}</td>
-                                        <td></td>
-                                        <td></td>
+                                        
+                                        @switch($l->status)
+                                            @case(1)
+                                            <td class="badge bg-info">
+                                                Em andamento
+                                            </td>
+                                                @break
+                                            @case(2)
+                                            <td class="badge bg-secondary">
+                                                Aguardando aprovação
+                                            </td>
+                                                @break
+                                            @case(3)
+                                            <td class="badge bg-warning">
+                                                Declinou
+                                            </td>
+                                                @break
+                                            @case(4)
+                                            <td class="badge bg-success">
+                                                Registrado
+                                            </td>
+                                                @break
+                                            @case(5)
+                                            <td class="badge bg-danger">
+                                                Cancelado
+                                            </td>
+                                                @break
+                                            @default
+                                                
+                                        @endswitch
+                                        
                                         <td>{{date_format(new DateTime($l->created_at),'d-m-Y H:i:s')}}</td>
                                         <td>{{date_format(new DateTime($l->updated_at),'d-m-Y H:i:s')}}</td>
                                         <td>
-                                            <a href=""><i class="far fa-edit"></i> Editar</a>
+                                            <a  href="{{ route('editar-proposta',$l->id) }}"><i class="far fa-edit"></i> Editar</a>
+                                            @if (auth()->user()->id_permissao == 1)
+                                                <a  href="{{ route('acompanhamentos',$l->id) }}"><i class="far fa-edit"></i>Acompanhamentos</a>
+                                            @endif
                                         </td>
                                     </tr>
                                    @endforeach

@@ -29,15 +29,28 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $usuarios = User::where([
+    public function index($idParceiro = null)
+    {   
+        if ($idParceiro > 0) {
+            $usuarios = User::where([
+                ['id_parceiro', '=',$idParceiro],
+                ['id_permissao','<',4]
+            ])->with('permissao')->get();
+        } else {
+            $usuarios = User::where([
+                ['id', '>',1],
+                ['id_permissao','<',4],
+                ['id_parceiro',auth()->user()->id_parceiro]
+            ])->with('permissao')->get();
+        }
+
+        $parceiros = Parceiro::where([
             ['id', '>',1],
-        ])->with('permissao')->get();
-
-
+        ])->get();
 
         return view('usuarios.list', [
+            "idParceiro" => $idParceiro,
+            'parceiros' => $parceiros,
             'usuarios' => $usuarios,
         ]);
     }
@@ -80,7 +93,20 @@ class UserController extends Controller
         ]);
     }
 
+    private function buscaPermissoes(){
+        $permissoes = PermissaoUsuario::limit(3)->get();
 
+        if (auth()->user()->id_permissao != 1) {
+            if (auth()->user()->id_permissao == 2) {
+                $permissoes2[] = $permissoes[2];// bolar um jeito de fazer isso direito
+
+                return $permissoes2;
+            } else {
+                unset($permissoes[0]); // bolar um jeito de fazer isso direito
+            }
+        }
+        return $permissoes;
+    }
    
     
     /**
@@ -181,7 +207,22 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if ($id > 0) {
+            try {
+                $usuario = User::find($id);
+                $estados = Uf::getEstados();
+                $parceiros = Parceiro::where('id','>',1)->get();
+
+                return view('usuarios.edit',[
+                    "usuario"=>$usuario, 
+                    "ufs" => $estados,
+                    "permissoes" => $this->buscaPermissoes(),
+                    "parceiros" => $parceiros
+                ]);
+            } catch (\Throwable $th) {
+                return Redirect('usuarios')->with('error','Usuário não encontrado');
+            }
+        }
     }
 
     /**
@@ -193,7 +234,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        if ($id == $data['id']) {
+            $usuario = User::findOrFail($id);
+            $usuario->update($data);
+
+            return Redirect('usuarios')->with('message','Usuário atualizado com sucesso');
+        }
+        return Redirect('usuarios')->with('error','Erro ao atualizar usuário');
     }
 
     /**

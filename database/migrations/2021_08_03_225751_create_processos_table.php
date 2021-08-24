@@ -33,6 +33,7 @@ class CreateProcessosTable extends Migration
             $table->foreign('id_imovel')->references('id')->on('imoveis');
             $table->unsignedBigInteger('id_usuario_criacao');
             $table->foreign('id_usuario_criacao')->references('id')->on('users');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

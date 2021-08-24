@@ -26,5 +26,6 @@ class Processo extends Model
         'id_vendedor',
         'id_imovel',
         'id_usuario_criacao',
+        'status'
     ];
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Parceiro;
 use App\Models\Uf;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 
 class ParceiroController extends Controller
 {
@@ -41,6 +43,22 @@ class ParceiroController extends Controller
 
         try {
             $parceiro = Parceiro::create($data);
+
+            $usuarioParceiro = [
+                'name' => $parceiro->apelido,
+                'email' => $parceiro->email,
+                'login' => $parceiro->cnpj,
+                'id_permissao' => 4,
+                'password' => Hash::make($parceiro->telefone),
+                'id_parceiro' => $parceiro->id
+            ];
+
+            if ($parceiro->tipo == 1) {
+                $usuarioParceiro['login'] = $parceiro->cpf;
+            }
+
+            User::create($usuarioParceiro);
+
             return Redirect('parceiros')->with('message','Parceiro adicionado com sucesso');
 
         } catch (\Throwable $th) {
@@ -94,7 +112,18 @@ class ParceiroController extends Controller
 
         if ($id == $data['id']) {
             $parceiro = Parceiro::findOrFail($id);
+
+            $statusParceiro = $parceiro->status;
+            
             $parceiro->update($data);
+
+            if ($statusParceiro == 1 && $data['status'] == 2) {
+                User::where('id_parceiro',$parceiro->id)->update(['status' => 0]);
+            }
+
+            if ($statusParceiro == 2 && $data['status'] == 1) {
+                User::where('id_parceiro',$parceiro->id)->update(['status' => 1]);
+            }
 
             return Redirect('parceiros')->with('message','Parceiro atualizado com sucesso');
         }

@@ -34,7 +34,8 @@ class User extends Authenticatable
         'uf',
         'password',
         'id_permissao',
-        'id_parceiro'
+        'id_parceiro',
+        'status'
     ];
 
 

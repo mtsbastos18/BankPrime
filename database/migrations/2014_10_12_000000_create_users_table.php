@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
             $table->string('uf')->nullable();
+            $table->boolean('status')->default(true);
             $table->string('password');
             $table->unsignedBigInteger('id_permissao');
             $table->foreign('id_permissao')->references('id')->on('permissao_usuarios');

@@ -2,3 +2,22 @@ th, td {
     font-size: 14px;
     padding: 5px !important;
 }
+
+.card-navy:not(.card-outline) > .card-header {
+    background-color: #d79c4e;
+}
+
+.btn-outline-primary {
+    color: #d79c4e;
+    border-color: #d79c4e;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #d79c4e;
+    border-color: #d79c4e;
+}
+
+.bg-info-dourado {
+    background-color: #d79c4e;
+}
