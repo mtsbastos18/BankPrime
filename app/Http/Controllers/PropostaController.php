@@ -15,6 +15,7 @@ use App\Models\RelCompradorProcesso;
 use App\Models\Uf;
 use App\Models\Vendedor;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class PropostaController extends Controller
 {
@@ -33,13 +34,49 @@ class PropostaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
-        $lista = DB::table('processos')
+    public function index($filtro = null)
+    {       
+
+        if (auth()->user()->id_parceiro > 1) {
+            if ($filtro != null) {
+                $lista = DB::table('processos')
+                        ->join('rel_comprador_imovel','processos.id','=','rel_comprador_imovel.id_processo')
+                        ->join('compradores','rel_comprador_imovel.id_comprador','=','compradores.id')
+                        ->join('users','processos.id_usuario_criacao','=','users.id')
+                        ->select('processos.*', 'compradores.nome', 'compradores.cpf')
+                        ->where('compradores.nome','like','%'.$filtro.'%')
+                        ->orWhere('compradores.cpf','like','%'.$filtro.'%')
+                        ->get();
+            } else {
+                $lista = DB::table('processos')
+                ->join('rel_comprador_imovel','processos.id','=','rel_comprador_imovel.id_processo')
+                ->join('compradores','rel_comprador_imovel.id_comprador','=','compradores.id')
+                ->join('users','processos.id_usuario_criacao','=','users.id')
+                ->select('processos.*', 'compradores.nome', 'compradores.cpf')
+                ->where('users.id_parceiro','=',auth()->user()->id_parceiro)
+                ->get();
+            }
+
+            return view("proposta.list", ['lista'=>$lista]);
+        }
+
+        if ($filtro != null) {
+            $lista = DB::table('processos')
                     ->join('rel_comprador_imovel','processos.id','=','rel_comprador_imovel.id_processo')
                     ->join('compradores','rel_comprador_imovel.id_comprador','=','compradores.id')
                     ->select('processos.*', 'compradores.nome', 'compradores.cpf')
+                    ->where('compradores.nome','like','%'.$filtro.'%')
+                    ->orWhere('compradores.cpf','like','%'.$filtro.'%')
                     ->get();
+        } else {
+            $lista = DB::table('processos')
+            ->join('rel_comprador_imovel','processos.id','=','rel_comprador_imovel.id_processo')
+            ->join('compradores','rel_comprador_imovel.id_comprador','=','compradores.id')
+            ->select('processos.*', 'compradores.nome', 'compradores.cpf')
+            ->get();
+        }
+
+        
 
         return view("proposta.list", ['lista'=>$lista]);
     }
@@ -80,6 +117,22 @@ class PropostaController extends Controller
         $vendedorData = $data['vendedor'];
 
         $comprador = Comprador::create($compradorData);
+
+        $senha = date_format($comprador->nascimento,'d-m-Y');
+
+        // $senha = str_replace("-","",$senha);
+
+        // $usuarioParceiro = [
+        //     'name' => $comprador->nome,
+        //     'email' => $comprador->email,
+        //     'login' => $comprador->cpf,
+        //     'id_permissao' => 5,
+        //     'password' => Hash::make($senha),
+        //     'id_parceiro' => auth()->user()->id_parceiro
+        // ];
+
+
+        // User::create($usuarioParceiro);
 
         $enderecoCompradorData['id_comprador'] = $comprador['id'];
         $enderecoComprador = EnderecoComprador::create($enderecoCompradorData);

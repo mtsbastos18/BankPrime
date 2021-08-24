@@ -13,6 +13,14 @@
             <div class="col-12 col-md-2">
                 <a href="{{ route('nova-proposta') }}" class="btn btn-block btn-outline-primary">Nova Proposta</a>
             </div>
+            <div class="col-12 col-md-10" style="display: flex;justify-content: flex-end;">
+                <div class="col-12 col-md-5">
+                    <input type="text" name="filtroProposta" id="input-busca" placeholder="Pesquisar" class="form-control form-control-border" id="">
+                </div>
+                <div class="col-12 col-md-3">
+                    <a class="btn btn-block btn-outline-primary" id="filtra-busca">Pesquisar</a>
+                </div>
+            </div>
         </div>
         <div class="row mt-3">
             <div class="col-12">
@@ -107,8 +115,7 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-@endsection
-<style>
+    <style>
 .card-header{ 
     padding-bottom: 0 !important;
 }
@@ -119,4 +126,13 @@ label {
     font-size: 12px !important;
 }
 </style>
+<script>
+$("#input-busca").on('keyup',function(){
+    let filtro = $(this).val();
+
+    $("#filtra-busca").attr('href','/propostas/' + filtro);
+})
+</script>
+
+@endsection
 

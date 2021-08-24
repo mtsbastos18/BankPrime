@@ -29,7 +29,7 @@ Route::post('/login', [
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/propostas',[App\Http\Controllers\PropostaController::class,'index'])->name('propostas');
+Route::get('/propostas/{filtro?}',[App\Http\Controllers\PropostaController::class,'index'])->name('propostas');
 Route::get('/nova-proposta',[App\Http\Controllers\PropostaController::class,'create'])->name('nova-proposta');
 Route::post('/salvar-proposta',[App\Http\Controllers\PropostaController::class,'store'])->name('salvar-proposta');
 Route::get('/editar-proposta/{IdProposta}',[App\Http\Controllers\PropostaController::class,'edit'])->name('editar-proposta');

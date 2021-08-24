@@ -15,11 +15,11 @@
             </div>
            
             @if (auth()->user()->id_parceiro == 1)
-                <div class="col-12 col-md-7 d-flex">
-                    <div class="col-4 text-right pr-0">
+                <div class="col-12 col-md-7 d-flex" style="flex-wrap: inherit;">
+                    <div class="col-12 col-md-4 text-right pr-0">
                     <p>Filtrar por parceiro:</p>
                     </div>
-                        <div class="col-5">
+                        <div class="col-12 col-md-5">
                         <select name="id_parceiro" id="id_parceiro" class="custom-select form-control form-control-border">
                             <option value="">Selecione</option>
                             @foreach ($parceiros as $p)
@@ -31,7 +31,7 @@
                             @endforeach
                         </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-12 col-md-3">
                             <a class="btn btn-block btn-outline-primary" id="filtra-busca">Filtrar</a>
                         </div>
                     </form>
