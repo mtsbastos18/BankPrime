@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Acompanhamentos;
+use App\Models\Processo;
+use App\Models\RelCompradorProcesso;
 use App\Models\ObservacaoAcompanhamentos;
 use App\Models\TipoAcompanhamentos;
 use App\Models\User;
+use App\Models\Comprador;
+use DateTime;
 use Illuminate\Http\Request;
 
 class AcompanhamentoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -37,15 +41,54 @@ class AcompanhamentoController extends Controller
         ]);
     }
 
-    public function indexCliente($IdProposta)
+    public function validaCliente($IdProposta)
     {
-        $acompanhamentoAtual = Acompanhamentos::where([
-            ['id_processo', '=', $IdProposta],
-        ])->orderBy('created_at', 'desc')->first();
-
-        return view('acompanhamentos.cliente', [
-            'atual' => $acompanhamentoAtual
+        return view('acompanhamentos.login', [
+            'idProposta' => $IdProposta
         ]);
+    }
+
+    public function indexCliente(Request $request)
+    {
+        $data = $request->all();
+
+        $processo = RelCompradorProcesso::where([
+            ['id_processo', '=', $data['idProposta']],
+        ])->get();
+
+        foreach ($processo as $p) {
+            $comprador = Comprador::where([
+                ['id', '=', $p['id_comprador']],
+            ])->first();
+
+            $cpf = str_replace('-', '', $comprador['cpf']);
+            $cpf = str_replace('.', '', $cpf);
+
+            $aux = new DateTime($comprador['nascimento']);
+            $nascimento = date_format($aux, 'd-m-Y');
+            $nascimento = str_replace('-', '', $nascimento);
+
+            if ($data['cpf'] == $cpf && $data['senha'] == $nascimento) {
+                $acompanhamentoAtual = Acompanhamentos::where([
+                    ['id_processo', '=', $data['idProposta']],
+                ])->orderBy('created_at', 'desc')->first();
+
+                if (!$acompanhamentoAtual) {
+                    $acompanhamentoAtual['id_tipo_acompanhamento'] = 0;
+                }
+                return view('acompanhamentos.cliente', [
+                    'atual' => $acompanhamentoAtual
+                ]);
+            }
+        }
+
+        // $acompanhamentoAtual = Acompanhamentos::where([
+        //     ['id_processo', '=', $IdProposta],
+        // ])->orderBy('created_at', 'desc')->first();
+
+        // return view('acompanhamentos.cliente', [
+        //     'atual' => $acompanhamentoAtual
+        // ]);
     }
 
     /**

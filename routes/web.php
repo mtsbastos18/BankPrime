@@ -64,4 +64,5 @@ Route::post('/salvar-vinculo/{IdUsuario}', [App\Http\Controllers\UserController:
 Route::get('/acompanhamentos/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'index'])->name('acompanhamentos');
 Route::get('/acompanhamento/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'create'])->name('novo-acompanhamento');
 Route::post('/acompanhamento/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'store'])->name('novo-acompanhamento');
-Route::get('/acompanhamento-cliente/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'indexCliente'])->name('acompanhamento-cliente');
+Route::get('/acompanhamento-cliente/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'validaCliente'])->name('acompanhamento-cliente');
+Route::post('/acompanhamento-cliente-logado', [App\Http\Controllers\AcompanhamentoController::class, 'indexCliente'])->name('acompanhamento-cliente-logado');
