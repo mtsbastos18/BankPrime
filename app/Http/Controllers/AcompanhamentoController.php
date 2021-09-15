@@ -82,6 +82,7 @@ class AcompanhamentoController extends Controller
             }
         }
 
+        return Redirect('acompanhamento-cliente/' . $data['idProposta']);
         // $acompanhamentoAtual = Acompanhamentos::where([
         //     ['id_processo', '=', $IdProposta],
         // ])->orderBy('created_at', 'desc')->first();
