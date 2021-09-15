@@ -27,13 +27,12 @@ class CreateParceirosTable extends Migration
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
             $table->string('nome_contato')->nullable();
-            $table->string('cep')->nullable();
-            $table->string('endereco')->nullable();
-            $table->string('numero')->nullable();
-            $table->string('complemento')->nullable();
-            $table->string('bairro')->nullable();
-            $table->string('cidade')->nullable();
-            $table->string('estado')->nullable();
+            $table->string('telefone_contato')->nullable();
+
+            $table->string('banco')->nullable();
+            $table->string('agencia')->nullable();
+            $table->string('conta')->nullable();
+            $table->string('observacoes')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

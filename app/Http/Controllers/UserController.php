@@ -30,22 +30,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($idParceiro = null)
-    {   
+    {
         if ($idParceiro > 0) {
             $usuarios = User::where([
-                ['id_parceiro', '=',$idParceiro],
-                ['id_permissao','<',4]
+                ['id_parceiro', '=', $idParceiro],
+                ['id_permissao', '<', 4]
             ])->with('permissao')->get();
         } else {
             $usuarios = User::where([
-                ['id', '>',1],
-                ['id_permissao','<',4],
-                ['id_parceiro',auth()->user()->id_parceiro]
+                ['id', '>', 1],
+                ['id_permissao', '<', 4],
+                ['id_parceiro', auth()->user()->id_parceiro]
             ])->with('permissao')->get();
         }
 
         $parceiros = Parceiro::where([
-            ['id', '>',1],
+            ['id', '>', 1],
         ])->get();
 
         return view('usuarios.list', [
@@ -71,11 +71,11 @@ class UserController extends Controller
     {
         $ufs = Uf::getEstados();
         $permissoes = PermissaoUsuario::limit(3)->get();
-        $parceiros = Parceiro::where('id','>',1)->get();
+        $parceiros = Parceiro::where('id', '>', 1)->get();
 
         if (auth()->user()->id_permissao != 1) {
             if (auth()->user()->id_permissao == 2) {
-                $permissoes2[] = $permissoes[2];// bolar um jeito de fazer isso direito
+                $permissoes2[] = $permissoes[2]; // bolar um jeito de fazer isso direito
 
                 return view('usuarios.create', [
                     'ufs' => $ufs,
@@ -93,12 +93,13 @@ class UserController extends Controller
         ]);
     }
 
-    private function buscaPermissoes(){
+    private function buscaPermissoes()
+    {
         $permissoes = PermissaoUsuario::limit(3)->get();
 
         if (auth()->user()->id_permissao != 1) {
             if (auth()->user()->id_permissao == 2) {
-                $permissoes2[] = $permissoes[2];// bolar um jeito de fazer isso direito
+                $permissoes2[] = $permissoes[2]; // bolar um jeito de fazer isso direito
 
                 return $permissoes2;
             } else {
@@ -107,8 +108,8 @@ class UserController extends Controller
         }
         return $permissoes;
     }
-   
-    
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -120,29 +121,29 @@ class UserController extends Controller
         $data = $request->all();
 
         if (auth()->user()->id_permissao != 1 && $data['id_permissao'] == 1) {
-            return redirect('usuarios')->with('error','Você não possui permissão para criar esse tipo de usuário');
+            return redirect('usuarios')->with('error', 'Você não possui permissão para criar esse tipo de usuário');
         }
 
         // try {
 
-            if ($data['id_permissao'] == 1) {
-                $data['id_parceiro'] = 1;
-            }
+        if ($data['id_permissao'] == 1) {
+            $data['id_parceiro'] = 1;
+        }
+        $cpf = str_replace('-', '', $data['cpf']);
+        $data['login'] = str_replace('.', '', $cpf);
+        $senha = date_format(new DateTime($data['data_nascimento']), 'd-m-Y');
 
-            $data['login'] = $data['cpf'];
-            $senha = date_format(new DateTime($data['data_nascimento']),'d-m-Y');
+        $senha = str_replace("-", "", $senha);
+        $data['password'] = Hash::make($senha);
 
-            $senha = str_replace("-","",$senha);
-            $data['password'] = Hash::make($senha);
+        $usuario = User::create($data);
 
-            $usuario = User::create($data);
-            
-            if ($usuario['id_permissao'] == 3) {
-                return redirect('vincular-usuario/' . $usuario['id']);
-            }
+        if ($usuario['id_permissao'] == 3) {
+            return redirect('vincular-usuario/' . $usuario['id']);
+        }
 
-            return redirect('usuarios')->with('success','Usuário criado com sucesso');
-            
+        return redirect('usuarios')->with('success', 'Usuário criado com sucesso');
+
 
         // } catch (\Throwable $th) {
         //     exit($th);
@@ -152,19 +153,19 @@ class UserController extends Controller
 
     }
 
-    public function vincularGerente($IdUsuario) 
+    public function vincularGerente($IdUsuario)
     {
         $usuario = User::find($IdUsuario);
         if ($usuario['id_permissao'] == 3) {
-            $gerentes = User::where('id_permissao',2)->where('id_parceiro', $usuario['id_parceiro'])->get();
+            $gerentes = User::where('id_permissao', 2)->where('id_parceiro', $usuario['id_parceiro'])->get();
 
-            return view('usuarios.vincular',['gerentes'=> $gerentes,'idUsuario' => $IdUsuario]);
+            return view('usuarios.vincular', ['gerentes' => $gerentes, 'idUsuario' => $IdUsuario]);
         }
 
-        return redirect('usuarios')->with('error','Usuário não pode ser vinculado à um gerente');    
+        return redirect('usuarios')->with('error', 'Usuário não pode ser vinculado à um gerente');
     }
 
-    public function salvarVinculo($IdUsuario, Request $request) 
+    public function salvarVinculo($IdUsuario, Request $request)
     {
         $data = $request->all();
         if ($IdUsuario == $data['idUsuario']) {
@@ -174,18 +175,18 @@ class UserController extends Controller
             ];
 
             // try {
-                RelCorretorGerente::where('id_corretor', $IdUsuario)->where('id_gerente',$data['id_gerente'])->delete();
+            RelCorretorGerente::where('id_corretor', $IdUsuario)->where('id_gerente', $data['id_gerente'])->delete();
 
-                RelCorretorGerente::create($relCorretorGerente);
-                
-                return redirect('usuarios')->with('success','Usuário vinculado com sucesso');
+            RelCorretorGerente::create($relCorretorGerente);
+
+            return redirect('usuarios')->with('success', 'Usuário vinculado com sucesso');
             // } catch (\Throwable $th) {
             //     return redirect('usuarios')->with('error','Erro ao vincular usuário ao gerente'); 
             // }
-            
+
         }
 
-        return redirect('usuarios')->with('error','Erro ao vincular usuário ao gerente'); 
+        return redirect('usuarios')->with('error', 'Erro ao vincular usuário ao gerente');
     }
 
     /**
@@ -211,16 +212,16 @@ class UserController extends Controller
             try {
                 $usuario = User::find($id);
                 $estados = Uf::getEstados();
-                $parceiros = Parceiro::where('id','>',1)->get();
+                $parceiros = Parceiro::where('id', '>', 1)->get();
 
-                return view('usuarios.edit',[
-                    "usuario"=>$usuario, 
+                return view('usuarios.edit', [
+                    "usuario" => $usuario,
                     "ufs" => $estados,
                     "permissoes" => $this->buscaPermissoes(),
                     "parceiros" => $parceiros
                 ]);
             } catch (\Throwable $th) {
-                return Redirect('usuarios')->with('error','Usuário não encontrado');
+                return Redirect('usuarios')->with('error', 'Usuário não encontrado');
             }
         }
     }
@@ -240,9 +241,9 @@ class UserController extends Controller
             $usuario = User::findOrFail($id);
             $usuario->update($data);
 
-            return Redirect('usuarios')->with('message','Usuário atualizado com sucesso');
+            return Redirect('usuarios')->with('message', 'Usuário atualizado com sucesso');
         }
-        return Redirect('usuarios')->with('error','Erro ao atualizar usuário');
+        return Redirect('usuarios')->with('error', 'Erro ao atualizar usuário');
     }
 
     /**
@@ -254,5 +255,23 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // ['permissao' => 'Gerente'], 2
+    // ['permissao' => 'Corretor'], 3
+
+    public function listaCorretores($idParceiro)
+    {
+        $lista = User::where([
+            ['id_permissao', '=', '2'],
+            ['id_parceiro', '=', $idParceiro],
+        ])
+            ->orWhere([
+                ['id_permissao', '=', '3'],
+                ['id_parceiro', '=', $idParceiro],
+            ])
+            ->get();
+
+        return response($lista);
     }
 }

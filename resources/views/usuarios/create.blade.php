@@ -56,76 +56,35 @@
                                 </div>
                                 <div class="col-6">
                                     <label>Data de nascimento</label>
-                                    <input type="date" name="data_nascimento" class="form-control form-control-border" required>
+                                    <input type="date" name="data_nascimento" class="form-control form-control-border">
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">
                                     <label>Sexo</label>
-                                    <select name="sexo" class="custom-select form-control form-control-border"  required>
+                                    <select name="sexo" class="custom-select form-control form-control-border">
                                         <option value="Feminino">Feminino</option>
                                         <option value="Masculino">Masculino</option>
                                     </select>
                                 </div>
                                 <div class="col-6">
                                     <label>E-mail</label>
-                                    <input type="text" name="email" placeholder="E-mail"  class="form-control form-control-border" required>
+                                    <input type="text" name="email" placeholder="E-mail"  class="form-control form-control-border">
                                 </div>
                                 
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">
                                     <label>Telefone</label>
-                                    <input type="text" name="telefone" placeholder="Telefone"  class="form-control form-control-border" required>
+                                    <input type="text" name="telefone" placeholder="Telefone"  class="form-control form-control-border telefone" required>
                                 </div>
                                 <div class="col-6">
                                     <label>Celular</label>
-                                    <input type="text" name="celular" placeholder="Celular"  class="form-control form-control-border" required>
+                                    <input type="text" name="celular" placeholder="Celular"  class="form-control form-control-border celular">
                                 </div>
                             </div>
 
-                            <div class="row mt-2">
-                                <div class="col-4">
-                                    <label>CEP</label>
-                                    <input type="text" onkeyup="pesquisacep()" name="cep" placeholder="CEP" id="busca_cep" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Endereço</label>
-                                    <input type="text" name="endereco" placeholder="Endereço" id="rua" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-2">
-                                    <label>Número</label>
-                                    <input type="text" name="numero" placeholder="Número"  class="form-control form-control-border" required>
-                                </div>
-                                
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Complemento</label>
-                                    <input type="text" name="complemento" placeholder="Complemento"  class="form-control form-control-border" >
-                                </div>
-                                <div class="col-6">
-                                    <label>Bairro</label>
-                                    <input type="text" name="bairro" placeholder="Bairro" id="bairro" class="form-control form-control-border" required>
-                                </div>
                             
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Cidade</label>
-                                    <input type="text" name="cidade" placeholder="Cidade" id="cidade"  class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Estado</label>
-                                    <select name="uf" id="uf" class="custom-select form-control form-control-border"  required>
-                                        @foreach ($ufs as $k => $v)
-                                            <option value="{{$k}}">{{$v}}</option> 
-                                        @endforeach
-                                    </select>
-                                </div>
-                                
-                            </div>
-
 
 
                             <div class="row justify-content-end">
@@ -143,7 +102,6 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-@endsection
 <style>
 .card-header{ 
     padding-bottom: 0 !important;
@@ -157,6 +115,17 @@ label {
 </style>
 
 <script>
+jQuery(function ($) {
+        $(".telefone").each(function () {
+            $(this).mask('(99) 9999-9999');
+        })
+        $(".celular").each(function () {
+            $(this).mask('(99) 99999-9999');
+        })
+        $(".cpf").each(function () {
+            $(this).mask('999.999.999-99');
+        })
+    });
     function parceiro() {
         var valor = document.getElementById('id_permissao').value;
         if (valor == 1) {
@@ -238,3 +207,5 @@ label {
         }
     };
 </script>
+
+@endsection

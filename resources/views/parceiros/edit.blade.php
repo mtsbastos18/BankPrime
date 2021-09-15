@@ -92,17 +92,14 @@
                                     <input type="text" name="email" placeholder="E-mail" value="{{$parceiro->email}}" class="form-control form-control-border" required>
                                 </div>
                                 <div class="col-6">
-                                    <label>E-mail do financeiro</label>
-                                    <input type="text" name="email_financeiro" placeholder="E-mail do financeiro" value="{{$parceiro->email_financeiro}}" class="form-control form-control-border" required>
+                                    <label>Telefone</label>
+                                    <input type="text" name="telefone" placeholder="Telefone" value="{{$parceiro->telefone}}" class="form-control form-control-border" required>
                                 </div>
                                 
                             </div>
 
                             <div class="row mt-2">
-                                <div class="col-4">
-                                    <label>Telefone</label>
-                                    <input type="text" name="telefone" placeholder="Telefone" value="{{$parceiro->telefone}}" class="form-control form-control-border" required>
-                                </div>
+                                
                                 <div class="col-4">
                                     <label>Celular</label>
                                     <input type="text" name="celular" placeholder="Celular" value="{{$parceiro->celular}}" class="form-control form-control-border" required>
@@ -111,53 +108,33 @@
                                     <label>Nome de contato</label>
                                     <input type="text" name="nome_contato" placeholder="Nome de contato" value="{{$parceiro->nome_contato}}" class="form-control form-control-border" required>
                                 </div>
+                                <div class="col-4">
+                                    <label>Telefone do contato</label>
+                                    <input type="text" name="telefone_contato" placeholder="Nome de contato" value="{{$parceiro->telefone_contato}}" class="form-control form-control-border" required>
+                                </div>
                                 
                             </div>
 
                             <div class="row mt-2">
-                                <div class="col-4">
-                                    <label>CEP</label>
-                                    <input type="text" onkeyup="pesquisacep()" name="cep" placeholder="CEP" value="{{$parceiro->cep}}" id="busca_cep" class="form-control form-control-border" required>
+                                <div class="col-6">
+                                    <label>Banco</label>
+                                    <input type="text" name="banco" placeholder="Banco" value="{{$parceiro->banco}}" class="form-control form-control-border">
                                 </div>
                                 <div class="col-6">
-                                    <label>Endereço</label>
-                                    <input type="text" name="endereco" placeholder="Endereço" id="rua" value="{{$parceiro->endereco}}" class="form-control form-control-border" required>
+                                    <label>Agência</label>
+                                    <input type="text" name="agencia" placeholder="Agência" value="{{$parceiro->agencia}}" class="form-control form-control-border">
                                 </div>
-                                <div class="col-2">
-                                    <label>Número</label>
-                                    <input type="text" name="numero" placeholder="Número" value="{{$parceiro->numero}}" class="form-control form-control-border" required>
+                                <div class="col-6">
+                                    <label>Conta</label>
+                                    <input type="text" name="conta" placeholder="Conta" value="{{$parceiro->conta}}" class="form-control form-control-border" required>
                                 </div>
-                                
                             </div>
+
                             <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Complemento</label>
-                                    <input type="text" name="complemento" placeholder="Complemento" value="{{$parceiro->complemento}}" class="form-control form-control-border" required>
+                                <div class="col-12">
+                                <label>Observações</label>
+                                <textarea name="observacoes" id="" cols="30" rows="5" class='form-control form-control-border'>{{$parceiro->observacoes}}</textarea>
                                 </div>
-                                <div class="col-6">
-                                    <label>Bairro</label>
-                                    <input type="text" name="bairro" placeholder="Bairro" id="bairro" value="{{$parceiro->bairro}}" class="form-control form-control-border" required>
-                                </div>
-                            
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Cidade</label>
-                                    <input type="text" name="cidade" placeholder="Cidade" id="cidade" value="{{$parceiro->cidade}}" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Estado</label>
-                                    <select name="estado" id="uf" class="custom-select form-control form-control-border"  required>
-                                       @foreach ($estados as $k => $v)
-                                            @if ($parceiro->estado == $k)
-                                                <option value="{{$k}}" selected>{{$v}}</option> 
-                                            @else 
-                                                <option value="{{$k}}">{{$v}}</option> 
-                                            @endif
-                                       @endforeach
-                                    </select>
-                                </div>
-                                
                             </div>
                             <div class="row justify-content-end">
                                 <div class="col-12 col-md-3 pull-right mt-3">

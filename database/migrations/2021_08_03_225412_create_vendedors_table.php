@@ -21,15 +21,7 @@ class CreateVendedorsTable extends Migration
             $table->date('nascimento')->nullable();
             $table->string('estado_civil')->nullable();
             $table->string('cnpj')->nullable();
-            $table->string('cep');
-            $table->string('logradouro');
-            $table->string('numero');
-            $table->string('complemento')->nullable();
-            $table->string('uf');
-            $table->string('cidade');
-            $table->string('bairro');
             $table->string('telefone')->nullable();
-            $table->boolean('correntista_bradesco');
             $table->string('profissao')->nullable();
             $table->timestamps();
         });

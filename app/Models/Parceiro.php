@@ -21,13 +21,11 @@ class Parceiro extends Model
         'telefone',
         'celular',
         'nome_contato',
-        'cep',
-        'endereco',
-        'numero',
-        'complemento',
-        'bairro',
-        'cidade',
-        'estado',
+        'telefone_contato',
+        'banco',
+        'agencia',
+        'conta',
+        'observacoes',
         'status'
     ];
 

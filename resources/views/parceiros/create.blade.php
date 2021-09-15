@@ -43,92 +43,50 @@
                                     <input type="text" name="email" placeholder="Apelido"  class="form-control form-control-border" required>
                                 </div>
                                 <div class="col-6">
-                                    <label>E-mail do financeiro</label>
-                                    <input type="text" name="email_financeiro" placeholder="Apelido"  class="form-control form-control-border" required>
+                                    <label>Telefone</label>
+                                    <input type="text" name="telefone" placeholder="Telefone"  class="form-control form-control-border telefone" required>
                                 </div>
-                                
                             </div>
 
                             <div class="row mt-2">
-                                <div class="col-4">
-                                    <label>Telefone</label>
-                                    <input type="text" name="telefone" placeholder="Telefone"  class="form-control form-control-border" required>
-                                </div>
+                                
                                 <div class="col-4">
                                     <label>Celular</label>
-                                    <input type="text" name="celular" placeholder="Celular"  class="form-control form-control-border" required>
+                                    <input type="text" name="celular" placeholder="Celular"  class="form-control form-control-border celular" required>
                                 </div>
                                 <div class="col-4">
                                     <label>Nome de contato</label>
                                     <input type="text" name="nome_contato" placeholder="Nome de contato"  class="form-control form-control-border" required>
                                 </div>
+
+                                 <div class="col-4">
+                                    <label>Telefone do contato</label>
+                                    <input type="text" name="telefone_contato" placeholder="Telefone do contato"  class="form-control form-control-border telefone" required>
+                                </div>
                                 
                             </div>
 
-                            <div class="row mt-2">
-                                <div class="col-4">
-                                    <label>CEP</label>
-                                    <input type="text" onkeyup="pesquisacep()" name="cep" placeholder="CEP" id="busca_cep" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Endereço</label>
-                                    <input type="text" name="endereco" placeholder="Endereço" id="rua" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-2">
-                                    <label>Número</label>
-                                    <input type="text" name="numero" placeholder="Número"  class="form-control form-control-border" required>
-                                </div>
-                                
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Complemento</label>
-                                    <input type="text" name="complemento" placeholder="Complemento"  class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Bairro</label>
-                                    <input type="text" name="bairro" placeholder="Bairro" id="bairro" class="form-control form-control-border" required>
-                                </div>
                             
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-6">
-                                    <label>Cidade</label>
-                                    <input type="text" name="cidade" placeholder="Cidade" id="cidade"  class="form-control form-control-border" required>
+                                    <label>Banco</label>
+                                    <input type="text" name="banco" placeholder="Banco"  class="form-control form-control-border">
                                 </div>
                                 <div class="col-6">
-                                    <label>Estado</label>
-                                    <select name="estado" id="uf" class="custom-select form-control form-control-border"  required>
-                                        <option value="AC">Acre</option>
-                                        <option value="AL">Alagoas</option>
-                                        <option value="AP">Amapá</option>
-                                        <option value="AM">Amazonas</option>
-                                        <option value="BA">Bahia</option>
-                                        <option value="CE">Ceará</option>
-                                        <option value="DF">Distrito Federal</option>
-                                        <option value="ES">Espírito Santo</option>
-                                        <option value="GO">Goiás</option>
-                                        <option value="MA">Maranhão</option>
-                                        <option value="MT">Mato Grosso</option>
-                                        <option value="MS">Mato Grosso do Sul</option>
-                                        <option value="MG">Minas Gerais</option>
-                                        <option value="PA">Pará</option>
-                                        <option value="PB">Paraíba</option>
-                                        <option value="PR">Paraná</option>
-                                        <option value="PE">Pernambuco</option>
-                                        <option value="PI">Piauí</option>
-                                        <option value="RJ">Rio de Janeiro</option>
-                                        <option value="RN">Rio Grande do Norte</option>
-                                        <option value="RS">Rio Grande do Sul</option>
-                                        <option value="RO">Rondônia</option>
-                                        <option value="RR">Roraima</option>
-                                        <option value="SC">Santa Catarina</option>
-                                        <option value="SP">São Paulo</option>
-                                        <option value="SE">Sergipe</option>
-                                        <option value="TO">Tocantins</option>
-                                    </select>
+                                    <label>Agência</label>
+                                    <input type="text" name="agencia" placeholder="Agência"  class="form-control form-control-border">
                                 </div>
-                                
+                                <div class="col-6">
+                                    <label>Conta</label>
+                                    <input type="text" name="conta" placeholder="Celular"  class="form-control form-control-border" required>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                <label>Observações</label>
+                                <textarea name="observacoes" id="" cols="30" rows="5" class='form-control form-control-border'></textarea>
+                                </div>
                             </div>
                             <div class="row justify-content-end">
                                 <div class="col-12 col-md-3 pull-right mt-3">
@@ -145,7 +103,6 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-@endsection
 <style>
 .card-header{ 
     padding-bottom: 0 !important;
@@ -159,10 +116,21 @@ label {
 </style>
 
 <script>
+jQuery(function ($) {
+        $(".telefone").each(function () {
+            $(this).mask('(99) 9999-9999');
+        })
+        $(".celular").each(function () {
+            $(this).mask('(99) 99999-9999');
+        })
+        $(".cpf").each(function () {
+            $(this).mask('999.999.999-99');
+        })
+    });
     var templateJuridica = ` 
         <div class="col-6">
             <label>CNPJ</label>
-            <input type="text" name="cnpj" placeholder="CNPJ"  class="form-control form-control-border" required>
+            <input type="text" name="cnpj" placeholder="CNPJ"  class="form-control form-control-border cpnj" required>
         </div>
         <div class="col-6">
             <label>Apelido (Exibido no sistema)</label>
@@ -181,7 +149,7 @@ label {
     var templateFisica = `
                         <div class="col-4">
                                     <label>CPF</label>
-                                    <input type="text" name="cpf" placeholder="CPF"  class="form-control form-control-border" required>
+                                    <input type="text" name="cpf" placeholder="CPF"  class="form-control form-control-border cpf" required>
                                 </div>
                                 <div class="col-4">
                                     <label>Apelido (Exibido no sistema)</label>
@@ -199,9 +167,15 @@ label {
         if (tipoVendedor.value == 1) {
             document.querySelector('#target-tipo-parceiro').innerHTML = '';
             document.querySelector('#target-tipo-parceiro').innerHTML = templateFisica;
+            $(".cpf").each(function () {
+                $(this).mask('999.999.999-99');
+            })
         } else {
             document.querySelector('#target-tipo-parceiro').innerHTML = '';
             document.querySelector('#target-tipo-parceiro').innerHTML = templateJuridica;
+            $(".cnpj").each(function () {
+                $(this).mask('99.999.999/9999-99');
+            })
         }
     }
 
@@ -272,3 +246,4 @@ label {
         }
     };
 </script>
+@endsection

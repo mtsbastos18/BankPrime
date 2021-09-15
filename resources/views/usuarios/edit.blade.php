@@ -41,7 +41,7 @@
                             <div class="row mt-3">
                                 <div class="col-3">
                                     <label>CPF</label>
-                                    <input type="text" name="cpf" placeholder="CPF" value="{{$usuario->cpf}}"  class="form-control form-control-border" required>
+                                    <input type="text" name="cpf" placeholder="CPF" value="{{$usuario->cpf}}"  class="form-control form-control-border cpf" required>
                                 </div>
                                 <div class="col-9">
                                     <label>Permissão</label>
@@ -110,51 +110,6 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-2">
-                                <div class="col-4">
-                                    <label>CEP</label>
-                                    <input type="text" onkeyup="pesquisacep()" name="cep"  value="{{$usuario->cep}}" placeholder="CEP" id="busca_cep" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Endereço</label>
-                                    <input type="text" name="endereco" placeholder="Endereço"   value="{{$usuario->endereco}}" id="rua" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-2">
-                                    <label>Número</label>
-                                    <input type="text" name="numero" placeholder="Número"  value="{{$usuario->numero}}"  class="form-control form-control-border" required>
-                                </div>
-                                
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Complemento</label>
-                                    <input type="text" name="complemento" placeholder="Complemento"  value="{{$usuario->complemento}}" class="form-control form-control-border" >
-                                </div>
-                                <div class="col-6">
-                                    <label>Bairro</label>
-                                    <input type="text" name="bairro" placeholder="Bairro" id="bairro"  value="{{$usuario->bairro}}" class="form-control form-control-border" required>
-                                </div>
-                            
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <label>Cidade</label>
-                                    <input type="text" name="cidade" placeholder="Cidade" id="cidade"  value="{{$usuario->cidade}}" class="form-control form-control-border" required>
-                                </div>
-                                <div class="col-6">
-                                    <label>Estado</label>
-                                    <select name="uf" id="uf" class="custom-select form-control form-control-border"  required>
-                                        @foreach ($ufs as $k => $v)
-                                            @if ($usuario->uf == $k)
-                                                <option value="{{$k}}" selected>{{$v}}</option> 
-                                            @else
-                                                 <option value="{{$k}}">{{$v}}</option> 
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
-                                
-                            </div>
 
 
 
@@ -187,6 +142,18 @@ label {
 </style>
 
 <script>
+<script>
+jQuery(function ($) {
+        $(".telefone").each(function () {
+            $(this).mask('(99) 9999-9999');
+        })
+        $(".celular").each(function () {
+            $(this).mask('(99) 99999-9999');
+        })
+        $(".cpf").each(function () {
+            $(this).mask('999.999.999-99');
+        })
+    });
     function parceiro() {
         var valor = document.getElementById('id_permissao').value;
         if (valor == 1) {

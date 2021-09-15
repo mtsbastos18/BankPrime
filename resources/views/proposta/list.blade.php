@@ -43,14 +43,13 @@
                             </div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="tabela-lista" class="table">
                                 <thead>
                                     <tr>
+                                        <th>Banco</th>
                                         <th>CPF</th>
                                         <th>Cliente</th>
-                                        <th>Valor</th>
                                         <th>Situação</th>
-                                        <th>Criado em</th>
                                         <th>Atualizado em</th>
                                         <th>Ações</th>
                                     </tr>
@@ -58,14 +57,27 @@
                                 <tbody>
                                    @foreach ($lista as $l)
                                     <tr>
+                                        @switch($l->banco)
+                                            @case(1)
+                                                <td><img src="{{ asset('images/itau.png') }}" style="max-width: 25px;"><span style="visibility:hidden;">{{$l->banco}}</span></td>
+                                                @break
+                                            @case(2)
+                                                <td><img src="{{ asset('images/bradesco.png') }}" style="max-width: 25px;"><span style="visibility:hidden;">{{$l->banco}}</span></td>
+                                                @break
+                                            @case(3)
+                                                <td><img src="{{ asset('images/santander.png') }}" style="max-width: 25px;"><span style="visibility:hidden;">{{$l->banco}}</span></td>
+                                                @break
+                                            @default
+                                                
+                                        @endswitch
+
                                         <td>{{$l->cpf}}</td>
                                         <td>{{$l->nome}}</td>
-                                        <td>R$ {{$l->valor_financiar}}</td>
                                         
                                         @switch($l->status)
                                             @case(1)
-                                            <td class="badge bg-info">
-                                                Em andamento
+                                            <td >
+                                                <a class="badge bg-info">Em andamento</a>
                                             </td>
                                                 @break
                                             @case(2)
@@ -92,12 +104,12 @@
                                                 
                                         @endswitch
                                         
-                                        <td>{{date_format(new DateTime($l->created_at),'d-m-Y H:i:s')}}</td>
                                         <td>{{date_format(new DateTime($l->updated_at),'d-m-Y H:i:s')}}</td>
-                                        <td>
-                                            <a  href="{{ route('editar-proposta',$l->id) }}"><i class="far fa-edit"></i> Editar</a>
+                                        <td class="td-acoes">
+                                        <a  href="{{ route('visualizar-proposta',$l->id) }}"><i class="far fa-eye"></i> </a>
+                                            <a  href="{{ route('editar-proposta',$l->id) }}"><i class="far fa-edit"></i> </a>
                                             @if (auth()->user()->id_permissao == 1)
-                                                <a  href="{{ route('acompanhamentos',$l->id) }}"><i class="far fa-edit"></i>Acompanhamentos</a>
+                                                <a  href="{{ route('acompanhamentos',$l->id) }}"><i class="fas fa-briefcase"></i></a>
                                             @endif
                                         </td>
                                     </tr>
@@ -132,6 +144,16 @@ $("#input-busca").on('keyup',function(){
 
     $("#filtra-busca").attr('href','/propostas/' + filtro);
 })
+
+$(document).ready(function() {
+    $('#tabela-lista').DataTable({
+        lengthChange: false,
+        searching: false,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/pt_br.json'
+        }
+    });
+} );
 </script>
 
 @endsection

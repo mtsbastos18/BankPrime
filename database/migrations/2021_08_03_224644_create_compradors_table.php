@@ -21,7 +21,6 @@ class CreateCompradorsTable extends Migration
             $table->char('sexo');
             $table->string('estado_civil');
             $table->string('email');
-            $table->string('nome_mae');
             $table->string('pais');
             $table->string('naturalidade');
             $table->string('tipo_documento');

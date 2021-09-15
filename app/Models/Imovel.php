@@ -20,5 +20,8 @@ class Imovel extends Model
         'estado',
         "vagas",
         'contato_avaliacao',
+        'telefone_contato',
+        'novo_usado',
+        'numero_vaga',
     ];
 }

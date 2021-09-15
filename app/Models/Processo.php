@@ -12,11 +12,13 @@ class Processo extends Model
     protected $fillable = [
         'valor_operacao',
         'valor_financiar',
+        'banco',
         'utiliza_fgts',
         'financiar_despesas',
         'financiar_avaliacao',
         'recursos_proprios',
         'fgts',
+        'valor_despesas',
         'valor_total_financiado',
         'valor_total_entrada',
         'ltv',
@@ -26,6 +28,11 @@ class Processo extends Model
         'id_vendedor',
         'id_imovel',
         'id_usuario_criacao',
-        'status'
+        'status',
+        'id_parceiro',
+        'dia_prestacao',
+        'amortizacao',
+        'indexador',
+        'id_corretor'
     ];
 }

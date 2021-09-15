@@ -1,6 +1,6 @@
 th, td {
     font-size: 14px;
-    padding: 5px !important;
+    /* padding: 5px !important; */
 }
 
 .card-navy:not(.card-outline) > .card-header {
@@ -20,4 +20,15 @@ th, td {
 
 .bg-info-dourado {
     background-color: #d79c4e;
+}
+
+td.td-acoes a {
+    margin-right: 6px;
+}
+td.td-acoes {
+    font-size: 17px;
+}
+
+.badge {
+    padding: 7px;
 }

@@ -17,7 +17,6 @@ class Comprador extends Model
         'sexo',
         'estado_civil',
         'email',
-        'nome_mae',
         'pais',
         'naturalidade',
         'tipo_documento',
