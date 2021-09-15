@@ -40,24 +40,49 @@ class PropostaController extends Controller
 
         if (auth()->user()->id_parceiro > 1) {
             if ($filtro != null) {
-                $lista = DB::table('processos')
-                    ->join('rel_comprador_imovel', 'processos.id', '=', 'rel_comprador_imovel.id_processo')
-                    ->join('compradores', 'rel_comprador_imovel.id_comprador', '=', 'compradores.id')
-                    ->join('users', 'processos.id_usuario_criacao', '=', 'users.id')
-                    ->select('processos.id', 'processos.banco', 'processos.status', 'processos.updated_at', 'compradores.nome', 'compradores.cpf')
-                    ->where('compradores.nome', 'like', '%' . $filtro . '%')
-                    ->orWhere('compradores.cpf', 'like', '%' . $filtro . '%')
-                    ->groupBy('processos.id')
-                    ->get();
+                if (auth()->user()->id_permissao == 4) {
+                    $lista = DB::table('processos')
+                        ->join('rel_comprador_imovel', 'processos.id', '=', 'rel_comprador_imovel.id_processo')
+                        ->join('compradores', 'rel_comprador_imovel.id_comprador', '=', 'compradores.id')
+                        ->join('users', 'processos.id_usuario_criacao', '=', 'users.id')
+                        ->select('processos.id', 'processos.banco', 'processos.status', 'processos.updated_at', 'compradores.nome', 'compradores.cpf')
+                        ->where('processos.id_parceiro', '=', auth()->user()->id)
+                        ->where('compradores.nome', 'like', '%' . $filtro . '%')
+                        ->orWhere('compradores.cpf', 'like', '%' . $filtro . '%')
+                        ->groupBy('processos.id')
+                        ->get();
+                } else {
+                    $lista = DB::table('processos')
+                        ->join('rel_comprador_imovel', 'processos.id', '=', 'rel_comprador_imovel.id_processo')
+                        ->join('compradores', 'rel_comprador_imovel.id_comprador', '=', 'compradores.id')
+                        ->join('users', 'processos.id_usuario_criacao', '=', 'users.id')
+                        ->select('processos.id', 'processos.banco', 'processos.status', 'processos.updated_at', 'compradores.nome', 'compradores.cpf')
+                        ->where('processos.id_corretor', '=', auth()->user()->id)
+                        ->where('compradores.nome', 'like', '%' . $filtro . '%')
+                        ->orWhere('compradores.cpf', 'like', '%' . $filtro . '%')
+                        ->groupBy('processos.id')
+                        ->get();
+                }
             } else {
-                $lista = DB::table('processos')
-                    ->join('rel_comprador_imovel', 'processos.id', '=', 'rel_comprador_imovel.id_processo')
-                    ->join('compradores', 'rel_comprador_imovel.id_comprador', '=', 'compradores.id')
-                    ->join('users', 'processos.id_usuario_criacao', '=', 'users.id')
-                    ->select('processos.id', 'processos.banco', 'processos.status', 'processos.updated_at', 'compradores.nome', 'compradores.cpf')
-                    ->where('users.id_parceiro', '=', auth()->user()->id_parceiro)
-                    ->groupBy('processos.id')
-                    ->get();
+                if (auth()->user()->id_permissao == 4) {
+                    $lista = DB::table('processos')
+                        ->join('rel_comprador_imovel', 'processos.id', '=', 'rel_comprador_imovel.id_processo')
+                        ->join('compradores', 'rel_comprador_imovel.id_comprador', '=', 'compradores.id')
+                        ->join('users', 'processos.id_usuario_criacao', '=', 'users.id')
+                        ->select('processos.id', 'processos.banco', 'processos.status', 'processos.updated_at', 'compradores.nome', 'compradores.cpf')
+                        ->where('processos.id_parceiro', '=', auth()->user()->id)
+                        ->groupBy('processos.id')
+                        ->get();
+                } else {
+                    $lista = DB::table('processos')
+                        ->join('rel_comprador_imovel', 'processos.id', '=', 'rel_comprador_imovel.id_processo')
+                        ->join('compradores', 'rel_comprador_imovel.id_comprador', '=', 'compradores.id')
+                        ->join('users', 'processos.id_usuario_criacao', '=', 'users.id')
+                        ->select('processos.id', 'processos.banco', 'processos.status', 'processos.updated_at', 'compradores.nome', 'compradores.cpf')
+                        ->where('processos.id_corretor', '=', auth()->user()->id)
+                        ->groupBy('processos.id')
+                        ->get();
+                }
             }
 
             return view("proposta.list", ['lista' => $lista]);
@@ -291,8 +316,20 @@ class PropostaController extends Controller
                 $data['profissaoComprador3'] = $profissaoComprador3;
                 $data['conjugeComprador3'] = $conjugeComprador3;
             }
+            $parceiros = Parceiro::all();
+            $data['parceiros'] = $parceiros;
 
-            exit(json_encode($data));
+            $listaCorretores = User::where([
+                ['id_permissao', '=', '2'],
+                ['id_parceiro', '=', $processo['id_parceiro']],
+            ])
+                ->orWhere([
+                    ['id_permissao', '=', '3'],
+                    ['id_parceiro', '=', $processo['id_parceiro']],
+                ])
+                ->get();
+
+            $data['corretores'] = $listaCorretores;
 
             return view('proposta.view', $data);
         }

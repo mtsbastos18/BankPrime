@@ -245,12 +245,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="right fas fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('parceiros') }}" class="nav-link">
-                                        <i class="nav-icon fas fa-file"></i>
-                                        <p>Parceiros</p>
-                                    </a>
-                                </li>
+                                @if (auth()->user()->id_permissao == 1)
+                                    <li class="nav-item">
+                                        <a href="{{ route('parceiros') }}" class="nav-link">
+                                            <i class="nav-icon fas fa-file"></i>
+                                            <p>Parceiros</p>
+                                        </a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a href="{{ route('usuarios') }}" class="nav-link">
                                         <i class="nav-icon fas fa-user"></i>

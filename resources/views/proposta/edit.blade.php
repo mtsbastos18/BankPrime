@@ -1400,7 +1400,7 @@
                     <label>CEP</label>
                     <input type="text" name="imovel[cep]" value={{ $imovel->cep }}
                         placeholder="CEP do
-                                                                                                                                                                                                                                                                                                                                                                                                    imóvel"
+                                                                                                                                                                                                                                                                                                                                                                                                        imóvel"
                         class="form-control form-control-border">
                 </div>
                 <div class="col-5">
