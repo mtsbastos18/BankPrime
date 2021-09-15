@@ -124,33 +124,29 @@ class UserController extends Controller
             return redirect('usuarios')->with('error', 'Você não possui permissão para criar esse tipo de usuário');
         }
 
-        // try {
+        try {
 
-        if ($data['id_permissao'] == 1) {
-            $data['id_parceiro'] = 1;
+            if ($data['id_permissao'] == 1) {
+                $data['id_parceiro'] = 1;
+            }
+            $cpf = str_replace('-', '', $data['cpf']);
+            $data['login'] = str_replace('.', '', $cpf);
+            $senha = date_format(new DateTime($data['data_nascimento']), 'd-m-Y');
+
+            $senha = str_replace("-", "", $senha);
+            $data['password'] = Hash::make($senha);
+
+            $usuario = User::create($data);
+
+            if ($usuario['id_permissao'] == 3) {
+                return redirect('vincular-usuario/' . $usuario['id']);
+            }
+
+            return redirect('usuarios')->with('success', 'Usuário criado com sucesso');
+        } catch (\Throwable $th) {
+            exit($th);
+            return redirect('usuarios')->with('error', 'Erro ao salvar usuário');
         }
-        $cpf = str_replace('-', '', $data['cpf']);
-        $data['login'] = str_replace('.', '', $cpf);
-        $senha = date_format(new DateTime($data['data_nascimento']), 'd-m-Y');
-
-        $senha = str_replace("-", "", $senha);
-        $data['password'] = Hash::make($senha);
-
-        $usuario = User::create($data);
-
-        if ($usuario['id_permissao'] == 3) {
-            return redirect('vincular-usuario/' . $usuario['id']);
-        }
-
-        return redirect('usuarios')->with('success', 'Usuário criado com sucesso');
-
-
-        // } catch (\Throwable $th) {
-        //     exit($th);
-        //     return redirect('usuarios')->with('error','Erro ao salvar usuário');
-        // }
-
-
     }
 
     public function vincularGerente($IdUsuario)
