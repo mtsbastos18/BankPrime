@@ -170,16 +170,15 @@ class UserController extends Controller
                 "id_gerente" => $data['id_gerente']
             ];
 
-            // try {
-            RelCorretorGerente::where('id_corretor', $IdUsuario)->where('id_gerente', $data['id_gerente'])->delete();
+            try {
+                RelCorretorGerente::where('id_corretor', $IdUsuario)->where('id_gerente', $data['id_gerente'])->delete();
 
-            RelCorretorGerente::create($relCorretorGerente);
+                RelCorretorGerente::create($relCorretorGerente);
 
-            return redirect('usuarios')->with('success', 'Usuário vinculado com sucesso');
-            // } catch (\Throwable $th) {
-            //     return redirect('usuarios')->with('error','Erro ao vincular usuário ao gerente'); 
-            // }
-
+                return redirect('usuarios')->with('success', 'Usuário vinculado com sucesso');
+            } catch (\Throwable $th) {
+                return redirect('usuarios')->with('error', 'Erro ao vincular usuário ao gerente');
+            }
         }
 
         return redirect('usuarios')->with('error', 'Erro ao vincular usuário ao gerente');

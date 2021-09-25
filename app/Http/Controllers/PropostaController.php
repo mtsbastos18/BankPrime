@@ -143,117 +143,117 @@ class PropostaController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
+        try {
 
-        $data = $request->all();
+            $data = $request->all();
 
-        $compradorData = $data['comprador'];
-        $enderecoCompradorData = $data['endereco_comprador'];
-        $processoData = $data['processo'];
-        $imovelData = $data['imovel'];
-        $profissaoCompradorData = $data['profissao_comprador'];
-        $conjugeData = $data['conjuge'];
-        $vendedorData = $data['vendedor'];
+            $compradorData = $data['comprador'];
+            $enderecoCompradorData = $data['endereco_comprador'];
+            $processoData = $data['processo'];
+            $imovelData = $data['imovel'];
+            $profissaoCompradorData = $data['profissao_comprador'];
+            $conjugeData = $data['conjuge'];
+            $vendedorData = $data['vendedor'];
 
-        $comprador2Data = $data['comprador2'];
-        $enderecoComprador2Data = $data['endereco_comprador2'];
-        $profissaoComprador2Data = $data['profissao_comprador2'];
-        $conjuge2Data = $data['conjuge2'];
+            $comprador2Data = $data['comprador2'];
+            $enderecoComprador2Data = $data['endereco_comprador2'];
+            $profissaoComprador2Data = $data['profissao_comprador2'];
+            $conjuge2Data = $data['conjuge2'];
 
-        $comprador3Data = $data['comprador3'];
-        $enderecoComprador3Data = $data['endereco_comprador3'];
-        $profissaoComprador3Data = $data['profissao_comprador3'];
-        $conjuge3Data = $data['conjuge3'];
+            $comprador3Data = $data['comprador3'];
+            $enderecoComprador3Data = $data['endereco_comprador3'];
+            $profissaoComprador3Data = $data['profissao_comprador3'];
+            $conjuge3Data = $data['conjuge3'];
 
-        $comprador = Comprador::create($compradorData);
+            $comprador = Comprador::create($compradorData);
 
-        // $senha = date_format($comprador->nascimento, 'd-m-Y');
+            // $senha = date_format($comprador->nascimento, 'd-m-Y');
 
-        // $senha = str_replace("-","",$senha);
+            // $senha = str_replace("-","",$senha);
 
-        // $usuarioParceiro = [
-        //     'name' => $comprador->nome,
-        //     'email' => $comprador->email,
-        //     'login' => $comprador->cpf,
-        //     'id_permissao' => 5,
-        //     'password' => Hash::make($senha),
-        //     'id_parceiro' => auth()->user()->id_parceiro
-        // ];
-
-
-        // User::create($usuarioParceiro);
-
-        $enderecoCompradorData['id_comprador'] = $comprador['id'];
-        $enderecoComprador = EnderecoComprador::create($enderecoCompradorData);
-
-        $profissaoCompradorData['id_comprador'] = $comprador['id'];
-        $profissaoComprador = ProfissaoComprador::create($profissaoCompradorData);
+            // $usuarioParceiro = [
+            //     'name' => $comprador->nome,
+            //     'email' => $comprador->email,
+            //     'login' => $comprador->cpf,
+            //     'id_permissao' => 5,
+            //     'password' => Hash::make($senha),
+            //     'id_parceiro' => auth()->user()->id_parceiro
+            // ];
 
 
-        if ($compradorData['estado_civil'] == 2 || $compradorData['estado_civil'] == 3) {
-            $conjugeData['id_comprador'] = $comprador['id'];
-            $conjuge = ConjugeComprador::create($conjugeData);
-        }
+            // User::create($usuarioParceiro);
+
+            $enderecoCompradorData['id_comprador'] = $comprador['id'];
+            $enderecoComprador = EnderecoComprador::create($enderecoCompradorData);
+
+            $profissaoCompradorData['id_comprador'] = $comprador['id'];
+            $profissaoComprador = ProfissaoComprador::create($profissaoCompradorData);
 
 
-        $imovel = Imovel::create($imovelData);
-
-        $vendedor = Vendedor::create($vendedorData);
-
-
-        $processoData['id_imovel'] = $imovel['id'];
-        $processoData['id_usuario_criacao'] = auth()->user()->id;
-        $processoData['id_vendedor'] = $vendedor['id'];
-
-        $processo = Processo::create($processoData);
-
-        $relProcessoComprador = RelCompradorProcesso::create([
-            'id_processo' => $processo['id'],
-            'id_comprador' => $comprador['id']
-        ]);
-
-        if ($comprador2Data['ativo'] == 1) {
-            $comprador2 = Comprador::create($comprador2Data);
-            $enderecoComprador2Data['id_comprador'] = $comprador2['id'];
-            $enderecoComprador2 = EnderecoComprador::create($enderecoComprador2Data);
-
-            $profissaoComprador2Data['id_comprador'] = $comprador2['id'];
-            $profissaoComprador2 = ProfissaoComprador::create($profissaoComprador2Data);
-
-            if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
-                $conjuge2Data['id_comprador'] = $comprador2['id'];
-                $conjuge2 = ConjugeComprador::create($conjuge2Data);
+            if ($compradorData['estado_civil'] == 2 || $compradorData['estado_civil'] == 3) {
+                $conjugeData['id_comprador'] = $comprador['id'];
+                $conjuge = ConjugeComprador::create($conjugeData);
             }
 
-            $relProcessoComprador2 = RelCompradorProcesso::create([
+
+            $imovel = Imovel::create($imovelData);
+
+            $vendedor = Vendedor::create($vendedorData);
+
+
+            $processoData['id_imovel'] = $imovel['id'];
+            $processoData['id_usuario_criacao'] = auth()->user()->id;
+            $processoData['id_vendedor'] = $vendedor['id'];
+
+            $processo = Processo::create($processoData);
+
+            $relProcessoComprador = RelCompradorProcesso::create([
                 'id_processo' => $processo['id'],
-                'id_comprador' => $comprador2['id']
+                'id_comprador' => $comprador['id']
             ]);
-        }
 
-        if ($comprador3Data['ativo'] == 1) {
-            $comprador3 = Comprador::create($comprador3Data);
-            $enderecoComprador3Data['id_comprador'] = $comprador3['id'];
-            $enderecoComprador3 = EnderecoComprador::create($enderecoComprador3Data);
+            if ($comprador2Data['ativo'] == 1) {
+                $comprador2 = Comprador::create($comprador2Data);
+                $enderecoComprador2Data['id_comprador'] = $comprador2['id'];
+                $enderecoComprador2 = EnderecoComprador::create($enderecoComprador2Data);
 
-            $profissaoComprador3Data['id_comprador'] = $comprador3['id'];
-            $profissaoComprador3 = ProfissaoComprador::create($profissaoComprador3Data);
+                $profissaoComprador2Data['id_comprador'] = $comprador2['id'];
+                $profissaoComprador2 = ProfissaoComprador::create($profissaoComprador2Data);
 
-            if ($comprador3Data['estado_civil'] == 2 || $comprador3Data['estado_civil'] == 3) {
-                $conjuge3Data['id_comprador'] = $comprador3['id'];
-                $conjuge3 = ConjugeComprador::create($conjuge3Data);
+                if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
+                    $conjuge2Data['id_comprador'] = $comprador2['id'];
+                    $conjuge2 = ConjugeComprador::create($conjuge2Data);
+                }
+
+                $relProcessoComprador2 = RelCompradorProcesso::create([
+                    'id_processo' => $processo['id'],
+                    'id_comprador' => $comprador2['id']
+                ]);
             }
 
-            $relProcessoComprador3 = RelCompradorProcesso::create([
-                'id_processo' => $processo['id'],
-                'id_comprador' => $comprador3['id']
-            ]);
-        }
+            if ($comprador3Data['ativo'] == 1) {
+                $comprador3 = Comprador::create($comprador3Data);
+                $enderecoComprador3Data['id_comprador'] = $comprador3['id'];
+                $enderecoComprador3 = EnderecoComprador::create($enderecoComprador3Data);
 
-        return Redirect('propostas');
-        // } catch (\Throwable $th) {
-        //     return Redirect()->back()->withInput($request->input())->with('error', 'Erro ao salvar proposta');;
-        // }
+                $profissaoComprador3Data['id_comprador'] = $comprador3['id'];
+                $profissaoComprador3 = ProfissaoComprador::create($profissaoComprador3Data);
+
+                if ($comprador3Data['estado_civil'] == 2 || $comprador3Data['estado_civil'] == 3) {
+                    $conjuge3Data['id_comprador'] = $comprador3['id'];
+                    $conjuge3 = ConjugeComprador::create($conjuge3Data);
+                }
+
+                $relProcessoComprador3 = RelCompradorProcesso::create([
+                    'id_processo' => $processo['id'],
+                    'id_comprador' => $comprador3['id']
+                ]);
+            }
+
+            return Redirect('propostas');
+        } catch (\Throwable $th) {
+            return Redirect()->back()->withInput($request->input())->with('error', 'Erro ao salvar proposta');;
+        }
     }
 
     /**

@@ -120,51 +120,55 @@ class AcompanhamentoController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        try {
+            $data = $request->all();
 
-        $check = Acompanhamentos::where([
-            ['id_tipo_acompanhamento', '=', $data['id_tipo_acompanhamento']],
-            ['id_processo', '=', $data['id_processo']]
-        ])->get();
+            $check = Acompanhamentos::where([
+                ['id_tipo_acompanhamento', '=', $data['id_tipo_acompanhamento']],
+                ['id_processo', '=', $data['id_processo']]
+            ])->get();
 
 
-        if (count($check) == 0) {
-            $dataAcompanhamento = [
-                'id_tipo_acompanhamento' => $data['id_tipo_acompanhamento'],
-                'id_processo' => $data['id_processo'],
-                'id_usuario_criacao' => auth()->user()->id
-            ];
-
-            $acompanhamento = Acompanhamentos::create($dataAcompanhamento);
-            if ($data['observacoes'] != "") {
-                $observacao = [
-                    'id_acompanhamento' => $acompanhamento['id'],
-                    'observacao' => $data['observacoes'],
+            if (count($check) == 0) {
+                $dataAcompanhamento = [
+                    'id_tipo_acompanhamento' => $data['id_tipo_acompanhamento'],
+                    'id_processo' => $data['id_processo'],
                     'id_usuario_criacao' => auth()->user()->id
                 ];
 
-                ObservacaoAcompanhamentos::create($observacao);
-            }
+                $acompanhamento = Acompanhamentos::create($dataAcompanhamento);
+                if ($data['observacoes'] != "") {
+                    $observacao = [
+                        'id_acompanhamento' => $acompanhamento['id'],
+                        'observacao' => $data['observacoes'],
+                        'id_usuario_criacao' => auth()->user()->id
+                    ];
+
+                    ObservacaoAcompanhamentos::create($observacao);
+                }
 
 
-            return Redirect('acompanhamentos/' . $data['id_processo']);
-        } else {
-            $acompanhamentoAtual = Acompanhamentos::where([
-                ['id_processo', '=', $data['id_processo']],
-            ])->orderBy('created_at', 'desc')->first();
-
-            if ($data['observacoes'] != "") {
-                $observacao = [
-                    'id_acompanhamento' => $acompanhamentoAtual['id'],
-                    'observacao' => $data['observacoes'],
-                    'id_usuario_criacao' => auth()->user()->id
-                ];
-
-                ObservacaoAcompanhamentos::create($observacao);
                 return Redirect('acompanhamentos/' . $data['id_processo']);
+            } else {
+                $acompanhamentoAtual = Acompanhamentos::where([
+                    ['id_processo', '=', $data['id_processo']],
+                ])->orderBy('created_at', 'desc')->first();
+
+                if ($data['observacoes'] != "") {
+                    $observacao = [
+                        'id_acompanhamento' => $acompanhamentoAtual['id'],
+                        'observacao' => $data['observacoes'],
+                        'id_usuario_criacao' => auth()->user()->id
+                    ];
+
+                    ObservacaoAcompanhamentos::create($observacao);
+                    return Redirect('acompanhamentos/' . $data['id_processo']);
+                }
             }
+            return Redirect('propostas')->with('message', 'Erro ao atualizar proposta');
+        } catch (\Throwable $th) {
+            return Redirect('propostas')->with('message', 'Erro ao atualizar proposta');
         }
-        return Redirect('propostas')->with('message', 'Erro ao atualizar proposta');
     }
 
     /**

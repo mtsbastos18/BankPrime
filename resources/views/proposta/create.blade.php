@@ -529,7 +529,8 @@
                         </div>
 
                         {{-- comprador 2 --}}
-                        <div class="card card-navy comprador2" style="display:none;">
+                        <div class="card card-navy comprador2"
+                            {{ old('comprador2.ativo') != 1 ? 'style=display:none;' : '' }}>
                             <div class="card-header">
                                 <h3 class="card-title">
                                     Dados Pessoais Comprador 2
@@ -1058,7 +1059,7 @@
 
                         {{-- comprador 3 --}}
                         <div class="card card-navy comprador3"
-                            {{ old('comprador3.ativo') == 1 ? '' : 'style="display:none;"' }}>
+                            {{ old('comprador3.ativo') != 1 ? 'style=display:none;' : '' }}>
                             <div class="card-header">
                                 <h3 class="card-title">
                                     Dados Pessoais Comprador 3
@@ -1961,8 +1962,9 @@
                         </div>
                         <div class="row justify-content-end mb-2">
                             <div class="col-12 col-md-3 pull-right">
-                                <input type="button" class="btn btn-block btn-outline-primary" onclick="addVendedor2()"
-                                    value="Adicionar Vendedor">
+
+                                <button type="button" class="btn btn-block btn-outline-primary" onclick="addVendedor2()"><i
+                                        class='fas fa-plus'></i> Vendedor</button>
                             </div>
                         </div>
 

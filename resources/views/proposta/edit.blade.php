@@ -1683,6 +1683,11 @@
             </h3>
         </div>
         <div class="card-body">
+            <div class="row justify-content-end">
+                <div class="col-12 col-md-3 col-lg-2">
+                    <a href="" class="btn btn-block btn-outline-danger">Excluir Vendedor</a>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-6">
                     <label>Tipo de vendedor</label>
@@ -1892,7 +1897,13 @@
             </div>
         </div>
     </div>
+    <div class="row justify-content-end mb-2">
+        <div class="col-12 col-md-3 pull-right">
 
+            <button type="button" class="btn btn-block btn-outline-primary" onclick="addVendedor2()"><i
+                    class='fas fa-plus'></i> Vendedor</button>
+        </div>
+    </div>
 
     <div class="card card-navy ">
         <div class="card-header">
