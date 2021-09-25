@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use App\Models\Uf;
 use App\Models\PermissaoUsuario;
@@ -121,7 +122,7 @@ class UserController extends Controller
         $data = $request->all();
 
         if (auth()->user()->id_permissao != 1 && $data['id_permissao'] == 1) {
-            return redirect('usuarios')->with('error', 'Você não possui permissão para criar esse tipo de usuário');
+            return Redirect()->back()->withInput($request->input())->with('error', 'Você não possui permissão para criar esse tipo de usuário');
         }
 
         try {
@@ -144,8 +145,7 @@ class UserController extends Controller
 
             return redirect('usuarios')->with('success', 'Usuário criado com sucesso');
         } catch (\Throwable $th) {
-            exit($th);
-            return redirect('usuarios')->with('error', 'Erro ao salvar usuário');
+            return Redirect()->back()->withInput($request->input())->with('error', 'Erro ao salvar usuário');
         }
     }
 

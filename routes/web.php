@@ -35,6 +35,8 @@ Route::post('/salvar-proposta', [App\Http\Controllers\PropostaController::class,
 Route::get('/editar-proposta/{IdProposta}', [App\Http\Controllers\PropostaController::class, 'edit'])->name('editar-proposta');
 Route::post('/atualizar-proposta/{IdProposta}', [App\Http\Controllers\PropostaController::class, 'update'])->name('atualizar-proposta');
 Route::get('/visualizar-proposta/{IdProposta}', [App\Http\Controllers\PropostaController::class, 'show'])->name('visualizar-proposta');
+Route::get('/excluir-proposta/{IdProposta}', [\App\Http\Controllers\PropostaController::class, 'destroy'])->name('excluir-proposta');
+Route::get('/excluir-comprador/{Id}', [\App\Http\Controllers\PropostaController::class, 'deleteComprador'])->name('excluir-comprador');
 
 
 
@@ -44,7 +46,6 @@ Route::get('/novo-parceiro', [App\Http\Controllers\ParceiroController::class, 'c
 Route::post('/salvar-parceiro', [App\Http\Controllers\ParceiroController::class, 'store'])->name('salvar-parceiro');
 Route::get('/editar-parceiro/{IdParceiro}', [App\Http\Controllers\ParceiroController::class, 'edit'])->name('editar-parceiro');
 Route::post('/atualizar-parceiro/{IdParceiro}', [App\Http\Controllers\ParceiroController::class, 'update'])->name('atualizar-parceiro');
-
 
 Route::get('/busca-corretor/{idParceiro}', [App\Http\Controllers\UserController::class, 'listaCorretores'])->name('busca-corretor');
 Route::get('/usuarios/{idParceiro?}', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios');

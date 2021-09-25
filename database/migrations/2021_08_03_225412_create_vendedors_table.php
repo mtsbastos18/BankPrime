@@ -15,8 +15,8 @@ class CreateVendedorsTable extends Migration
     {
         Schema::create('vendedores', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipo');
-            $table->string('nome');
+            $table->integer('tipo')->nullable();
+            $table->string('nome')->nullable();
             $table->string('cpf')->nullable();
             $table->date('nascimento')->nullable();
             $table->string('estado_civil')->nullable();

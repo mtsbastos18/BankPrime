@@ -38,7 +38,7 @@
                         @endif
 
                         <div class="row justify-content-end mb-2">
-                            <div class="col-12 col-md-3 pull-right mt-3">
+                            <div class="col-12 col-md-3 col-lg-2 pull-right mt-3">
                                 <input type="submit" class="btn btn-block btn-outline-primary" value="Salvar">
                             </div>
                         </div>
@@ -568,8 +568,15 @@
                 <h3 class="card-title">
                     Dados Pessoais Comprador 2
                 </h3>
+
             </div>
             <div class="card-body">
+                <div class="row justify-content-end">
+                    <div class="col-12 col-md-3 col-lg-2">
+                        <a href="{{ route('excluir-comprador', $comprador2->id) }}"
+                            class="btn btn-block btn-outline-danger">Excluir Comprador</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-4">
                         <label>CPF</label>
@@ -772,92 +779,314 @@
                         <label>Tipo contratação</label>
                         <select name="profissao_comprador2[contratacao]"
                             class="custom-select form-control form-control-border">
-                            <option value="1" @if ($profissaoComprador2->contratacao == 1)
-                                selected
-    @endif>Assalariado</option>
-    <option value="2" @if ($profissaoComprador2->contratacao == 2) selected
-        @endif>Aposentado</option>
-    <option value="3" @if ($profissaoComprador2->contratacao == 3) selected
-        @endif>Sócio Proprietário</option>
-    <option value="4" @if ($profissaoComprador2->contratacao == 4) selected
-        @endif>Autônomo</option>
-    <option value="5" @if ($profissaoComprador2->contratacao == 5) selected
-        @endif>Profissional liberal</option>
-    </select>
-    </div>
-    <div class="col-4">
-        <label>Data admissão</label>
-        <input type="date" name="profissao_comprador2[admissao]" value="{{ $profissaoComprador2->admissao }}"
-            class="form-control form-control-border">
-    </div>
-    <div class="col-4">
-        <label>Cargo</label>
-        <input type="text" name="profissao_comprador2[cargo]" value="{{ $profissaoComprador2->cargo }}"
-            placeholder="Cargo" class="form-control form-control-border">
-    </div>
-    </div>
-
-    <div class="row mt-3">
-        <div class="col-4">
-            <label>Renda mensal</label>
-            <input type="text" name="profissao_comprador2[renda_mensal]" value="{{ $profissaoComprador2->renda_mensal }}"
-                placeholder="Renda mensal" class="form-control form-control-border">
-        </div>
-        <div class="col-4">
-            <label>Outra renda mensal</label>
-            <input type="text" name="profissao_comprador2[outra_renda_mensal]"
-                value="{{ $profissaoComprador2->outra_renda_mensal }}" placeholder="Outra renda mensal"
-                class="form-control form-control-border">
-        </div>
-        <div class="col-4">
-            <label>Origem</label>
-            <input type="text" name="profissao_comprador2[origem_renda]" value="{{ $profissaoComprador2->origem_renda }}"
-                placeholder="Origem" class="form-control form-control-border">
-        </div>
-    </div>
-
-    </div>
-    </div>
-
-    @if ($conjugeComprador2)
-        <div class="card card-navy ">
-            <div class="card-header">
-                <h3 class="card-title">
-                    Dados Pessoais do cônjuge do Comprador 2
-                </h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <label>Nome</label>
-                        <input type="text" name="conjuge2[nome]" value="{{ $conjugeComprador2->nome }}" placeholder="CPF"
-                            class="form-control form-control-border">
-                    </div>
-                    <div class="col-4">
-                        <label>Sexo</label>
-                        <select name="conjuge2[sexo]" class="custom-select form-control form-control-border">
-                            <option value="1" @if ($conjugeComprador2->sexo == 1) selected @endif>Masculino
+                            <option value="1" {{ $profissaoComprador2->contratacao == 1 ? 'selected' : '' }}>Assalariado
                             </option>
-                            <option value="2" @if ($conjugeComprador2->sexo == 2) selected @endif>Feminino
+                            <option value="2" {{ $profissaoComprador2->contratacao == 2 ? 'selected' : '' }}>Aposentado
                             </option>
+                            <option value="3" {{ $profissaoComprador2->contratacao == 3 ? 'selected' : '' }}>Sócio
+                                Proprietário</option>
+                            <option value="4" {{ $profissaoComprador2->contratacao == 4 ? 'selected' : '' }}>Autônomo
+                            </option>
+                            <option value="5" {{ $profissaoComprador2->contratacao == 5 ? 'selected' : '' }}>Profissional
+                                liberal</option>
                         </select>
                     </div>
                     <div class="col-4">
-                        <label>Nome da mãe</label>
-                        <input type="text" name="conjuge2[nome_mae]" value="{{ $conjugeComprador2->nome_mae }}"
-                            placeholder="Nome da mãe" class="form-control form-control-border">
+                        <label>Data admissão</label>
+                        <input type="date" name="profissao_comprador2[admissao]"
+                            value="{{ $profissaoComprador2->admissao }}" class="form-control form-control-border">
                     </div>
+                    <div class="col-4">
+                        <label>Cargo</label>
+                        <input type="text" name="profissao_comprador2[cargo]" value="{{ $profissaoComprador2->cargo }}"
+                            placeholder="Cargo" class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Renda mensal</label>
+                        <input type="text" name="profissao_comprador2[renda_mensal]"
+                            value="{{ $profissaoComprador2->renda_mensal }}" placeholder="Renda mensal"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Outra renda mensal</label>
+                        <input type="text" name="profissao_comprador2[outra_renda_mensal]"
+                            value="{{ $profissaoComprador2->outra_renda_mensal }}" placeholder="Outra renda mensal"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Origem</label>
+                        <input type="text" name="profissao_comprador2[origem_renda]"
+                            value="{{ $profissaoComprador2->origem_renda }}" placeholder="Origem"
+                            class="form-control form-control-border">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        @if ($conjugeComprador2)
+            <div class="card card-navy ">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Dados Pessoais do cônjuge do Comprador 2
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Nome</label>
+                            <input type="text" name="conjuge2[nome]" value="{{ $conjugeComprador2->nome }}"
+                                placeholder="CPF" class="form-control form-control-border">
+                        </div>
+                        <div class="col-4">
+                            <label>Sexo</label>
+                            <select name="conjuge2[sexo]" class="custom-select form-control form-control-border">
+                                <option value="1" @if ($conjugeComprador2->sexo == 1) selected @endif>Masculino
+                                </option>
+                                <option value="2" @if ($conjugeComprador2->sexo == 2) selected @endif>Feminino
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label>Nome da mãe</label>
+                            <input type="text" name="conjuge2[nome_mae]" value="{{ $conjugeComprador2->nome_mae }}"
+                                placeholder="Nome da mãe" class="form-control form-control-border">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <label>Nacionalidade</label>
+                            <input type="text" name="conjuge2[pais]" value="{{ $conjugeComprador2->pais }}"
+                                placeholder="Nacionalidade" class="form-control form-control-border">
+                        </div>
+                        <div class="col-6">
+                            <label>Naturalidade</label>
+                            <input type="text" name="conjuge2[naturalidade]"
+                                value="{{ $conjugeComprador2->naturalidade }}" placeholder="Naturalidade"
+                                class="form-control form-control-border">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <label>Documento</label>
+                            <input type="text" name="conjuge2[tipo_documento]"
+                                value="{{ $conjugeComprador2->tipo_documento }}" placeholder="Documento"
+                                class="form-control form-control-border">
+                        </div>
+                        <div class="col-6">
+                            <label>Nº Documento</label>
+                            <input type="text" name="conjuge2[num_documento]"
+                                value="{{ $conjugeComprador2->num_documento }}" placeholder="Nº Documento"
+                                class="form-control form-control-border">
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label>Órgão expedidor</label>
+                            <input type="text" name="conjuge2[orgao_emissor]"
+                                value="{{ $conjugeComprador2->orgao_emissor }}" placeholder="Órgão expedidor"
+                                class="form-control form-control-border">
+                        </div>
+                        <div class="col-4">
+                            <label>UF emissão</label>
+                            <select name="conjuge2[estado_documento]"
+                                class="custom-select form-control form-control-border">
+                                @foreach ($ufs as $k => $v)
+                                    @if ($conjugeComprador2->estado_documento == $k)
+                                        <option value="{{ $k }}" selected>{{ $v }}</option>
+                                    @else
+                                        <option value="{{ $k }}">{{ $v }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label>Data emissão</label>
+                            <input type="date" name="conjuge2[data_emissao]"
+                                value="{{ $conjugeComprador2->data_emissao }}" placeholder="Data emissão"
+                                class="form-control form-control-border">
+                        </div>
+                    </div>
+
+
+
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label>Telefone</label>
+                            <input type="text" name="conjuge2[telefone]" value="{{ $conjugeComprador2->telefone }}"
+                                placeholder="Telefone" class="form-control form-control-border">
+                        </div>
+
+                        <div class="col-4">
+                            <label>Celular</label>
+                            <input type="text" name="conjuge2[celular]" value="{{ $conjugeComprador2->celular }}"
+                                placeholder="Celular" class="form-control form-control-border">
+                        </div>
+
+                        <div class="col-4">
+                            <label>E-mail</label>
+                            <input type="text" name="conjuge2[email]" value="{{ $conjugeComprador2->email }}"
+                                placeholder="E-mail" class="form-control form-control-border">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="card card-navy ">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Dados profissionais do cônjuge do comprador
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Nome da empresa</label>
+                            <input type="text" name="conjuge2[nome_empresa]"
+                                value="{{ $conjugeComprador2->nome_empresa }}" placeholder="Nome da empresa"
+                                class="form-control form-control-border">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label>Tipo contratação</label>
+                            <select name="conjuge2[contratacao]" class="custom-select form-control form-control-border">
+                                <option value="1" {{ $conjugeComprador2->contratacao == 1 ? 'selected' : '' }}>
+                                    Assalariado</option>
+                                <option value="2" {{ $conjugeComprador2->contratacao == 2 ? 'selected' : '' }}>
+                                    Aposentado</option>
+                                <option value="3" {{ $conjugeComprador2->contratacao == 3 ? 'selected' : '' }}>Sócio
+                                    Proprietário</option>
+                                <option value="4" {{ $conjugeComprador2->contratacao == 4 ? 'selected' : '' }}>Autônomo
+                                </option>
+                                <option value="5" {{ $conjugeComprador2->contratacao == 6 ? 'selected' : '' }}>
+                                    Profissional liberal</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label>Data admissão</label>
+                            <input type="date" name="conjuge2[admissao]" value="{{ $conjugeComprador2->admissao }}"
+                                class="form-control form-control-border">
+                        </div>
+                        <div class="col-4">
+                            <label>Cargo</label>
+                            <input type="text" name="conjuge2[cargo]" value="{{ $conjugeComprador2->cargo }}"
+                                placeholder="Cargo" class="form-control form-control-border">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <label>Renda mensal</label>
+                            <input type="text" name="conjuge2[renda_mensal]"
+                                value="{{ $conjugeComprador2->renda_mensal }}" placeholder="Renda mensal"
+                                class="form-control form-control-border">
+                        </div>
+                        <div class="col-4">
+                            <label>Outra renda mensal</label>
+                            <input type="text" name="conjuge2[outra_renda_mensal]"
+                                value="{{ $conjugeComprador2->outra_renda_mensal }}" placeholder="Outra renda mensal"
+                                class="form-control form-control-border">
+                        </div>
+                        <div class="col-4">
+                            <label>Origem</label>
+                            <input type="text" name="conjuge2[origem_renda]"
+                                value="{{ $conjugeComprador2->origem_renda }}" placeholder="Origem"
+                                class="form-control form-control-border">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        @endif
+
+    @else
+        <div class="row justify-content-end mb-2">
+            <div class="col-12 col-md-3 pull-right">
+                <button type="button" class="btn btn-block btn-outline-primary" onclick="addComprador2()"><i
+                        class='fas fa-plus'></i> Comprador</button>
+            </div>
+        </div>
+
+        {{-- comprador 2 --}}
+        <div class="card card-navy comprador2" style="display:none;">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Dados Pessoais Comprador 2
+                </h3>
+            </div>
+            <div class="card-body">
+                <input type="hidden" value="{{ old('comprador2.ativo') }}" id="seleciona-comprador-2"
+                    name="comprador2[ativo]">
+                <div class="row">
+                    <div class="col-4">
+                        <label>CPF comprador </label>
+                        <input type="text" value="{{ old('comprador2.cpf') }}" name="comprador2[cpf]" placeholder="CPF"
+                            class="form-control form-control-border cpf">
+                    </div>
+                    <div class="col-4">
+                        <label>Data de Nascimento</label>
+                        <input type="date" value="{{ old('comprador2.nascimento') }}" name="comprador2[nascimento]"
+                            placeholder="Data de Nascimento" class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Estado Civil</label>
+                        <select name="comprador2[estado_civil]" onchange="setEstadoCivil2()"
+                            class="custom-select form-control form-control-border" id="estado-civil-2">
+                            <option value="">Selecione</option>
+                            <option value="1" {{ old('comprador2.estado_civil') == 1 ? 'selected' : '' }}>Solteiro(a)
+                            </option>
+                            <option value="2" {{ old('comprador2.estado_civil') == 2 ? 'selected' : '' }}>
+                                Casado(a)</option>
+                            <option value="3" {{ old('comprador2.estado_civil') == 3 ? 'selected' : '' }}>
+                                União estável</option>
+                            <option value="4" {{ old('comprador2.estado_civil') == 4 ? 'selected' : '' }}>
+                                Divorciado(a)</option>
+                            <option value="5" {{ old('comprador2.estado_civil') == 5 ? 'selected' : '' }}>
+                                Viúvo(a)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <label>Nome</label>
+                        <input type="text" value="{{ old('comprador2.nome') }}" name="comprador2[nome]"
+                            placeholder="Nome" class="form-control form-control-border">
+                    </div>
+                    <div class="col-6">
+                        <label>Sexo</label>
+                        <select name="comprador2[sexo]" class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
+                            <option value="1" {{ old('comprador2.sexo') == 1 ? 'selected' : '' }}>
+                                Masculino</option>
+                            <option value="2" {{ old('comprador2.sexo') == 2 ? 'selected' : '' }}>
+                                Feminino</option>
+                        </select>
+                    </div>
+
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-6">
                         <label>Nacionalidade</label>
-                        <input type="text" name="conjuge2[pais]" value="{{ $conjugeComprador2->pais }}"
+                        <input type="text" value="{{ old('comprador2.pais') }}" name="comprador2[pais]"
                             placeholder="Nacionalidade" class="form-control form-control-border">
                     </div>
                     <div class="col-6">
                         <label>Naturalidade</label>
-                        <input type="text" name="conjuge2[naturalidade]" value="{{ $conjugeComprador2->naturalidade }}"
+                        <input type="text" value="{{ old('comprador2.naturalidade') }}" name="comprador2[naturalidade]"
                             placeholder="Naturalidade" class="form-control form-control-border">
                     </div>
                 </div>
@@ -865,14 +1094,14 @@
                 <div class="row mt-3">
                     <div class="col-6">
                         <label>Documento</label>
-                        <input type="text" name="conjuge2[tipo_documento]"
-                            value="{{ $conjugeComprador2->tipo_documento }}" placeholder="Documento"
+                        <input type="text" value="{{ old('comprador2.tipo_documento') }}"
+                            name="comprador2[tipo_documento]" placeholder="Documento"
                             class="form-control form-control-border">
                     </div>
                     <div class="col-6">
                         <label>Nº Documento</label>
-                        <input type="text" name="conjuge2[num_documento]"
-                            value="{{ $conjugeComprador2->num_documento }}" placeholder="Nº Documento"
+                        <input type="text" value="{{ old('comprador2.num_documento') }}"
+                            name="comprador2[num_documento]" placeholder="Nº Documento"
                             class="form-control form-control-border">
                     </div>
 
@@ -882,16 +1111,18 @@
                 <div class="row mt-3">
                     <div class="col-4">
                         <label>Órgão expedidor</label>
-                        <input type="text" name="conjuge2[orgao_emissor]"
-                            value="{{ $conjugeComprador2->orgao_emissor }}" placeholder="Órgão expedidor"
+                        <input type="text" value="{{ old('comprador2.orgao_emissor') }}"
+                            name="comprador2[orgao_emissor]" placeholder="Órgão expedidor"
                             class="form-control form-control-border">
                     </div>
                     <div class="col-4">
                         <label>UF emissão</label>
-                        <select name="conjuge2[estado_documento]" class="custom-select form-control form-control-border">
+                        <select name="comprador2[estado_documento]" class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
                             @foreach ($ufs as $k => $v)
-                                @if ($conjugeComprador2->estado_documento == $k)
-                                    <option value="{{ $k }}" selected>{{ $v }}</option>
+                                @if ($k == 'RS')
+                                    <option value="{{ $k }}" selected>{{ $v }}
+                                    </option>
                                 @else
                                     <option value="{{ $k }}">{{ $v }}</option>
                                 @endif
@@ -900,7 +1131,284 @@
                     </div>
                     <div class="col-4">
                         <label>Data emissão</label>
-                        <input type="date" name="conjuge2[data_emissao]" value="{{ $conjugeComprador2->data_emissao }}"
+                        <input type="date" value="{{ old('comprador2.data_emissao') }}" name="comprador2[data_emissao]"
+                            placeholder="Data emissão" class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3 dados-casamento2" style="display:none;">
+                    <div class="col-6">
+                        <label>Regime de bens</label>
+                        <select name="comprador2[regime_bens]" class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
+                            <option value="1" {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }}>Comunhão
+                                parcial de bens</option>
+                            <option value="2" {{ old('comprador2.regime_bens') == 2 ? 'selected' : '' }}>Comunhão
+                                Universal de Bens</option>
+                            <option value="3" {{ old('comprador2.regime_bens') == 3 ? 'selected' : '' }}>Separação de
+                                bens</option>
+                        </select>
+                    </div>
+
+                    <div class="col-6">
+                        <label>Data casamento</label>
+                        <input type="date" value="{{ old('comprador2.data_casamento') }}"
+                            name="comprador2[data_casamento]" placeholder="" class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-3">
+                        <label>CEP Residencial</label>
+                        <input type="text" value="{{ old('endereco_comprador2.cep') }}" onkeyup="pesquisacep(1)"
+                            name="endereco_comprador2[cep]" id="cep1" placeholder=""
+                            class="form-control form-control-border">
+                    </div>
+
+                    <div class="col-5">
+                        <label>Endereço residencial</label>
+                        <input type="text" value="{{ old('endereco_comprador2.logradouro') }}"
+                            name="endereco_comprador2[logradouro]" id="rua1" placeholder=""
+                            class="form-control form-control-border">
+                    </div>
+
+                    <div class="col-2">
+                        <label>Número</label>
+                        <input type="text" value="{{ old('endereco_comprador2.numero') }}"
+                            name="endereco_comprador2[numero]" id="numero1" placeholder=""
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-2">
+                        <label>Complemento</label>
+                        <input type="text" value="{{ old('endereco_comprador2.complemento') }}"
+                            name="endereco_comprador2[complemento]" placeholder=""
+                            class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Bairro</label>
+                        <input type="text" value="{{ old('endereco_comprador2.bairro') }}"
+                            name="endereco_comprador2[bairro]" id="bairro1" placeholder=""
+                            class="form-control form-control-border">
+                    </div>
+
+                    <div class="col-4">
+                        <label>Cidade</label>
+                        <input type="text" value="{{ old('endereco_comprador2.cidade') }}"
+                            name="endereco_comprador2[cidade]" id="cidade1" placeholder=""
+                            class="form-control form-control-border">
+                    </div>
+
+                    <div class="col-4">
+                        <label>Estado</label>
+                        <select name="endereco_comprador2[uf]" class="custom-select form-control form-control-border"
+                            id="uf1">
+                            @foreach ($ufs as $k => $v)
+                                <option {{ old('endereco_comprador2.uf') == $k ? 'selected' : '' }}
+                                    value="{{ $k }}">{{ $v }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Telefone</label>
+                        <input type="text" value="{{ old('endereco_comprador2.telefone') }}"
+                            name="endereco_comprador2[telefone]" id="telefone" placeholder=""
+                            class="form-control form-control-border telefone">
+                    </div>
+
+                    <div class="col-4">
+                        <label>Celular</label>
+                        <input type="text" value="{{ old('endereco_comprador2.celular') }}"
+                            name="endereco_comprador2[celular]" placeholder=""
+                            class="form-control form-control-border celular">
+                    </div>
+
+                    <div class="col-4">
+                        <label>E-mail</label>
+                        <input type="text" value="{{ old('endereco_comprador2.email') }}" name="comprador2[email]"
+                            placeholder="" class="form-control form-control-border">
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="card card-navy comprador2" style="display:none;">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Dados Profissionais Comprador 2
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <label>Nome da empresa</label>
+                        <input type="text" value="{{ old('profissao_comprador2.nome_empresa') }}"
+                            name="profissao_comprador2[nome_empresa]" placeholder="Nome da empresa"
+                            class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Tipo contratação</label>
+                        <select name="profissao_comprador2[contratacao]"
+                            class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
+                            <option value="1" {{ old('profissao_comprador2.contratacao') == 1 ? 'selected' : '' }}>
+                                Assalariado</option>
+                            <option value="2" {{ old('profissao_comprador2.contratacao') == 2 ? 'selected' : '' }}>
+                                Aposentado</option>
+                            <option value="3" {{ old('profissao_comprador2.contratacao') == 3 ? 'selected' : '' }}>
+                                Sócio Proprietário</option>
+                            <option value="4" {{ old('profissao_comprador2.contratacao') == 4 ? 'selected' : '' }}>
+                                Autônomo</option>
+                            <option value="5" {{ old('profissao_comprador2.contratacao') == 5 ? 'selected' : '' }}>
+                                Profissional liberal</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label>Data admissão</label>
+                        <input type="date" value="{{ old('profissao_comprador2.admissao') }}"
+                            name="profissao_comprador2[admissao]" class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Cargo</label>
+                        <input type="text" value="{{ old('profissao_comprador2.cargo') }}"
+                            name="profissao_comprador2[cargo]" placeholder="Cargo"
+                            class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Renda mensal</label>
+                        <input type="text" value="{{ old('profissao_comprador2.renda_mensal') }}"
+                            name="profissao_comprador2[renda_mensal]" placeholder="Renda mensal"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Outra renda mensal</label>
+                        <input type="text" value="{{ old('profissao_comprador2.outra_renda_mensal') }}"
+                            name="profissao_comprador2[outra_renda_mensal]" placeholder="Outra renda mensal"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Origem</label>
+                        <input type="text" value="{{ old('profissao_comprador2.origem_renda') }}"
+                            name="profissao_comprador2[origem_renda]" placeholder="Origem"
+                            class="form-control form-control-border">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card card-navy conjuge2" style="display:none;">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Dados Pessoais do cônjuge do Comprador 2
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <label>CPF cônjuge 2</label>
+                        <input type="text" value="{{ old('conjuge2.cpf') }}" name="conjuge2[cpf]" placeholder="CPF"
+                            class="form-control form-control-border cpf">
+                    </div>
+                    <div class="col-4">
+                        <label>Data de Nascimento</label>
+                        <input type="date" value="{{ old('conjuge2.data_nascimento') }}"
+                            name="conjuge2[data_nascimento]" placeholder="Data de Nascimento"
+                            class="form-control form-control-border">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Nome</label>
+                        <input type="text" value="{{ old('conjuge2.nome') }}" name="conjuge2[nome]" placeholder="Nome"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Sexo</label>
+                        <select name="conjuge2[sexo]" class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
+                            <option value="1" {{ old('conjuge2.sexo') == 1 ? 'selected' : '' }}>
+                                Masculino</option>
+                            <option value="2" {{ old('conjuge2.sexo') == 2 ? 'selected' : '' }}>Feminino
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label>Nome da mãe</label>
+                        <input type="text" value="{{ old('conjuge2.nome_mae') }}" name="conjuge2[nome_mae]"
+                            placeholder="Nome da mãe" class="form-control form-control-border">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <label>Nacionalidade</label>
+                        <input type="text" value="{{ old('conjuge2.pais') }}" name="conjuge2[pais]"
+                            placeholder="Nacionalidade" class="form-control form-control-border">
+                    </div>
+                    <div class="col-6">
+                        <label>Naturalidade</label>
+                        <input type="text" value="{{ old('conjuge2.naturalidade') }}" name="conjuge2[naturalidade]"
+                            placeholder="Naturalidade" class="form-control form-control-border">
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <label>Documento</label>
+                        <input type="text" value="{{ old('conjuge2.tipo_documento') }}" name="conjuge2[tipo_documento]"
+                            placeholder="Documento" class="form-control form-control-border">
+                    </div>
+                    <div class="col-6">
+                        <label>Nº Documento</label>
+                        <input type="text" value="{{ old('conjuge2.num_documento') }}" name="conjuge2[num_documento]"
+                            placeholder="Nº Documento" class="form-control form-control-border">
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Órgão expedidor</label>
+                        <input type="text" value="{{ old('conjuge2.orgao_emissor') }}" name="conjuge2[orgao_emissor]"
+                            placeholder="Órgão expedidor" class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>UF emissão</label>
+                        <select name="conjuge2[estado_documento]" class="custom-select form-control form-control-border">
+                            <option value="">Selecione</option>
+                            @foreach ($ufs as $k => $v)
+                                @if ($k == 'RS')
+                                    <option value="{{ $k }}" selected>{{ $v }}
+                                    </option>
+                                @else
+                                    <option value="{{ $k }}">{{ $v }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+
+                    </div>
+                    <div class="col-4">
+                        <label>Data emissão</label>
+                        <input type="date" value="{{ old('conjuge2.data_emissao') }}" name="conjuge2[data_emissao]"
                             placeholder="Data emissão" class="form-control form-control-border">
                     </div>
                 </div>
@@ -910,20 +1418,20 @@
                 <div class="row mt-3">
                     <div class="col-4">
                         <label>Telefone</label>
-                        <input type="text" name="conjuge2[telefone]" value="{{ $conjugeComprador2->telefone }}"
-                            placeholder="Telefone" class="form-control form-control-border">
+                        <input type="text" value="{{ old('conjuge2.telefone') }}" name="conjuge2[telefone]"
+                            placeholder="" class="form-control form-control-border telefone">
                     </div>
 
                     <div class="col-4">
                         <label>Celular</label>
-                        <input type="text" name="conjuge2[celular]" value="{{ $conjugeComprador2->celular }}"
-                            placeholder="Celular" class="form-control form-control-border">
+                        <input type="text" value="{{ old('conjuge2.celular') }}" name="conjuge2[celular]" placeholder=""
+                            class="form-control form-control-border celular">
                     </div>
 
                     <div class="col-4">
                         <label>E-mail</label>
-                        <input type="text" name="conjuge2[email]" value="{{ $conjugeComprador2->email }}"
-                            placeholder="E-mail" class="form-control form-control-border">
+                        <input type="text" value="{{ old('conjuge2.email') }}" name="conjuge2[email]" placeholder=""
+                            class="form-control form-control-border">
                     </div>
                 </div>
 
@@ -931,17 +1439,17 @@
             </div>
         </div>
 
-        <div class="card card-navy ">
+        <div class="card card-navy conjuge2" style="display:none;">
             <div class="card-header">
                 <h3 class="card-title">
-                    Dados profissionais do cônjuge do comprador
+                    Dados profissionais do cônjuge do comprador 2
                 </h3>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
                         <label>Nome da empresa</label>
-                        <input type="text" name="conjuge2[nome_empresa]" value="{{ $conjugeComprador2->nome_empresa }}"
+                        <input type="text" value="{{ old('conjuge2.nome_empresa') }}" name="conjuge2[nome_empresa]"
                             placeholder="Nome da empresa" class="form-control form-control-border">
                     </div>
                 </div>
@@ -950,52 +1458,54 @@
                     <div class="col-4">
                         <label>Tipo contratação</label>
                         <select name="conjuge2[contratacao]" class="custom-select form-control form-control-border">
-                            <option value="1" @if ($conjugeComprador2->contratacao == 1)
-                                selected
-    @endif>Assalariado</option>
-    <option value="2" @if ($conjugeComprador2->contratacao == 2) selected
-        @endif>Aposentado</option>
-    <option value="3" @if ($conjugeComprador2->contratacao == 3) selected
-        @endif>Sócio Proprietário</option>
-    <option value="4" @if ($conjugeComprador2->contratacao == 4) selected
-        @endif>Autônomo</option>
-    <option value="5" @if ($conjugeComprador2->contratacao == 5) selected
-        @endif>Profissional liberal</option>
-    </select>
-    </div>
-    <div class="col-4">
-        <label>Data admissão</label>
-        <input type="date" name="conjuge2[admissao]" value="{{ $conjugeComprador2->admissao }}"
-            class="form-control form-control-border">
-    </div>
-    <div class="col-4">
-        <label>Cargo</label>
-        <input type="text" name="conjuge2[cargo]" value="{{ $conjugeComprador2->cargo }}" placeholder="Cargo"
-            class="form-control form-control-border">
-    </div>
-    </div>
+                            <option value="">Selecione</option>
+                            <option value="1" {{ old('conjuge2.contratacao') == 1 ? 'selected' : '' }}>
+                                Assalariado</option>
+                            <option value="2" {{ old('conjuge2.contratacao') == 2 ? 'selected' : '' }}>
+                                Aposentado</option>
+                            <option value="3" {{ old('conjuge2.contratacao') == 3 ? 'selected' : '' }}>
+                                Sócio Proprietário</option>
+                            <option value="4" {{ old('conjuge2.contratacao') == 4 ? 'selected' : '' }}>
+                                Autônomo</option>
+                            <option value="5" {{ old('conjuge2.contratacao') == 5 ? 'selected' : '' }}>
+                                Profissional liberal</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label>Data admissão</label>
+                        <input type="date" value="{{ old('conjuge2.admissao') }}" name="conjuge2[admissao]"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Cargo</label>
+                        <input type="text" value="{{ old('conjuge2.cargo') }}" name="conjuge2[cargo]"
+                            placeholder="Cargo" class="form-control form-control-border">
+                    </div>
+                </div>
 
-    <div class="row mt-3">
-        <div class="col-4">
-            <label>Renda mensal</label>
-            <input type="text" name="conjuge2[renda_mensal]" value="{{ $conjugeComprador2->renda_mensal }}"
-                placeholder="Renda mensal" class="form-control form-control-border">
-        </div>
-        <div class="col-4">
-            <label>Outra renda mensal</label>
-            <input type="text" name="conjuge2[outra_renda_mensal]" value="{{ $conjugeComprador2->outra_renda_mensal }}"
-                placeholder="Outra renda mensal" class="form-control form-control-border">
-        </div>
-        <div class="col-4">
-            <label>Origem</label>
-            <input type="text" name="conjuge2[origem_renda]" value="{{ $conjugeComprador2->origem_renda }}"
-                placeholder="Origem" class="form-control form-control-border">
-        </div>
-    </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <label>Renda mensal</label>
+                        <input type="text" value="{{ old('conjuge2.renda_mensal') }}" name="conjuge2[renda_mensal]"
+                            placeholder="Renda mensal" class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Outra renda mensal</label>
+                        <input type="text" value="{{ old('conjuge2.outra_renda_mensal') }}"
+                            name="conjuge2[outra_renda_mensal]" placeholder="Outra renda mensal"
+                            class="form-control form-control-border">
+                    </div>
+                    <div class="col-4">
+                        <label>Origem</label>
+                        <input type="text" value="{{ old('conjuge2.origem_renda') }}" name="conjuge2[origem_renda]"
+                            placeholder="Origem" class="form-control form-control-border">
+                    </div>
+                </div>
 
-    </div>
-    </div>
-    @endif
+            </div>
+        </div>
+        {{-- comprador 2 --}}
+
     @endif
     {{-- comprador2 --}}
     <div class="card card-navy ">
@@ -1071,11 +1581,7 @@
                     <input type="text" name="processo[fgts]" placeholder="Valor FGTS" value="{{ $processo->fgts }}"
                         class="form-control form-control-border">
                 </div>
-                <div class="col-4">
-                    <label>Valor de entrada total</label>
-                    <input type="text" name="processo[valor_total_entrada]" value="{{ $processo->valor_total_entrada }}"
-                        placeholder="Valor Total Entrada" class="form-control form-control-border">
-                </div>
+
             </div>
 
 
@@ -1155,7 +1661,7 @@
 
 
                 <div class="col-6">
-                    <label>Meses</label>
+                    <label>Prazo</label>
                     <input type="text" name="processo[meses_financiamento]" value="{{ $processo->meses_financiamento }}"
                         placeholder="Meses" class="form-control form-control-border">
                 </div>
@@ -1398,24 +1904,22 @@
             <div class="row mt-3">
                 <div class="col-3">
                     <label>CEP</label>
-                    <input type="text" name="imovel[cep]" value={{ $imovel->cep }}
-                        placeholder="CEP do
-                                                                                                                                                                                                                                                                                                                                                                                                        imóvel"
+                    <input type="text" name="imovel[cep]" value="{{ $imovel->cep }}" placeholder="CEP do imóvel"
                         class="form-control form-control-border">
                 </div>
                 <div class="col-5">
                     <label>Endereço</label>
-                    <input type="text" name="imovel[endereco]" value={{ $imovel->endereco }}
+                    <input type="text" name="imovel[endereco]" value="{{ $imovel->endereco }}"
                         placeholder="Endereço do imóvel" class="form-control form-control-border">
                 </div>
                 <div class="col-2">
                     <label>Número</label>
-                    <input type="text" name="imovel[numero]" value={{ $imovel->numero }} placeholder="Número"
+                    <input type="text" name="imovel[numero]" value="{{ $imovel->numero }}" placeholder="Número"
                         class="form-control form-control-border">
                 </div>
                 <div class="col-2">
                     <label>Complemento</label>
-                    <input type="text" name="imovel[complemento]" value={{ $imovel->complemento }}
+                    <input type="text" name="imovel[complemento]" value="{{ $imovel->complemento }}"
                         placeholder="Complemento" class="form-control form-control-border">
                 </div>
             </div>
@@ -1423,12 +1927,12 @@
 
                 <div class="col-4">
                     <label>Bairro</label>
-                    <input type="text" name="imovel[bairro]" value={{ $imovel->bairro }} placeholder="Bairro"
+                    <input type="text" name="imovel[bairro]" value="{{ $imovel->bairro }}" placeholder="Bairro"
                         class="form-control form-control-border">
                 </div>
                 <div class="col-4">
                     <label>Cidade</label>
-                    <input type="text" name="imovel[cidade]" value={{ $imovel->cidade }} placeholder="Cidade"
+                    <input type="text" name="imovel[cidade]" value="{{ $imovel->cidade }}" placeholder="Cidade"
                         class="form-control form-control-border">
                 </div>
                 <div class="col-4">
@@ -1575,7 +2079,11 @@
     </div>
 
     <div class="row justify-content-end mb-2">
-        <div class="col-12 col-md-3 pull-right mt-3">
+        <div class="col-12 col-md-3 col-lg-2 pull-left mt-3">
+            <a href="{{ route('excluir-proposta', $processo->id) }}"
+                class="btn btn-block btn-outline-danger">Excluir</a>
+        </div>
+        <div class="col-12 col-md-3 col-lg-2 pull-right mt-3">
             <input type="submit" class="btn btn-block btn-outline-primary" value="Salvar">
         </div>
     </div>
@@ -1689,6 +2197,12 @@
                         $('#id_corretor').append(option);
                     })
                 });
+        }
+
+        function addComprador2() {
+            $('.comprador2').show();
+            $(".btn-comprador3").show();
+            $('#seleciona-comprador-2').val(1);
         }
     </script>
 @endsection

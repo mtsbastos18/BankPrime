@@ -598,7 +598,7 @@
                                 </div>
                             </div>
 
-                            @if ($conjugeComprador)
+                            @if ($conjugeComprador2)
                                 <div class="card card-navy ">
                                     <div class="card-header">
                                         <h3 class="card-title">
@@ -793,18 +793,15 @@
 
                                 <div class="row mt-2">
 
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Recursos Próprios</label>
                                         <p>{{ $processo->recursos_proprios }}</p>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Valor FGTS</label>
                                         <p>{{ $processo->fgts }}</p>
                                     </div>
-                                    <div class="col-4">
-                                        <label>Valor de entrada total</label>
-                                        <p>{{ $processo->valor_total_entrada }}</p>
-                                    </div>
+
                                 </div>
 
 
@@ -882,7 +879,7 @@
 
 
                                     <div class="col-6">
-                                        <label>Meses</label>
+                                        <label>Prazo</label>
                                         <p>{{ $processo->meses_financiamento }}</p>
                                     </div>
 

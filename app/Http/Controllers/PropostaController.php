@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Models\Acompanhamentos;
 use Illuminate\Http\Request;
 use App\Models\Parceiro;
 use App\Models\Comprador;
@@ -9,6 +11,7 @@ use App\Models\ConjugeComprador;
 use App\Models\EnderecoComprador;
 use App\Models\EstadoCivil;
 use App\Models\Imovel;
+use App\Models\ObservacaoAcompanhamentos;
 use App\Models\Processo;
 use App\Models\ProfissaoComprador;
 use App\Models\RelCompradorProcesso;
@@ -17,6 +20,7 @@ use App\Models\Vendedor;
 use App\Models\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Process\Process;
 
 class PropostaController extends Controller
 {
@@ -140,6 +144,7 @@ class PropostaController extends Controller
     public function store(Request $request)
     {
         // try {
+
         $data = $request->all();
 
         $compradorData = $data['comprador'];
@@ -247,7 +252,7 @@ class PropostaController extends Controller
 
         return Redirect('propostas');
         // } catch (\Throwable $th) {
-        //     return Redirect('propostas')->with('message', 'Erro ao inserir proposta');
+        //     return Redirect()->back()->withInput($request->input())->with('error', 'Erro ao salvar proposta');;
         // }
     }
 
@@ -471,18 +476,39 @@ class PropostaController extends Controller
             $vendedor->update($vendedorData);
 
             if (isset($data['comprador2'])) {
+
                 $comprador2Data = $data['comprador2'];
                 $enderecoComprador2Data = $data['endereco_comprador2'];
                 $profissaoComprador2Data = $data['profissao_comprador2'];
 
-                $comprador2 = Comprador::findOrFail($comprador2Data['id']);
-                $comprador2->update($comprador2Data);
+                if (isset($comprador2Data['id'])) {
 
-                $enderecoComprador2 = EnderecoComprador::findOrFail($enderecoComprador2Data['id']);
-                $enderecoComprador2->update($enderecoComprador2Data);
+                    $comprador2 = Comprador::findOrFail($comprador2Data['id']);
+                    $comprador2->update($comprador2Data);
 
-                $profissaoComprador2 = ProfissaoComprador::findOrFail($profissaoComprador2Data['id']);
-                $profissaoComprador2->update($profissaoComprador2Data);
+                    $enderecoComprador2 = EnderecoComprador::findOrFail($enderecoComprador2Data['id']);
+                    $enderecoComprador2->update($enderecoComprador2Data);
+
+                    $profissaoComprador2 = ProfissaoComprador::findOrFail($profissaoComprador2Data['id']);
+                    $profissaoComprador2->update($profissaoComprador2Data);
+                } else if ($comprador2Data['ativo'] == 1) {
+                    $comprador2 = Comprador::create($comprador2Data);
+                    $enderecoComprador2Data['id_comprador'] = $comprador2['id'];
+                    $enderecoComprador2 = EnderecoComprador::create($enderecoComprador2Data);
+
+                    $profissaoComprador2Data['id_comprador'] = $comprador2['id'];
+                    $profissaoComprador2 = ProfissaoComprador::create($profissaoComprador2Data);
+
+                    if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
+                        $conjuge2Data['id_comprador'] = $comprador2['id'];
+                        $conjuge2 = ConjugeComprador::create($conjuge2Data);
+                    }
+
+                    $relProcessoComprador2 = RelCompradorProcesso::create([
+                        'id_processo' => $processo['id'],
+                        'id_comprador' => $comprador2['id']
+                    ]);
+                }
             }
 
             if (isset($data['comprador3'])) {
@@ -515,6 +541,43 @@ class PropostaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!is_numeric($id)) {
+            return redirect('propostas')->with('message', 'Erro ao excluir proposta');
+        }
+        $processo = Processo::find($id);
+
+        $relProcessoComprador = RelCompradorProcesso::where('id_processo', $processo['id'])->delete();
+
+        $acompanhamento = Acompanhamentos::where('id_processo', $processo['id'])->get();
+
+        foreach ($acompanhamento as $c) {
+            $deleteObservacoes = ObservacaoAcompanhamentos::where('id_acompanhamento', $c['id'])->delete();
+        }
+
+        Acompanhamentos::where('id_processo', $processo['id'])->delete();
+
+        $processo->delete();
+
+        return redirect('propostas')->with('message', 'Proposta Excluída');
+    }
+
+    public function deleteComprador($id)
+    {
+        if (!is_numeric($id)) {
+            return redirect()->back()->with('message', 'Erro ao excluir comprador');
+        }
+
+        $comprador = Comprador::find($id);
+
+        if ($comprador) {
+            $relProcessoComprador = RelCompradorProcesso::where('id_comprador', $id)->delete();
+            EnderecoComprador::where('id_comprador', $id)->delete();
+            ConjugeComprador::where('id_comprador', $id)->delete();
+            ProfissaoComprador::where('id_comprador', $id)->delete();
+
+            return redirect()->back()->with('message', 'Comprador Excluído');
+        }
+
+        return redirect()->back()->with('error', 'Comprador não encontrado');
     }
 }

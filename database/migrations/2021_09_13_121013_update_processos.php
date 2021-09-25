@@ -14,8 +14,8 @@ class UpdateProcessos extends Migration
     public function up()
     {
         Schema::table('processos', function (Blueprint $table) {
-            $table->integer('dia_prestacao');
-            $table->string('amortizacao');
+            $table->integer('dia_prestacao')->nullable();
+            $table->string('amortizacao')->nullable();
         });
     }
 

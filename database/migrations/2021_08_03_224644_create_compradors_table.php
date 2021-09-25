@@ -15,19 +15,19 @@ class CreateCompradorsTable extends Migration
     {
         Schema::create('compradores', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('cpf');
-            $table->date('nascimento');
-            $table->char('sexo');
-            $table->string('estado_civil');
-            $table->string('email');
-            $table->string('pais');
-            $table->string('naturalidade');
-            $table->string('tipo_documento');
-            $table->string('num_documento');
-            $table->string('estado_documento');
-            $table->string('orgao_emissor');
-            $table->date('data_emissao');
+            $table->string('nome')->nullable();
+            $table->string('cpf')->nullable();
+            $table->date('nascimento')->nullable();
+            $table->char('sexo')->nullable();
+            $table->string('estado_civil')->nullable();
+            $table->string('email')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('naturalidade')->nullable();
+            $table->string('tipo_documento')->nullable();
+            $table->string('num_documento')->nullable();
+            $table->string('estado_documento')->nullable();
+            $table->string('orgao_emissor')->nullable();
+            $table->date('data_emissao')->nullable();
             $table->string('regime_bens')->nullable();
             $table->date('data_casamento')->nullable();
             $table->timestamps();

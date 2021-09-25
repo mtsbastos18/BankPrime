@@ -17,13 +17,13 @@ class CreateProfissaoCompradorsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_comprador');
             $table->foreign('id_comprador')->references('id')->on('compradores');
-            $table->string('nome_empresa');
-            $table->integer('contratacao');
-            $table->date('admissao');
-            $table->string('cargo');
-            $table->string('renda_mensal');
-            $table->string('outra_renda_mensal');
-            $table->string('origem_renda');
+            $table->string('nome_empresa')->nullable();
+            $table->integer('contratacao')->nullable();
+            $table->date('admissao')->nullable();
+            $table->string('cargo')->nullable();
+            $table->string('renda_mensal')->nullable();
+            $table->string('outra_renda_mensal')->nullable();
+            $table->string('origem_renda')->nullable();
             $table->timestamps();
         });
     }
