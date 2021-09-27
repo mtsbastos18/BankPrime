@@ -33,6 +33,7 @@ class Processo extends Model
         'dia_prestacao',
         'amortizacao',
         'indexador',
-        'id_corretor'
+        'id_corretor',
+        'id_vendedor2'
     ];
 }

@@ -37,6 +37,7 @@ Route::post('/atualizar-proposta/{IdProposta}', [App\Http\Controllers\PropostaCo
 Route::get('/visualizar-proposta/{IdProposta}', [App\Http\Controllers\PropostaController::class, 'show'])->name('visualizar-proposta');
 Route::get('/excluir-proposta/{IdProposta}', [\App\Http\Controllers\PropostaController::class, 'destroy'])->name('excluir-proposta');
 Route::get('/excluir-comprador/{Id}', [\App\Http\Controllers\PropostaController::class, 'deleteComprador'])->name('excluir-comprador');
+Route::get('/excluir-vendedor/{Id}', [\App\Http\Controllers\PropostaController::class, 'deleteVendedor'])->name('excluir-vendedor');
 
 
 

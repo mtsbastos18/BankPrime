@@ -60,26 +60,27 @@
                                     <tbody>
                                         @foreach ($lista as $l)
                                             <tr>
-                                                @switch($l->banco)
-                                                    @case(1)
-                                                        <td><img src="{{ asset('images/itau.png') }}"
+                                                <td>
+                                                    @switch($l->banco)
+                                                        @case(1)
+                                                            <img src="{{ asset('images/itau.png') }}"
                                                                 style="max-width: 25px;"><span
-                                                                style="visibility:hidden;">{{ $l->banco }}</span></td>
-                                                    @break
-                                                    @case(2)
-                                                        <td><img src="{{ asset('images/bradesco.png') }}"
+                                                                style="visibility:hidden;">{{ $l->banco }}</span>
+                                                        @break
+                                                        @case(2)
+                                                            <img src="{{ asset('images/bradesco.png') }}"
                                                                 style="max-width: 25px;"><span
-                                                                style="visibility:hidden;">{{ $l->banco }}</span></td>
-                                                    @break
-                                                    @case(3)
-                                                        <td><img src="{{ asset('images/santander.png') }}"
+                                                                style="visibility:hidden;">{{ $l->banco }}</span>
+                                                        @break
+                                                        @case(3)
+                                                            <img src="{{ asset('images/santander.png') }}"
                                                                 style="max-width: 25px;"><span
-                                                                style="visibility:hidden;">{{ $l->banco }}</span></td>
-                                                    @break
-                                                    @default
+                                                                style="visibility:hidden;">{{ $l->banco }}</span>
+                                                        @break
+                                                        @default
 
-                                                @endswitch
-
+                                                    @endswitch
+                                                </td>
                                                 <td>{{ $l->cpf }}</td>
                                                 <td>{{ $l->nome }}</td>
 

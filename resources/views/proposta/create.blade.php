@@ -1969,6 +1969,7 @@
                         </div>
 
                         <div class="card card-navy " id="vendedor2" style="display: none;">
+                            <input type="hidden" name="vendedor2[ativo]" id="set-vendedor2">
                             <div class="card-header">
                                 <h3 class="card-title">
                                     Dados do Vendedor 2
@@ -2648,6 +2649,7 @@
         }
 
         function addVendedor2() {
+            $('#set-vendedor2').val(1);
             $('#vendedor2').show()
         }
     </script>

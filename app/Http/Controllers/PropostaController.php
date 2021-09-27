@@ -155,6 +155,8 @@ class PropostaController extends Controller
             $conjugeData = $data['conjuge'];
             $vendedorData = $data['vendedor'];
 
+            $vendedor2Data = $data['vendedor2'];
+
             $comprador2Data = $data['comprador2'];
             $enderecoComprador2Data = $data['endereco_comprador2'];
             $profissaoComprador2Data = $data['profissao_comprador2'];
@@ -166,22 +168,6 @@ class PropostaController extends Controller
             $conjuge3Data = $data['conjuge3'];
 
             $comprador = Comprador::create($compradorData);
-
-            // $senha = date_format($comprador->nascimento, 'd-m-Y');
-
-            // $senha = str_replace("-","",$senha);
-
-            // $usuarioParceiro = [
-            //     'name' => $comprador->nome,
-            //     'email' => $comprador->email,
-            //     'login' => $comprador->cpf,
-            //     'id_permissao' => 5,
-            //     'password' => Hash::make($senha),
-            //     'id_parceiro' => auth()->user()->id_parceiro
-            // ];
-
-
-            // User::create($usuarioParceiro);
 
             $enderecoCompradorData['id_comprador'] = $comprador['id'];
             $enderecoComprador = EnderecoComprador::create($enderecoCompradorData);
@@ -200,10 +186,15 @@ class PropostaController extends Controller
 
             $vendedor = Vendedor::create($vendedorData);
 
+            if ($vendedor2Data['ativo'] == 1) {
+                $vendedor2 = Vendedor::create($vendedor2Data);
+            }
 
             $processoData['id_imovel'] = $imovel['id'];
             $processoData['id_usuario_criacao'] = auth()->user()->id;
             $processoData['id_vendedor'] = $vendedor['id'];
+            $processoData['id_vendedor2'] = $vendedor2['id'];
+
 
             $processo = Processo::create($processoData);
 
@@ -269,6 +260,12 @@ class PropostaController extends Controller
             $imovel = Imovel::find($processo['id_imovel']);
             $vendedor = Vendedor::find($processo['id_vendedor']);
 
+            $vendedor2 = false;
+
+            if ($processo['id_vendedor2'] != null) {
+                $vendedor2 = Vendedor::find($processo['id_vendedor2']);
+            }
+
             $idComprador = RelCompradorProcesso::where('id_processo', $processo['id'])->select('id_comprador')->get();
             $comprador = Comprador::find($idComprador[0]['id_comprador']);
 
@@ -289,7 +286,8 @@ class PropostaController extends Controller
                 'profissaoComprador' => $profissaoComprador,
                 'conjugeComprador' => $conjugeComprador,
                 'comprador2' => false,
-                'comprador3' => false
+                'comprador3' => false,
+                'vendedor2' => $vendedor2
             ];
 
             if (count($idComprador) > 1) {
@@ -352,6 +350,11 @@ class PropostaController extends Controller
             $processo = Processo::find($id);
             $imovel = Imovel::find($processo['id_imovel']);
             $vendedor = Vendedor::find($processo['id_vendedor']);
+            $vendedor2 = false;
+
+            if ($processo['id_vendedor2'] != null) {
+                $vendedor2 = Vendedor::find($processo['id_vendedor2']);
+            }
 
             $idComprador = RelCompradorProcesso::where('id_processo', $processo['id'])->select('id_comprador')->get();
             $comprador = Comprador::find($idComprador[0]['id_comprador']);
@@ -373,7 +376,8 @@ class PropostaController extends Controller
                 'profissaoComprador' => $profissaoComprador,
                 'conjugeComprador' => $conjugeComprador,
                 'comprador2' => false,
-                'comprador3' => false
+                'comprador3' => false,
+                'vendedor2' => $vendedor2
             ];
 
             if (count($idComprador) > 1) {
@@ -452,11 +456,32 @@ class PropostaController extends Controller
             $vendedorData['tipo'] = $tipo;
         }
 
+        if (isset($data['vendedor2'])) {
+            $vendedor2Data = $data['vendedor2'];
+            $ativo = $vendedor2Data['ativo'];
+
+            if ($vendedor2Data['tipo'] == 2) {
+                $tipo = $vendedor2Data['tipo'];
+                $vendedor2Data = $data['vendedor2_cnpj'];
+                $vendedor2Data['tipo'] = $tipo;
+            }
+
+            if ($ativo == 1) {
+                $vendedor2 = Vendedor::create($vendedor2Data);
+                $processoData['id_vendedor2'] = $vendedor2['id'];
+            } else if (isset($vendedor2Data['id'])) {
+                $vendedor2 = Vendedor::findOrFail($vendedor2Data['id']);
+                $vendedor2->update($vendedor2Data);
+            }
+        }
+
+
         try {
             $processo = Processo::findOrFail($processoData['id']);
             $processo->update($processoData);
 
             $comprador = Comprador::findOrFail($compradorData['id']);
+            $auxEstadoCivil = $comprador['estado_civil'];
             $comprador->update($compradorData);
 
             $enderecoComprador = EnderecoComprador::findOrFail($enderecoCompradorData['id']);
@@ -468,9 +493,19 @@ class PropostaController extends Controller
             $profissaoComprador = ProfissaoComprador::findOrFail($profissaoCompradorData['id']);
             $profissaoComprador->update($profissaoCompradorData);
 
+            if ($compradorData['estado_civil'] != 2 && $compradorData['estado_civil'] != 3) {
+                ConjugeComprador::where('id_comprador', $compradorData['id'])->delete();
+                unset($conjugeData);
+            }
+
             if (isset($conjugeData)) {
-                $conjuge = ConjugeComprador::findOrFail($conjugeData['id']);
-                $conjuge->update($conjugeData);
+                if (($compradorData['estado_civil'] == 2 || $compradorData['estado_civil'] == 3) && $auxEstadoCivil != $compradorData['estado_civil']) {
+                    $conjugeData['id_comprador'] = $comprador['id'];
+                    $conjuge = ConjugeComprador::create($conjugeData);
+                } else {
+                    $conjuge = ConjugeComprador::findOrFail($conjugeData['id']);
+                    $conjuge->update($conjugeData);
+                }
             }
             $vendedor = Vendedor::findOrFail($vendedorData['id']);
             $vendedor->update($vendedorData);
@@ -491,6 +526,25 @@ class PropostaController extends Controller
 
                     $profissaoComprador2 = ProfissaoComprador::findOrFail($profissaoComprador2Data['id']);
                     $profissaoComprador2->update($profissaoComprador2Data);
+
+                    if (isset($data['conjuge2']['id'])) {
+                        $conjuge2Data = $data['conjuge2'];
+
+                        $conjuge2 = ConjugeComprador::findOrFail($conjuge2Data['id']);
+
+                        if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
+                            $conjuge2->update($conjuge2Data);
+                        } else {
+                            $conjuge2->delete();
+                        }
+                    } else {
+                        if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
+                            $conjuge2Data = $data['conjuge2'];
+                            $conjuge2Data['id_comprador'] = $comprador2['id'];
+
+                            $conjuge2 = ConjugeComprador::create($conjuge2Data);
+                        }
+                    }
                 } else if ($comprador2Data['ativo'] == 1) {
                     $comprador2 = Comprador::create($comprador2Data);
                     $enderecoComprador2Data['id_comprador'] = $comprador2['id'];
@@ -500,7 +554,66 @@ class PropostaController extends Controller
                     $profissaoComprador2 = ProfissaoComprador::create($profissaoComprador2Data);
 
                     if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
+                        $conjuge2Data = $data['conjuge2'];
                         $conjuge2Data['id_comprador'] = $comprador2['id'];
+
+                        $conjuge2 = ConjugeComprador::create($conjuge2Data);
+                    }
+
+                    $relProcessoComprador2 = RelCompradorProcesso::create([
+                        'id_processo' => $processo['id'],
+                        'id_comprador' => $comprador2['id']
+                    ]);
+                }
+            }
+
+            if (isset($data['comprador3'])) {
+
+                $comprador3Data = $data['comprador3'];
+                $enderecoComprador3Data = $data['endereco_comprador3'];
+                $profissaoComprador3Data = $data['profissao_comprador3'];
+
+                if (isset($comprador3Data['id'])) {
+
+                    $comprador3 = Comprador::findOrFail($comprador3Data['id']);
+                    $comprador3->update($comprador3Data);
+
+                    $enderecoComprador3 = EnderecoComprador::findOrFail($enderecoComprador3Data['id']);
+                    $enderecoComprador3->update($enderecoComprador3Data);
+
+                    $profissaoComprador3 = ProfissaoComprador::findOrFail($profissaoComprador3Data['id']);
+                    $profissaoComprador3->update($profissaoComprador3Data);
+
+                    if (isset($data['conjuge3']['id'])) {
+                        $conjuge3Data = $data['conjuge3'];
+
+                        $conjuge3 = ConjugeComprador::findOrFail($conjuge3Data['id']);
+
+                        if ($comprador3Data['estado_civil'] == 2 || $comprador3Data['estado_civil'] == 3) {
+                            $conjuge3->update($conjuge3Data);
+                        } else {
+                            $conjuge3->delete();
+                        }
+                    } else {
+                        if ($comprador3Data['estado_civil'] == 2 || $comprador3Data['estado_civil'] == 3) {
+                            $conjuge3Data = $data['conjuge3'];
+                            $conjuge3Data['id_comprador'] = $comprador3['id'];
+
+                            $conjuge3 = ConjugeComprador::create($conjuge3Data);
+                        }
+                    }
+                } else if ($comprador2Data['ativo'] == 1) {
+                    $comprador2 = Comprador::create($comprador2Data);
+                    $enderecoComprador2Data['id_comprador'] = $comprador2['id'];
+                    $enderecoComprador2 = EnderecoComprador::create($enderecoComprador2Data);
+
+                    $profissaoComprador2Data['id_comprador'] = $comprador2['id'];
+                    $profissaoComprador2 = ProfissaoComprador::create($profissaoComprador2Data);
+
+                    if ($comprador2Data['estado_civil'] == 2 || $comprador2Data['estado_civil'] == 3) {
+                        $conjuge2Data = $data['conjuge2'];
+                        $conjuge2Data['id_comprador'] = $comprador2['id'];
+
                         $conjuge2 = ConjugeComprador::create($conjuge2Data);
                     }
 
@@ -576,6 +689,25 @@ class PropostaController extends Controller
             ProfissaoComprador::where('id_comprador', $id)->delete();
 
             return redirect()->back()->with('message', 'Comprador Excluído');
+        }
+
+        return redirect()->back()->with('error', 'Comprador não encontrado');
+    }
+
+    public function deleteVendedor($id)
+    {
+        if (!is_numeric($id)) {
+            return redirect()->back()->with('message', 'Erro ao excluir vendedor');
+        }
+
+        $processo = Processo::find($id);
+
+        if ($processo) {
+            $processo['id_vendedor2'] = null;
+
+            $processo->update();
+
+            return redirect()->back()->with('message', 'Vendedor Excluído');
         }
 
         return redirect()->back()->with('error', 'Comprador não encontrado');
