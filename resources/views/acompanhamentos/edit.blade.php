@@ -20,46 +20,18 @@
                         <div class="card-body">
 
                             <form method="POST" enctype="multipart/form-data"
-                                action="{{ Route('novo-acompanhamento', $idProposta) }}">
+                                action="{{ Route('editar-observacao', $observacao->id) }}">
                                 @csrf
+                                <input type="hidden" name="id_observacao" value="{{ $observacao->id }}">
                                 <input type="hidden" name="id_processo" value="{{ $idProposta }}">
-                                <div class="row">
 
-                                    <div class="col-12 col-md-6 col-lg-6">
-                                        <label>Acompanhamento</label>
-                                        <select name="id_tipo_acompanhamento" id=""
-                                            class="custom-select form-control form-control-border" required>
-                                            <option value="">Selecione</option>
-                                            @foreach ($tipos as $t)
-                                                @if ($atual)
-                                                    @if ($atual->id == $t->id)
-                                                        <option value="{{ $t->id }}" selected>{{ $t->descricao }}
-                                                        </option>
-
-                                                    @else
-                                                        <option value="{{ $t->id }}">{{ $t->descricao }}</option>
-
-                                                    @endif
-                                                @else
-                                                    <option value="{{ $t->id }}">{{ $t->descricao }}</option>
-                                                @endif
-
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="col-12 col-md-6 col-lg-6">
-                                        <label for="">Data</label>
-                                        <input type="date" class="form-control form-control-border" name="data">
-                                    </div>
-                                </div>
 
                                 <div class="row mt-3">
 
                                     <div class="col-12">
                                         <label>Observações</label>
-                                        <textarea name="observacoes" id="" cols="30" rows="10"
-                                            class='form-control form-control-border'></textarea>
+                                        <textarea name="observacao" id="" cols="30" rows="10"
+                                            class='form-control form-control-border'>{{ $observacao->observacao }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row justify-content-end">

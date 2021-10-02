@@ -13,5 +13,6 @@ class ObservacaoAcompanhamentos extends Model
         'id_acompanhamento',
         'observacao',
         'id_usuario_criacao',
+        'data'
     ];
 }

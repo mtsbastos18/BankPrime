@@ -23,7 +23,7 @@
                         @foreach ($lista as $l)
                             <div class="time-label">
                                 <span class="bg-info">{{ $l->tipo_acompanhamento->descricao }} -
-                                    {{ date_format(new DateTime($l->created_at), 'd/m/Y') }}</span>
+                                    {{ date_format(new DateTime($l->data), 'd/m/Y') }}</span>
                             </div>
                             @if (auth()->user()->id_permissao != 3)
                                 <div class="detalhes-timeline">
@@ -34,6 +34,10 @@
                                         <div class="timeline-item mt-2">
                                             <h3 class="timeline-header">{{ $o->nomeUsuario->name }} adicionou uma
                                                 observação
+
+                                                <a title="Editar"
+                                                    href="{{ url('editar-observacao/' . $idProposta . '/' . $o->id) }}"><i
+                                                        class="far fa-edit pull-right"></i> </a>
                                             </h3>
 
                                             <div class="timeline-body">

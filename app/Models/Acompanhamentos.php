@@ -12,10 +12,12 @@ class Acompanhamentos extends Model
     protected $fillable = [
         'id_processo',
         'id_tipo_acompanhamento',
-        'id_usuario_criacao'
+        'id_usuario_criacao',
+        'data'
     ];
 
-    public function observacao() {
-        return $this->hasMany(ObservacaoAcompanhamentos::class,'id_acompanhamento','id');
+    public function observacao()
+    {
+        return $this->hasMany(ObservacaoAcompanhamentos::class, 'id_acompanhamento', 'id');
     }
 }

@@ -93,11 +93,12 @@
                                     <div class="col-4">
                                         <label>CPF</label>
                                         <input type="text" value="{{ $comprador->cpf }}" name="comprador[cpf]"
-                                            placeholder="CPF" class="form-control form-control-border">
+                                            placeholder="CPF" class="form-control form-control-border cpf">
                                     </div>
                                     <div class="col-4">
                                         <label>Data de Nascimento</label>
-                                        <input type="date" name="comprador[nascimento]" placeholder="Data de Nascimento"
+                                        <input type="date" value="{{ $comprador->nascimento }}"
+                                            name="comprador[nascimento]" placeholder="Data de Nascimento"
                                             class="form-control form-control-border">
                                     </div>
                                     <div class="col-4">
@@ -291,14 +292,14 @@
                                         <label>Telefone</label>
                                         <input type="text" name="endereco_comprador[telefone]"
                                             value="{{ $enderecoComprador->telefone }}" placeholder=""
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border telefone">
                                     </div>
 
                                     <div class="col-4">
                                         <label>Celular</label>
                                         <input type="text" name="endereco_comprador[celular]"
                                             value="{{ $enderecoComprador->celular }}" placeholder=""
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border celular">
                                     </div>
 
                                     <div class="col-4">
@@ -331,7 +332,7 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Tipo contratação</label>
                                         <select name="profissao_comprador[contratacao]"
                                             class="custom-select form-control form-control-border">
@@ -347,18 +348,18 @@
                                                 @endif>Profissional liberal</option>
                                         </select>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Data admissão</label>
                                         <input type="date" name="profissao_comprador[admissao]"
                                             value="{{ $profissaoComprador->admissao }}"
                                             class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" name="profissao_comprador[cargo]"
                                             value="{{ $profissaoComprador->cargo }}" placeholder="Cargo"
                                             class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -366,13 +367,14 @@
                                         <label>Renda mensal</label>
                                         <input type="text" name="profissao_comprador[renda_mensal]"
                                             value="{{ $profissaoComprador->renda_mensal }}" placeholder="Renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" name="profissao_comprador[outra_renda_mensal]"
                                             value="{{ $profissaoComprador->outra_renda_mensal }}"
-                                            placeholder="Outra renda mensal" class="form-control form-control-border">
+                                            placeholder="Outra renda mensal"
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -400,7 +402,7 @@
                                 <div class="col-4">
                                     <label>Nome</label>
                                     <input type="text" name="conjuge[nome]" value="{{ $conjugeComprador->nome }}"
-                                        placeholder="CPF" class="form-control form-control-border">
+                                        placeholder="Nome" class="form-control form-control-border">
                                 </div>
                                 <div class="col-4">
                                     <label>Sexo</label>
@@ -484,13 +486,13 @@
                                 <div class="col-4">
                                     <label>Telefone</label>
                                     <input type="text" name="conjuge[telefone]" value="{{ $conjugeComprador->telefone }}"
-                                        placeholder="Telefone" class="form-control form-control-border">
+                                        placeholder="Telefone" class="form-control form-control-border telefone">
                                 </div>
 
                                 <div class="col-4">
                                     <label>Celular</label>
                                     <input type="text" name="conjuge[celular]" value="{{ $conjugeComprador->celular }}"
-                                        placeholder="Celular" class="form-control form-control-border">
+                                        placeholder="Celular" class="form-control form-control-border celular">
                                 </div>
 
                                 <div class="col-4">
@@ -523,7 +525,7 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <label>Tipo contratação</label>
                                 <select name="conjuge[contratacao]" class="custom-select form-control form-control-border">
                                     <option value="1" {{ $conjugeComprador->contratacao == 1 ? 'selected' : '' }}>
@@ -540,16 +542,16 @@
                                         Profissional liberal</option>
                                 </select>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <label>Data admissão</label>
                                 <input type="date" name="conjuge[admissao]" value="{{ $conjugeComprador->admissao }}"
                                     class="form-control form-control-border">
                             </div>
-                            <div class="col-4">
+                            {{-- <div class="col-4">
                                 <label>Cargo</label>
                                 <input type="text" name="conjuge[cargo]" value="{{ $conjugeComprador->cargo }}"
                                     placeholder="Cargo" class="form-control form-control-border">
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="row mt-3">
@@ -557,13 +559,13 @@
                                 <label>Renda mensal</label>
                                 <input type="text" name="conjuge[renda_mensal]"
                                     value="{{ $conjugeComprador->renda_mensal }}" placeholder="Renda mensal"
-                                    class="form-control form-control-border">
+                                    class="form-control form-control-border decimal">
                             </div>
                             <div class="col-4">
                                 <label>Outra renda mensal</label>
                                 <input type="text" name="conjuge[outra_renda_mensal]"
                                     value="{{ $conjugeComprador->outra_renda_mensal }}" placeholder="Outra renda mensal"
-                                    class="form-control form-control-border">
+                                    class="form-control form-control-border decimal">
                             </div>
                             <div class="col-4">
                                 <label>Origem</label>
@@ -726,7 +728,7 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <label>Tipo contratação</label>
                                 <select name="conjuge[contratacao]" class="custom-select form-control form-control-border">
                                     <option value="">Selecione</option>
@@ -742,16 +744,16 @@
                                         Profissional liberal</option>
                                 </select>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <label>Data admissão</label>
                                 <input type="date" value="{{ old('conjuge.admissao') }}" name="conjuge[admissao]"
                                     class="form-control form-control-border">
                             </div>
-                            <div class="col-4">
+                            {{-- <div class="col-4">
                                 <label>Cargo</label>
                                 <input type="text" value="{{ old('conjuge.cargo') }}" name="conjuge[cargo]"
                                     placeholder="Cargo" class="form-control form-control-border">
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="row mt-3">
@@ -759,13 +761,13 @@
                                 <label>Renda mensal</label>
                                 <input type="text" value="{{ old('conjuge.renda_mensal') }}"
                                     name="conjuge[renda_mensal]" placeholder="Renda mensal"
-                                    class="form-control form-control-border">
+                                    class="form-control form-control-border decimal">
                             </div>
                             <div class="col-4">
                                 <label>Outra renda mensal</label>
                                 <input type="text" value="{{ old('conjuge.outra_renda_mensal') }}"
                                     name="conjuge[outra_renda_mensal]" placeholder="Outra renda mensal"
-                                    class="form-control form-control-border">
+                                    class="form-control form-control-border decimal">
                             </div>
                             <div class="col-4">
                                 <label>Origem</label>
@@ -800,11 +802,12 @@
                                 <div class="col-4">
                                     <label>CPF</label>
                                     <input type="text" value="{{ $comprador2->cpf }}" name="comprador2[cpf]"
-                                        placeholder="CPF" class="form-control form-control-border">
+                                        placeholder="CPF" class="form-control form-control-border  cpf">
                                 </div>
                                 <div class="col-4">
                                     <label>Data de Nascimento</label>
-                                    <input type="date" name="comprador2[nascimento]" placeholder="Data de Nascimento"
+                                    <input type="date" value="{{ $comprador2->nascimento }}"
+                                        name="comprador2[nascimento]" placeholder="Data de Nascimento"
                                         class="form-control form-control-border">
                                 </div>
                                 <div class="col-4">
@@ -990,13 +993,13 @@
                 <div class="col-4">
                     <label>Telefone</label>
                     <input type="text" name="endereco_comprador2[telefone]" value="{{ $enderecoComprador2->telefone }}"
-                        placeholder="" class="form-control form-control-border">
+                        placeholder="" class="form-control form-control-border telefone">
                 </div>
 
                 <div class="col-4">
                     <label>Celular</label>
                     <input type="text" name="endereco_comprador2[celular]" value="{{ $enderecoComprador2->celular }}"
-                        placeholder="" class="form-control form-control-border">
+                        placeholder="" class="form-control form-control-border celular">
                 </div>
 
                 <div class="col-4">
@@ -1029,7 +1032,7 @@
             </div>
 
             <div class="row mt-3">
-                <div class="col-4">
+                <div class="col-6">
                     <label>Tipo contratação</label>
                     <select name="profissao_comprador2[contratacao]"
                         class="custom-select form-control form-control-border">
@@ -1050,16 +1053,16 @@
                             liberal</option>
                     </select>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <label>Data admissão</label>
                     <input type="date" name="profissao_comprador2[admissao]"
                         value="{{ $profissaoComprador2->admissao }}" class="form-control form-control-border">
                 </div>
-                <div class="col-4">
+                {{-- <div class="col-4">
                     <label>Cargo</label>
                     <input type="text" name="profissao_comprador2[cargo]" value="{{ $profissaoComprador2->cargo }}"
                         placeholder="Cargo" class="form-control form-control-border">
-                </div>
+                </div> --}}
             </div>
 
             <div class="row mt-3">
@@ -1067,13 +1070,13 @@
                     <label>Renda mensal</label>
                     <input type="text" name="profissao_comprador2[renda_mensal]"
                         value="{{ $profissaoComprador2->renda_mensal }}" placeholder="Renda mensal"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Outra renda mensal</label>
                     <input type="text" name="profissao_comprador2[outra_renda_mensal]"
                         value="{{ $profissaoComprador2->outra_renda_mensal }}" placeholder="Outra renda mensal"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Origem</label>
@@ -1179,13 +1182,13 @@
                     <div class="col-4">
                         <label>Telefone</label>
                         <input type="text" name="conjuge2[telefone]" value="{{ $conjugeComprador2->telefone }}"
-                            placeholder="Telefone" class="form-control form-control-border">
+                            placeholder="Telefone" class="form-control form-control-border telefone">
                     </div>
 
                     <div class="col-4">
                         <label>Celular</label>
                         <input type="text" name="conjuge2[celular]" value="{{ $conjugeComprador2->celular }}"
-                            placeholder="Celular" class="form-control form-control-border">
+                            placeholder="Celular" class="form-control form-control-border celular">
                     </div>
 
                     <div class="col-4">
@@ -1215,7 +1218,7 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-4">
+                    <div class="col-6">
                         <label>Tipo contratação</label>
                         <select name="conjuge2[contratacao]" class="custom-select form-control form-control-border">
                             <option value="1" {{ $conjugeComprador2->contratacao == 1 ? 'selected' : '' }}>
@@ -1230,29 +1233,29 @@
                                 Profissional liberal</option>
                         </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <label>Data admissão</label>
                         <input type="date" name="conjuge2[admissao]" value="{{ $conjugeComprador2->admissao }}"
                             class="form-control form-control-border">
                     </div>
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <label>Cargo</label>
                         <input type="text" name="conjuge2[cargo]" value="{{ $conjugeComprador2->cargo }}"
                             placeholder="Cargo" class="form-control form-control-border">
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-4">
                         <label>Renda mensal</label>
                         <input type="text" name="conjuge2[renda_mensal]" value="{{ $conjugeComprador2->renda_mensal }}"
-                            placeholder="Renda mensal" class="form-control form-control-border">
+                            placeholder="Renda mensal" class="form-control form-control-border decimal">
                     </div>
                     <div class="col-4">
                         <label>Outra renda mensal</label>
                         <input type="text" name="conjuge2[outra_renda_mensal]"
                             value="{{ $conjugeComprador2->outra_renda_mensal }}" placeholder="Outra renda mensal"
-                            class="form-control form-control-border">
+                            class="form-control form-control-border decimal">
                     </div>
                     <div class="col-4">
                         <label>Origem</label>
@@ -1406,7 +1409,7 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-4">
+                    <div class="col-6">
                         <label>Tipo contratação</label>
                         <select name="conjuge2[contratacao]" class="custom-select form-control form-control-border">
                             <option value="">Selecione</option>
@@ -1422,29 +1425,29 @@
                                 Profissional liberal</option>
                         </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <label>Data admissão</label>
                         <input type="date" value="{{ old('conjuge2.admissao') }}" name="conjuge2[admissao]"
                             class="form-control form-control-border">
                     </div>
-                    <div class="col-4">
+                    {{-- <div class="col-4">
                         <label>Cargo</label>
                         <input type="text" value="{{ old('conjuge2.cargo') }}" name="conjuge2[cargo]"
                             placeholder="Cargo" class="form-control form-control-border">
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row mt-3">
                     <div class="col-4">
                         <label>Renda mensal</label>
                         <input type="text" value="{{ old('conjuge2.renda_mensal') }}" name="conjuge2[renda_mensal]"
-                            placeholder="Renda mensal" class="form-control form-control-border">
+                            placeholder="Renda mensal" class="form-control form-control-border decimal">
                     </div>
                     <div class="col-4">
                         <label>Outra renda mensal</label>
                         <input type="text" value="{{ old('conjuge2.outra_renda_mensal') }}"
                             name="conjuge2[outra_renda_mensal]" placeholder="Outra renda mensal"
-                            class="form-control form-control-border">
+                            class="form-control form-control-border decimal">
                     </div>
                     <div class="col-4">
                         <label>Origem</label>
@@ -1702,7 +1705,7 @@
             </div>
 
             <div class="row mt-3">
-                <div class="col-4">
+                <div class="col-6">
                     <label>Tipo contratação</label>
                     <select name="profissao_comprador2[contratacao]"
                         class="custom-select form-control form-control-border">
@@ -1719,16 +1722,16 @@
                             Profissional liberal</option>
                     </select>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <label>Data admissão</label>
                     <input type="date" value="{{ old('profissao_comprador2.admissao') }}"
                         name="profissao_comprador2[admissao]" class="form-control form-control-border">
                 </div>
-                <div class="col-4">
+                {{-- <div class="col-4">
                     <label>Cargo</label>
                     <input type="text" value="{{ old('profissao_comprador2.cargo') }}"
                         name="profissao_comprador2[cargo]" placeholder="Cargo" class="form-control form-control-border">
-                </div>
+                </div> --}}
             </div>
 
             <div class="row mt-3">
@@ -1736,13 +1739,13 @@
                     <label>Renda mensal</label>
                     <input type="text" value="{{ old('profissao_comprador2.renda_mensal') }}"
                         name="profissao_comprador2[renda_mensal]" placeholder="Renda mensal"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Outra renda mensal</label>
                     <input type="text" value="{{ old('profissao_comprador2.outra_renda_mensal') }}"
                         name="profissao_comprador2[outra_renda_mensal]" placeholder="Outra renda mensal"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Origem</label>
@@ -1896,7 +1899,7 @@
             </div>
 
             <div class="row mt-3">
-                <div class="col-4">
+                <div class="col-6">
                     <label>Tipo contratação</label>
                     <select name="conjuge2[contratacao]" class="custom-select form-control form-control-border">
                         <option value="">Selecione</option>
@@ -1912,29 +1915,29 @@
                             Profissional liberal</option>
                     </select>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <label>Data admissão</label>
                     <input type="date" value="{{ old('conjuge2.admissao') }}" name="conjuge2[admissao]"
                         class="form-control form-control-border">
                 </div>
-                <div class="col-4">
+                {{-- <div class="col-4">
                     <label>Cargo</label>
                     <input type="text" value="{{ old('conjuge2.cargo') }}" name="conjuge2[cargo]" placeholder="Cargo"
                         class="form-control form-control-border">
-                </div>
+                </div> --}}
             </div>
 
             <div class="row mt-3">
                 <div class="col-4">
                     <label>Renda mensal</label>
                     <input type="text" value="{{ old('conjuge2.renda_mensal') }}" name="conjuge2[renda_mensal]"
-                        placeholder="Renda mensal" class="form-control form-control-border">
+                        placeholder="Renda mensal" class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Outra renda mensal</label>
                     <input type="text" value="{{ old('conjuge2.outra_renda_mensal') }}"
                         name="conjuge2[outra_renda_mensal]" placeholder="Outra renda mensal"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Origem</label>
@@ -1958,22 +1961,25 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-4">
+                    {{-- @php
+                        echo json_encode($processo);
+                    @endphp --}}
                     <label>Valor Imóvel</label>
                     <input type="text" value="{{ $processo->valor_operacao }}" name="processo[valor_operacao]"
-                        placeholder="R$" class="form-control form-control-border">
+                        placeholder="R$" class="form-control form-control-border decimal">
                 </div>
                 <div class="col-4">
                     <label>Valor a financiar</label>
                     <input type="text" name="processo[valor_financiar]" value="{{ $processo->valor_financiar }}"
-                        placeholder="R$" class="form-control form-control-border">
+                        placeholder="R$" class="form-control form-control-border decimal">
                 </div>
                 <div class="col-2">
                     <div class="custom-control custom-checkbox">
                         @if ($processo->utiliza_fgts == 1)
-                            <input class="custom-control-input" type="checkbox" id="utilizar_fgts"
+                            <input class="custom-control-input" type="checkbox" onchange="campoFgts()" id="utilizar_fgts"
                                 name="processo[utiliza_fgts]" value="1" checked>
                         @else
-                            <input class="custom-control-input" type="checkbox" id="utilizar_fgts"
+                            <input class="custom-control-input" type="checkbox" onchange="campoFgts()" id="utilizar_fgts"
                                 name="processo[utiliza_fgts]" value="1">
                         @endif
                         <label for="utilizar_fgts" class="custom-control-label">Utilizar FGTS</label>
@@ -1982,11 +1988,11 @@
                 <div class="col-2">
                     <div class="custom-control custom-checkbox">
                         @if ($processo->financiar_despesas == 1)
-                            <input class="custom-control-input" type="checkbox" id="financiar_despesas"
-                                name="processo[financiar_despesas]" value="1" checked>
+                            <input class="custom-control-input" type="checkbox" onchange="campoDespesas()"
+                                id="financiar_despesas" name="processo[financiar_despesas]" value="1" checked>
                         @else
-                            <input class="custom-control-input" type="checkbox" id="financiar_despesas"
-                                name="processo[financiar_despesas]" value="1">
+                            <input class="custom-control-input" type="checkbox" onchange="campoDespesas()"
+                                id="financiar_despesas" name="processo[financiar_despesas]" value="1">
                         @endif
                         <label for="financiar_despesas" class="custom-control-label">Financiar
                             Despesas</label>
@@ -2012,30 +2018,39 @@
 
             <div class="row mt-2">
 
-                <div class="col-4">
-                    <label>Recursos Próprios</label>
-                    <input type="text" name="processo[recursos_proprios]" value="{{ $processo->recursos_proprios }}"
-                        placeholder="Valor Recursos Próprios" class="form-control form-control-border">
-                </div>
-                <div class="col-4">
+                <div class="col-6 valor_fgts" {{ $processo->utiliza_fgts != 1 ? 'style=display:none;' : '' }}>
                     <label>Valor FGTS</label>
                     <input type="text" name="processo[fgts]" placeholder="Valor FGTS" value="{{ $processo->fgts }}"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
-
+                <div class="col-6 valor_despesas"
+                    {{ $processo->financiar_despesas != 1 ? 'style=display:none;' : '' }}>
+                    <label>Valor Despesas</label>
+                    <input type="text" value="{{ $processo->valor_despesas }}" name="processo[valor_despesas]"
+                        placeholder="Valor Despesas" class="form-control form-control-border decimal">
+                </div>
             </div>
 
 
             <div class="row mt-2">
-
-                <div class="col-5">
+                <div class="col-6">
+                    <label>Recursos Próprios</label>
+                    <input type="text" name="processo[recursos_proprios]" value="{{ $processo->recursos_proprios }}"
+                        placeholder="Valor Recursos Próprios" class="form-control form-control-border decimal">
+                </div>
+                <div class="col-6">
                     <label>Valor total financiado</label>
                     <input type="text" name="processo[valor_total_financiado]"
                         value="{{ $processo->valor_total_financiado }}" placeholder="Valor total financiado"
-                        class="form-control form-control-border">
+                        class="form-control form-control-border decimal">
                 </div>
 
-                <div class="col-1 mr-2">
+
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-2 mr-2">
                     <div class="custom-control custom-radio">
                         @php
                             $checked1 = '';
@@ -2063,7 +2078,7 @@
                         <label for="tipo_imovel1" class="custom-control-label">Residencial</label>
                     </div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" type="radio" id="tipo_imovel2" name="processo[tipo_imovel]"
                             value="2" {{ $checked2 }}>
@@ -2071,7 +2086,7 @@
                     </div>
                 </div>
 
-                <div class="col-1">
+                <div class="col-2">
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" type="radio" id="tipo_imovel3" name="processo[tipo_imovel]"
                             value="3" {{ $checked3 }}>
@@ -2079,7 +2094,7 @@
                     </div>
                 </div>
 
-                <div class="col-1">
+                <div class="col-2">
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" type="radio" id="tipo_imovel4" name="processo[tipo_imovel]"
                             value="4" {{ $checked4 }}>
@@ -2095,7 +2110,6 @@
                             Construção</label>
                     </div>
                 </div>
-
             </div>
 
             <div class="row mt-3">
@@ -2166,7 +2180,7 @@
                     <div class="col-4">
                         <label>CPF</label>
                         <input type="text" name="vendedor[cpf]" value="{{ $vendedor->cpf }}" placeholder="CPF"
-                            class="form-control form-control-border">
+                            class="form-control form-control-border cpf">
                     </div>
                 </div>
 
@@ -2175,7 +2189,7 @@
                     <div class="col-6">
                         <label>Telefone</label>
                         <input type="text" name="vendedor[telefone]" value="{{ $vendedor->telefone }}"
-                            placeholder="Telefone" class="form-control form-control-border">
+                            placeholder="Telefone" class="form-control form-control-border telefone">
                     </div>
 
                     <div class="col-6">
@@ -2260,13 +2274,13 @@
                     </div>
                     <div class="col-4">
                         <label>CNPJ</label>
-                        <input type="text" name="vendedor_cnpj[cnpj]" value={{ $vendedor->cnpj }} placeholder="CPF"
-                            class="form-control form-control-border">
+                        <input type="text" name="vendedor_cnpj[cnpj]" value={{ $vendedor->cnpj }} placeholder="CNPJ"
+                            class="form-control form-control-border cnpj">
                     </div>
                     <div class="col-4">
                         <label>Telefone</label>
                         <input type="text" name="vendedor_cnpj[telefone]" value={{ $vendedor->telefone }}
-                            placeholder="Telefone" class="form-control form-control-border">
+                            placeholder="Telefone" class="form-control form-control-border telefone">
                     </div>
 
                 </div>
@@ -2404,7 +2418,7 @@
     <div class="col-4">
         <label>CPF</label>
         <input type="text" name="vendedor2[cpf]" value="{{ $vendedor2->cpf }}" placeholder="CPF"
-            class="form-control form-control-border">
+            class="form-control form-control-border cpf">
     </div>
     </div>
 
@@ -2413,7 +2427,7 @@
         <div class="col-6">
             <label>Telefone</label>
             <input type="text" name="vendedor2[telefone]" value="{{ $vendedor2->telefone }}" placeholder="Telefone"
-                class="form-control form-control-border">
+                class="form-control form-control-border telefone">
         </div>
 
         <div class="col-6">
@@ -2496,13 +2510,13 @@
             </div>
             <div class="col-4">
                 <label>CNPJ</label>
-                <input type="text" name="vendedor2_cnpj[cnpj]" value={{ $vendedor2->cnpj }} placeholder="CPF"
-                    class="form-control form-control-border">
+                <input type="text" name="vendedor2_cnpj[cnpj]" value={{ $vendedor2->cnpj }} placeholder="CNPJ"
+                    class="form-control form-control-border cnpj">
             </div>
             <div class="col-4">
                 <label>Telefone</label>
                 <input type="text" name="vendedor2_cnpj[telefone]" value={{ $vendedor2->telefone }}
-                    placeholder="Telefone" class="form-control form-control-border">
+                    placeholder="Telefone" class="form-control form-control-border telefone">
             </div>
 
         </div>
@@ -2719,7 +2733,7 @@
                     <div class="col-4">
                         <label>Telefone</label>
                         <input type="text" value="{{ old('vendedor2.telefone') }}" name="vendedor2_cnpj[telefone]"
-                            placeholder="Telefone" class="form-control form-control-border">
+                            placeholder="Telefone" class="form-control form-control-border telefone">
                     </div>
                 </div>
 
@@ -2871,7 +2885,7 @@
                 <div class="col-4">
                     <label>Telefone do contato</label>
                     <input type="text" name="imovel[telefone_contato]" value="{{ $imovel->telefone_contato }}"
-                        placeholder="Contato de avaliação" class="form-control form-control-border">
+                        placeholder="Contato de avaliação" class="form-control form-control-border telefone">
                 </div>
 
                 <div class="col-4">
@@ -2901,6 +2915,7 @@
                         <option value="1" @if ($processo->banco == 1) selected @endif>Itaú</option>
                         <option value="2" @if ($processo->banco == 2) selected @endif>Bradesco</option>
                         <option value="3" @if ($processo->banco == 3) selected @endif>Santander</option>
+                        <option value="4" @if ($processo->banco == 4) selected @endif>Caixa</option>
                     </select>
                 </div>
                 <div class="col-6">
@@ -2975,8 +2990,8 @@
         </div>
     </div>
 
-    <div class="row justify-content-end mb-2">
-        <div class="col-12 col-md-3 col-lg-2 pull-left mt-3">
+    <div class="row justify-content-between mb-2">
+        <div class="col-12 col-md-3 col-lg-2 pull-right mt-3">
             <a href="{{ route('excluir-proposta', $processo->id) }}"
                 class="btn btn-block btn-outline-danger">Excluir</a>
         </div>
@@ -3145,6 +3160,38 @@
             $(".cpf").each(function() {
                 $(this).mask('999.999.999-99');
             })
+
+            $(".cnpj").each(function() {
+                $(this).mask('00.000.000/0000-00');
+            })
+
+            $(".cep").each(function() {
+                $(this).mask('00000-000');
+            })
+
+            $(".decimal").each(function() {
+                $(this).mask("#.##0,00", {
+                    reverse: true
+                });
+            })
         });
+
+        function campoDespesas() {
+            if ($('#financiar_despesas').is(':checked')) {
+                $('.valor_despesas').show()
+            } else {
+                $('.valor_despesas').hide()
+
+            }
+        }
+
+        function campoFgts() {
+            if ($('#utilizar_fgts').is(':checked')) {
+                $('.valor_fgts').show()
+            } else {
+                $('.valor_fgts').hide()
+
+            }
+        }
     </script>
 @endsection

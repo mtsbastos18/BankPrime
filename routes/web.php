@@ -68,3 +68,5 @@ Route::get('/acompanhamento/{IdProposta}', [App\Http\Controllers\AcompanhamentoC
 Route::post('/acompanhamento/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'store'])->name('novo-acompanhamento');
 Route::get('/acompanhamento-cliente/{IdProposta}', [App\Http\Controllers\AcompanhamentoController::class, 'validaCliente'])->name('acompanhamento-cliente');
 Route::post('/acompanhamento-cliente-logado', [App\Http\Controllers\AcompanhamentoController::class, 'indexCliente'])->name('acompanhamento-cliente-logado');
+Route::get('/editar-observacao/{IdProposta}/{IdObservacao}', [App\Http\Controllers\AcompanhamentoController::class, 'edit'])->name('editar-observacao');
+Route::post('/editar-observacao/{IdObservacao}', [App\Http\Controllers\AcompanhamentoController::class, 'update'])->name('editar-observacao');

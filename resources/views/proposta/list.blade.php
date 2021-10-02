@@ -77,6 +77,11 @@
                                                                 style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
+                                                        @case(4)
+                                                            <img src="{{ asset('images/caixa.png') }}"
+                                                                style="max-width: 25px;"><span
+                                                                style="visibility:hidden;">{{ $l->banco }}</span>
+                                                        @break
                                                         @default
 
                                                     @endswitch
@@ -91,23 +96,23 @@
                                                         </td>
                                                     @break
                                                     @case(2)
-                                                        <td class="badge bg-secondary">
-                                                            Aguardando aprovação
+                                                        <td>
+                                                            <a class="badge bg-secondary">Aguardando aprovação</a>
                                                         </td>
                                                     @break
                                                     @case(3)
-                                                        <td class="badge bg-warning">
-                                                            Declinou
+                                                        <td>
+                                                            <a class="badge bg-warning">Declinou</a>
                                                         </td>
                                                     @break
                                                     @case(4)
-                                                        <td class="badge bg-success">
-                                                            Registrado
+                                                        <td>
+                                                            <a class="badge bg-success">Registrado</a>
                                                         </td>
                                                     @break
                                                     @case(5)
-                                                        <td class="badge bg-danger">
-                                                            Cancelado
+                                                        <td>
+                                                            <a class="badge bg-danger">Cancelado</a>
                                                         </td>
                                                     @break
                                                     @default
@@ -116,13 +121,16 @@
 
                                                 <td>{{ date_format(new DateTime($l->updated_at), 'd-m-Y H:i:s') }}</td>
                                                 <td class="td-acoes">
-                                                    <a href="{{ route('visualizar-proposta', $l->id) }}"><i
+                                                    <a title="Visualizar"
+                                                        href="{{ route('visualizar-proposta', $l->id) }}"><i
                                                             class="far fa-eye"></i> </a>
                                                     @if (auth()->user()->id_permissao == 1)
-                                                        <a href="{{ route('editar-proposta', $l->id) }}"><i
+                                                        <a title="Editar"
+                                                            href="{{ route('editar-proposta', $l->id) }}"><i
                                                                 class="far fa-edit"></i> </a>
 
-                                                        <a href="{{ route('acompanhamentos', $l->id) }}"><i
+                                                        <a title="Acompanhamentos"
+                                                            href="{{ route('acompanhamentos', $l->id) }}"><i
                                                                 class="fas fa-briefcase"></i></a>
                                                     @endif
                                                 </td>

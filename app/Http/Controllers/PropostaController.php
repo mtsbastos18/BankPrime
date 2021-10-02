@@ -150,6 +150,9 @@ class PropostaController extends Controller
             $compradorData = $data['comprador'];
             $enderecoCompradorData = $data['endereco_comprador'];
             $processoData = $data['processo'];
+
+            $processoData = $this->formataValores($processoData);
+
             $imovelData = $data['imovel'];
             $profissaoCompradorData = $data['profissao_comprador'];
             $conjugeData = $data['conjuge'];
@@ -188,12 +191,13 @@ class PropostaController extends Controller
 
             if ($vendedor2Data['ativo'] == 1) {
                 $vendedor2 = Vendedor::create($vendedor2Data);
+                $processoData['id_vendedor2'] = $vendedor2['id'];
             }
 
             $processoData['id_imovel'] = $imovel['id'];
             $processoData['id_usuario_criacao'] = auth()->user()->id;
             $processoData['id_vendedor'] = $vendedor['id'];
-            $processoData['id_vendedor2'] = $vendedor2['id'];
+
 
 
             $processo = Processo::create($processoData);
@@ -243,7 +247,7 @@ class PropostaController extends Controller
 
             return Redirect('propostas');
         } catch (\Throwable $th) {
-            return Redirect()->back()->withInput($request->input())->with('error', 'Erro ao salvar proposta');;
+            return Redirect()->back()->withInput($request->input())->with('error', $th);
         }
     }
 
@@ -444,6 +448,7 @@ class PropostaController extends Controller
         $compradorData = $data['comprador'];
         $enderecoCompradorData = $data['endereco_comprador'];
         $processoData = $data['processo'];
+        $processoData = $this->formataValores($processoData);
         $imovelData = $data['imovel'];
         $profissaoCompradorData = $data['profissao_comprador'];
         if (isset($data['conjuge'])) {
@@ -646,6 +651,29 @@ class PropostaController extends Controller
         }
     }
 
+    private function formataValores($data)
+    {
+        $data['valor_operacao'] = str_replace('.', '', $data['valor_operacao']);
+        $data['valor_operacao'] = str_replace(',', '.', $data['valor_operacao']);
+
+        $data['valor_financiar'] = str_replace('.', '', $data['valor_financiar']);
+        $data['valor_financiar'] = str_replace(',', '.', $data['valor_financiar']);
+
+        $data['recursos_proprios'] = str_replace('.', '', $data['recursos_proprios']);
+        $data['recursos_proprios'] = str_replace(',', '.', $data['recursos_proprios']);
+
+        $data['fgts'] = str_replace('.', '', $data['fgts']);
+        $data['fgts'] = str_replace(',', '.', $data['fgts']);
+
+        $data['valor_despesas'] = str_replace('.', '', $data['valor_despesas']);
+        $data['valor_despesas'] = str_replace(',', '.', $data['valor_despesas']);
+
+        $data['valor_total_financiado'] = str_replace('.', '', $data['valor_total_financiado']);
+        $data['valor_total_financiado'] = str_replace(',', '.', $data['valor_total_financiado']);
+
+
+        return $data;
+    }
     /**
      * Remove the specified resource from storage.
      *

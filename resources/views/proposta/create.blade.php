@@ -165,7 +165,7 @@
                                         <label>CEP Residencial</label>
                                         <input value="{{ old('endereco_comprador.cep') }}" type="text"
                                             onkeyup="pesquisacep(1)" name="endereco_comprador[cep]" id="cep1" placeholder=""
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
@@ -285,12 +285,12 @@
                                         <input type="date" value="{{ old('profissao_comprador.admissao') }}"
                                             name="profissao_comprador[admissao]" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" name="profissao_comprador[cargo]"
                                             value="{{ old('profissao_comprador.cargo') }}" placeholder="Cargo"
                                             class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -299,14 +299,14 @@
                                         <input type="text" name="profissao_comprador[renda_mensal]"
                                             placeholder="Renda mensal"
                                             value="{{ old('profissao_comprador.renda_mensal') }}"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" name="profissao_comprador[outra_renda_mensal]"
                                             placeholder="Outra renda mensal"
                                             value="{{ old('profissao_comprador.outra_renda_mensal') }}"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -347,8 +347,7 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Sexo</label>
-                                        <select name="conjuge[sexo]"
-                                            class="custom-select form-control form-control-border">
+                                        <select name="conjuge[sexo]" class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
                                             <option value="1" {{ old('conjuge.sexo') == 1 ? 'selected' : '' }}>Masculino
                                             </option>
@@ -490,11 +489,11 @@
                                         <input type="date" value="{{ old('conjuge.admissao') }}" name="conjuge[admissao]"
                                             class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" value="{{ old('conjuge.cargo') }}" name="conjuge[cargo]"
                                             placeholder="Cargo" class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -502,13 +501,13 @@
                                         <label>Renda mensal</label>
                                         <input type="text" value="{{ old('conjuge.renda_mensal') }}"
                                             name="conjuge[renda_mensal]" placeholder="Renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" value="{{ old('conjuge.outra_renda_mensal') }}"
                                             name="conjuge[outra_renda_mensal]" placeholder="Outra renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -661,8 +660,8 @@
                                         <select name="comprador2[regime_bens]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1"
-                                                {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }}>Comunhão
+                                            <option value="1" {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }}>
+                                                Comunhão
                                                 parcial de bens</option>
                                             <option value="2"
                                                 {{ old('comprador2.regime_bens') == 2 ? 'selected' : '' }}>Comunhão
@@ -686,7 +685,7 @@
                                         <label>CEP Residencial</label>
                                         <input type="text" value="{{ old('endereco_comprador2.cep') }}"
                                             onkeyup="pesquisacep(1)" name="endereco_comprador2[cep]" id="cep1"
-                                            placeholder="" class="form-control form-control-border">
+                                            placeholder="" class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
@@ -811,12 +810,12 @@
                                         <input type="date" value="{{ old('profissao_comprador2.admissao') }}"
                                             name="profissao_comprador2[admissao]" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" value="{{ old('profissao_comprador2.cargo') }}"
                                             name="profissao_comprador2[cargo]" placeholder="Cargo"
                                             class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -824,13 +823,13 @@
                                         <label>Renda mensal</label>
                                         <input type="text" value="{{ old('profissao_comprador2.renda_mensal') }}"
                                             name="profissao_comprador2[renda_mensal]" placeholder="Renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" value="{{ old('profissao_comprador2.outra_renda_mensal') }}"
                                             name="profissao_comprador2[outra_renda_mensal]" placeholder="Outra renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -1018,11 +1017,11 @@
                                         <input type="date" value="{{ old('conjuge2.admissao') }}"
                                             name="conjuge2[admissao]" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" value="{{ old('conjuge2.cargo') }}" name="conjuge2[cargo]"
                                             placeholder="Cargo" class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -1030,13 +1029,13 @@
                                         <label>Renda mensal</label>
                                         <input type="text" value="{{ old('conjuge2.renda_mensal') }}"
                                             name="conjuge2[renda_mensal]" placeholder="Renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" value="{{ old('conjuge2.outra_renda_mensal') }}"
                                             name="conjuge2[outra_renda_mensal]" placeholder="Outra renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -1218,7 +1217,7 @@
                                         <label>CEP Residencial</label>
                                         <input type="text" value="{{ old('comprador3.cep') }}" onkeyup="pesquisacep(1)"
                                             name="endereco_comprador3[cep]" id="cep1" placeholder=""
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
@@ -1344,12 +1343,12 @@
                                         <input type="date" value="{{ old('profissao_comprador3.admissao') }}"
                                             name="profissao_comprador3[admissao]" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" value="{{ old('profissao_comprador3.cargo') }}"
                                             name="profissao_comprador3[cargo]" placeholder="Cargo"
                                             class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -1357,13 +1356,13 @@
                                         <label>Renda mensal</label>
                                         <input type="text" value="{{ old('profissao_comprador3.renda_mensal') }}"
                                             name="profissao_comprador3[renda_mensal]" placeholder="Renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" value="{{ old('profissao_comprador3.outra_renda_mensal') }}"
                                             name="profissao_comprador3[outra_renda_mensal]" placeholder="Outra renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -1550,11 +1549,11 @@
                                         <input type="date" value="{{ old('conjuge3.admissao') }}"
                                             name="conjuge3[admissao]" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Cargo</label>
                                         <input type="text" value="{{ old('conjuge3.cargo') }}" name="conjuge3[cargo]"
                                             placeholder="Cargo" class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -1562,13 +1561,13 @@
                                         <label>Renda mensal</label>
                                         <input type="text" value="{{ old('conjuge3.renda_mensal') }}"
                                             name="conjuge3[renda_mensal]" placeholder="Renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
                                         <input type="text" value="{{ old('conjuge3.outra_renda_mensal') }}"
                                             name="conjuge3[outra_renda_mensal]" placeholder="Outra renda mensal"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Origem</label>
@@ -1595,13 +1594,13 @@
                                         <label>Valor Imóvel</label>
                                         <input type="text" value="{{ old('processo.valor_operacao') }}"
                                             name="processo[valor_operacao]" placeholder="R$"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
                                         <label>Valor a financiar</label>
                                         <input type="text" value="{{ old('processo.valor_financiar') }}"
                                             name="processo[valor_financiar]" placeholder="R$"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-2">
                                         <div class="custom-control custom-checkbox">
@@ -1637,47 +1636,47 @@
                                     <div class="col-4 valor_fgts" style="display:none">
                                         <label>Valor FGTS</label>
                                         <input type="text" value="{{ old('processo.fgts') }}" name="processo[fgts]"
-                                            placeholder="Valor FGTS" class="form-control form-control-border">
+                                            placeholder="Valor FGTS" class="form-control form-control-border decimal">
                                     </div>
 
                                     <div class="col-4 valor_despesas" style="display:none">
                                         <label>Valor Despesas</label>
                                         <input type="text" value="{{ old('processo.despesas') }}"
-                                            name="processo[despesas]" placeholder="Valor Despesas"
-                                            class="form-control form-control-border">
+                                            name="processo[valor_despesas]" placeholder="Valor Despesas"
+                                            class="form-control form-control-border decimal">
                                     </div>
                                 </div>
 
                                 <div class="row mt-2">
 
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Recursos Próprios</label>
                                         <input type="text" value="{{ old('processo.recursos_proprios') }}"
                                             name="processo[recursos_proprios]" placeholder="Valor Recursos Próprios"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
 
-
-                                </div>
-
-
-                                <div class="row mt-2">
-
-                                    <div class="col-5">
+                                    <div class="col-6">
                                         <label>Valor total financiado</label>
                                         <input type="text" value="{{ old('processo.valor_total_financiado') }}"
                                             name="processo[valor_total_financiado]" placeholder="Valor total financiado"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border decimal">
                                     </div>
+                                </div>
 
-                                    <div class="col-1 mr-2">
+
+                                <div class="row mt-3">
+
+
+
+                                    <div class="col-2 mr-2">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel1"
                                                 name="processo[tipo_imovel]" value="1">
                                             <label for="tipo_imovel1" class="custom-control-label">Residencial</label>
                                         </div>
                                     </div>
-                                    <div class="col-1">
+                                    <div class="col-2">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel2"
                                                 name="processo[tipo_imovel]" value="2">
@@ -1685,7 +1684,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-1">
+                                    <div class="col-2">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel3"
                                                 name="processo[tipo_imovel]" value="3">
@@ -1693,7 +1692,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-1">
+                                    <div class="col-2">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel4"
                                                 name="processo[tipo_imovel]" value="4">
@@ -1880,13 +1879,13 @@
                                         <div class="col-4">
                                             <label>CNPJ</label>
                                             <input type="text" value="{{ old('vendedor.cnpj') }}" name="vendedor[cnpj]"
-                                                placeholder="CPF" class="form-control form-control-border cpf">
+                                                placeholder="CNPJ" class="form-control form-control-border cnpj">
                                         </div>
                                         <div class="col-4">
                                             <label>Telefone</label>
                                             <input type="text" value="{{ old('vendedor.telefone') }}"
                                                 name="vendedor[telefone]" placeholder="Telefone"
-                                                class="form-control form-control-border">
+                                                class="form-control form-control-border telefone">
                                         </div>
                                     </div>
 
@@ -2123,8 +2122,8 @@
                                         <div class="col-4">
                                             <label>CNPJ</label>
                                             <input type="text" value="{{ old('vendedor2.cnpj') }}"
-                                                name="vendedor2[cnpj]" placeholder="CPF"
-                                                class="form-control form-control-border cpf">
+                                                name="vendedor2[cnpj]" placeholder="CNPJ"
+                                                class="form-control form-control-border cnpj">
                                         </div>
                                         <div class="col-4">
                                             <label>Telefone</label>
@@ -2216,7 +2215,7 @@
                                     <div class="col-3">
                                         <label>CEP</label>
                                         <input type="text" value="{{ old('imovel.cpf') }}" name="imovel[cep]"
-                                            placeholder="CEP do imóvel" class="form-control form-control-border">
+                                            placeholder="CEP do imóvel" class="form-control form-control-border cep">
                                     </div>
                                     <div class="col-5">
                                         <label>Endereço</label>
@@ -2332,6 +2331,8 @@
                                                 Bradesco</option>
                                             <option value="3" {{ old('processo.banco') == 3 ? 'selected' : '' }}>
                                                 Santander</option>
+                                            <option value="4" {{ old('processo.banco') == 4 ? 'selected' : '' }}>
+                                                Caixa</option>
                                         </select>
                                     </div>
                                     <div class="col-6">
@@ -2446,6 +2447,20 @@
             $(".cpf").each(function() {
                 $(this).mask('999.999.999-99');
             })
+
+            $(".cnpj").each(function() {
+                $(this).mask('00.000.000/0000-00');
+            })
+
+            $(".cep").each(function() {
+                $(this).mask('00000-000');
+            })
+
+            $(".decimal").each(function() {
+                $(this).mask("#.##0,00", {
+                    reverse: true
+                });
+            })
         });
 
         function campoFgts() {
@@ -2497,8 +2512,12 @@
         function setEstadoCivil() {
             let value = $('#estado-civil-1').val();
             if (value == 2 || value == 3) {
+                $('.dados-casamento').show();
+
                 $('.conjuge1').show();
             } else {
+                $('.dados-casamento').hide();
+
                 $('.conjuge1').hide();
             }
         }
@@ -2506,8 +2525,10 @@
         function setEstadoCivil2() {
             let value = $('#estado-civil-2').val();
             if (value == 2 || value == 3) {
+                $('.dados-casamento2').show();
                 $('.conjuge2').show();
             } else {
+                $('.dados-casamento2').hide();
                 $('.conjuge2').hide();
             }
         }
@@ -2515,8 +2536,10 @@
         function setEstadoCivil3() {
             let value = $('#estado-civil-3').val();
             if (value == 2 || value == 3) {
+                $('.dados-casamento3').show();
                 $('.conjuge3').show();
             } else {
+                $('.dados-casamento3').hide();
                 $('.conjuge3').hide();
             }
         }

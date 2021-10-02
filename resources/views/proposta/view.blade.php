@@ -62,16 +62,33 @@
                                         <p>{{ $comprador->cpf }}</p>
                                     </div>
                                     <div class="col-4">
+                                        <label>Data de Nascimento</label>
+                                        <p>{{ date_format(new DateTime($comprador->nascimento), 'd/m/Y') }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Estado Civil</label>
+                                        <p>
+                                            {{ $comprador->estado_civil == 1 ? 'Solteiro(a)' : '' }}
+                                            {{ $comprador->estado_civil == 2 ? 'Casado(a)' : '' }}
+                                            {{ $comprador->estado_civil == 3 ? 'União estável' : '' }}
+                                            {{ $comprador->estado_civil == 4 ? 'Divorciado(a)' : '' }}
+                                            {{ $comprador->estado_civil == 5 ? 'Viúvo(a)' : '' }}
+                                        </p>
+                                    </div>
+
+
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
                                         <label>Nome</label>
                                         <p>{{ $comprador->nome }}</p>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Sexo</label>
                                         @if ($comprador->sexo == 1) <p>Masculino</p> @endif
                                         @if ($comprador->sexo == 2) <p>Feminino</p> @endif
 
                                     </div>
-
                                 </div>
 
                                 <div class="row mt-3">
@@ -116,11 +133,13 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Data emissão</label>
-                                        <p>{{ $comprador->data_emissao }}</p>
+                                        <p>{{ date_format(new DateTime($comprador->data_emissao), 'd/m/Y') }}</p>
                                     </div>
                                 </div>
 
-                                <div class="row mt-3">
+                                <div class="row mt-3" @if ($comprador->estado_civil != 2 && $comprador->estado_civil != 3)
+                                    style="display:none;"
+                                    @endif>
                                     <div class="col-6">
                                         <label>Regime de bens</label>
                                         @if ($comprador->regime_bens == 1) <p>Comunhão parcial de bens</p> @endif
@@ -170,7 +189,7 @@
                                         <label>Estado</label>
                                         @foreach ($ufs as $k => $v)
                                             @if ($enderecoComprador->uf == $k)
-                                                <p>$v</p>
+                                                <p>{{ $v }}</p>
                                             @endif
                                         @endforeach
                                     </div>
@@ -215,7 +234,7 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Tipo contratação</label>
                                         @if ($profissaoComprador->contratacao == 1) <p>Assalariado</p> @endif
                                         @if ($profissaoComprador->contratacao == 2) <p>Aposentado</p> @endif
@@ -223,14 +242,11 @@
                                         @if ($profissaoComprador->contratacao == 4) <p>Autônomo</p> @endif
                                         @if ($profissaoComprador->contratacao == 5) <p>Profissional liberal</p> @endif
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Data admissão</label>
-                                        <p>{{ $profissaoComprador->admissao }}</p>
+                                        <p>{{ date_format(new DateTime($profissaoComprador->admissao), 'd/m/Y') }}</p>
                                     </div>
-                                    <div class="col-4">
-                                        <label>Cargo</label>
-                                        <p>{{ $profissaoComprador->cargo }}</p>
-                                    </div>
+
                                 </div>
 
                                 <div class="row mt-3">
@@ -356,7 +372,7 @@
                                     </div>
 
                                     <div class="row mt-3">
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <label>Tipo contratação</label>
                                             @if ($conjugeComprador->contratacao == 1) <p>Assalariado</p> @endif
                                             @if ($conjugeComprador->contratacao == 2) <p>Aposentado</p> @endif
@@ -364,14 +380,11 @@
                                             @if ($conjugeComprador->contratacao == 4) <p>Autônomo</p> @endif
                                             @if ($conjugeComprador->contratacao == 5) <p>Profissional Liberal</p> @endif
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <label>Data admissão</label>
-                                            <p>{{ $conjugeComprador->admissao }}</p>
+                                            <p>{{ date_format(new DateTime($conjugeComprador2->admissao), 'd/m/Y') }}</p>
                                         </div>
-                                        <div class="col-4">
-                                            <label>Cargo</label>
-                                            <p>{{ $conjugeComprador->cargo }}</p>
-                                        </div>
+
                                     </div>
 
                                     <div class="row mt-3">
@@ -562,7 +575,7 @@
                                     </div>
 
                                     <div class="row mt-3">
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <label>Tipo contratação</label>
                                             @if ($profissaoComprador2->contratacao == 1) <p>Assalariado</p> @endif
                                             @if ($profissaoComprador2->contratacao == 2) <p>Aposentado</p> @endif
@@ -570,14 +583,12 @@
                                             @if ($profissaoComprador2->contratacao == 4) <p>Autônomo</p> @endif
                                             @if ($profissaoComprador2->contratacao == 5) <p>Profissional liberal</p> @endif
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <label>Data admissão</label>
-                                            <p>{{ $profissaoComprador2->admissao }}</p>
+                                            <p>{{ date_format(new DateTime($profissaoComprador2->admissao), 'd/m/Y') }}
+                                            </p>
                                         </div>
-                                        <div class="col-4">
-                                            <label>Cargo</label>
-                                            <p>{{ $profissaoComprador2->cargo }}</p>
-                                        </div>
+
                                     </div>
 
                                     <div class="row mt-3">
@@ -703,7 +714,7 @@
                                         </div>
 
                                         <div class="row mt-3">
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <label>Tipo contratação</label>
                                                 @if ($conjugeComprador2->contratacao == 1) <p>Assalariado</p> @endif
                                                 @if ($conjugeComprador2->contratacao == 2) <p>Aposentado</p> @endif
@@ -711,14 +722,13 @@
                                                 @if ($conjugeComprador2->contratacao == 4) <p>Autônomo</p> @endif
                                                 @if ($conjugeComprador2->contratacao == 5) <p>Profissional Liberal</p> @endif
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <label>Data admissão</label>
-                                                <p>{{ $conjugeComprador2->admissao }}</p>
+                                                <p>
+                                                    {{ date_format(new DateTime($conjugeComprador2->admissao), 'd/m/Y') }}
+                                                </p>
                                             </div>
-                                            <div class="col-4">
-                                                <label>Cargo</label>
-                                                <p>{{ $conjugeComprador2->cargo }}</p>
-                                            </div>
+
                                         </div>
 
                                         <div class="row mt-3">
@@ -751,11 +761,12 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <label>Valor Imóvel</label>
-                                        <p>{{ $processo->valor_operacao }}</p>
+                                        <p>
+                                            {{ 'R$ ' . number_format($processo->valor_operacao, 2, ',', '.') }} </p>
                                     </div>
                                     <div class="col-4">
                                         <label>Valor a financiar</label>
-                                        <p>{{ $processo->valor_financiar }}</p>
+                                        <p>{{ 'R$ ' . number_format($processo->valor_financiar, 2, ',', '.') }} </p>
                                     </div>
                                     <div class="col-2">
                                         <div class="custom-control custom-checkbox">
@@ -795,11 +806,13 @@
 
                                     <div class="col-6">
                                         <label>Recursos Próprios</label>
-                                        <p>{{ $processo->recursos_proprios }}</p>
+                                        <p>
+                                            {{ 'R$ ' . number_format($processo->recursos_proprios, 2, ',', '.') }} </p>
                                     </div>
                                     <div class="col-6">
                                         <label>Valor FGTS</label>
-                                        <p>{{ $processo->fgts }}</p>
+                                        <p>{{ 'R$ ' . number_format($processo->fgts, 2, ',', '.') }}
+                                        </p>
                                     </div>
 
                                 </div>
@@ -809,7 +822,9 @@
 
                                     <div class="col-5">
                                         <label>Valor total financiado</label>
-                                        <p>{{ $processo->valor_total_financiado }}</p>
+                                        <p>
+                                            {{ 'R$ ' . number_format($processo->valor_total_financiado, 2, ',', '.') }}
+                                        </p>
                                     </div>
 
                                     <div class="col-1 mr-2">
