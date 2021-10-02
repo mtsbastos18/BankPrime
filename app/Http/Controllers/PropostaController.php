@@ -53,6 +53,8 @@ class PropostaController extends Controller
                         ->where('processos.id_parceiro', '=', auth()->user()->id)
                         ->where('compradores.nome', 'like', '%' . $filtro . '%')
                         ->orWhere('compradores.cpf', 'like', '%' . $filtro . '%')
+                        ->orWhere('processos.banco', 'like', '%' . $filtro . '%')
+
                         ->groupBy('processos.id')
                         ->get();
                 } else {
@@ -64,6 +66,7 @@ class PropostaController extends Controller
                         ->where('processos.id_corretor', '=', auth()->user()->id)
                         ->where('compradores.nome', 'like', '%' . $filtro . '%')
                         ->orWhere('compradores.cpf', 'like', '%' . $filtro . '%')
+                        ->orWhere('processos.banco', 'like', '%' . $filtro . '%')
                         ->groupBy('processos.id')
                         ->get();
                 }

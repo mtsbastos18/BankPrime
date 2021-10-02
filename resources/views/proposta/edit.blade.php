@@ -2505,18 +2505,18 @@
         <div class="row mt-3">
             <div class="col-4">
                 <label>Razão social</label>
-                <input type="text" name="vendedor2_cnpj[nome]" value={{ $vendedor2->nome }} placeholder="Razão Social"
-                    class="form-control form-control-border">
+                <input type="text" name="vendedor2_cnpj[nome]" value="{{ $vendedor2->nome }}"" placeholder=" Razão
+                    Social" class="form-control form-control-border">
             </div>
             <div class="col-4">
                 <label>CNPJ</label>
-                <input type="text" name="vendedor2_cnpj[cnpj]" value={{ $vendedor2->cnpj }} placeholder="CNPJ"
+                <input type="text" name="vendedor2_cnpj[cnpj]" value="{{ $vendedor2->cnpj }}"" placeholder=" CNPJ"
                     class="form-control form-control-border cnpj">
             </div>
             <div class="col-4">
                 <label>Telefone</label>
-                <input type="text" name="vendedor2_cnpj[telefone]" value={{ $vendedor2->telefone }}
-                    placeholder="Telefone" class="form-control form-control-border telefone">
+                <input type="text" name="vendedor2_cnpj[telefone]" value="{{ $vendedor2->telefone }}""
+                        placeholder=" Telefone" class="form-control form-control-border telefone">
             </div>
 
         </div>
@@ -2728,7 +2728,7 @@
                     <div class="col-4">
                         <label>CNPJ</label>
                         <input type="text" value="{{ old('vendedor2_cnpj.cnpj') }}" name="vendedor2_cnpj[cnpj]"
-                            placeholder="CPF" class="form-control form-control-border cpf">
+                            placeholder="CNPJ" class="form-control form-control-border cnpj">
                     </div>
                     <div class="col-4">
                         <label>Telefone</label>

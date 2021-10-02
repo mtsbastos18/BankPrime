@@ -16,6 +16,19 @@
                     @endif
                 </div>
                 <div class="col-12 col-md-10" style="display: flex;justify-content: flex-end;">
+                    <div class="col-4">
+                        <select id="filtro-banco" class="custom-select form-control form-control-border">
+                            <option value="">Filtra por banco</option>
+                            <option value="1">Itaú
+                            </option>
+                            <option value="2">
+                                Bradesco</option>
+                            <option value="3">
+                                Santander</option>
+                            <option value="4">
+                                Caixa</option>
+                        </select>
+                    </div>
                     <div class="col-12 col-md-5">
                         <input type="text" name="filtroProposta" id="input-busca" placeholder="Pesquisar"
                             class="form-control form-control-border" id="">
@@ -168,6 +181,13 @@
             let filtro = $(this).val();
 
             $("#filtra-busca").attr('href', '/propostas/' + filtro);
+        })
+
+        $("#filtro-banco").on('change', function() {
+            let filtro = $(this).val();
+            console.log(filtro)
+            $("#filtra-busca").attr('href', '/propostas/' + filtro);
+            window.location.href = '/propostas/' + filtro;
         })
 
         $(document).ready(function() {

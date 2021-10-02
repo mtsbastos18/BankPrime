@@ -27,7 +27,7 @@ class AcompanhamentoController extends Controller
     {
         $lista = Acompanhamentos::where([
             ['id_processo', $IdProposta]
-        ])->with('observacao')->orderBy('data')->get();
+        ])->with('observacao')->get();
         foreach ($lista as $l) {
             foreach ($l['observacao'] as $o) {
                 $o['nomeUsuario'] = User::find($o['id_usuario_criacao']);

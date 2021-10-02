@@ -17,6 +17,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <p>Clique nas etapas para ocultar as observações</p>
+
                     <!-- The time line -->
                     <div class="timeline">
 
