@@ -157,10 +157,28 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Documento</label>
-                                        <input type="text" name="comprador[tipo_documento]"
-                                            value="{{ $comprador->tipo_documento }}" placeholder="Documento"
-                                            class="form-control form-control-border">
 
+                                        <select class="custom-select form-control form-control-border"
+                                            name="comprador[tipo_documento]" id="">
+                                            <option value="">Selecione</option>
+                                            <option {{ $comprador->tipo_documento == 'RG' ? 'selected' : '' }}
+                                                value="RG">
+                                                RG</option>
+                                            <option {{ $comprador->tipo_documento == 'CNH' ? 'selected' : '' }}
+                                                value="CNH">
+                                                CNH</option>
+                                            <option
+                                                {{ $comprador->tipo_documento == 'Carteira Funcional' ? 'selected' : '' }}
+                                                value="Carteira Funcional">
+                                                Carteira Funcional</option>
+                                            <option
+                                                {{ $comprador->tipo_documento == 'Identidade Militar' ? 'selected' : '' }}
+                                                value="Identidade Militar">
+                                                Identidade Militar</option>
+                                            <option {{ $comprador->tipo_documento == 'OAB' ? 'selected' : '' }}
+                                                value="OAB">
+                                                OAB</option>
+                                        </select>
                                     </div>
                                     <div class="col-6">
                                         <label>Nº Documento</label>
@@ -437,9 +455,28 @@
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <label>Documento</label>
-                                    <input type="text" name="conjuge[tipo_documento]"
-                                        value="{{ $conjugeComprador->tipo_documento }}" placeholder="Documento"
-                                        class="form-control form-control-border">
+
+                                    <select class="custom-select form-control form-control-border"
+                                        name="conjuge[tipo_documento]" id="">
+                                        <option value="">Selecione</option>
+                                        <option {{ $conjugeComprador->tipo_documento == 'RG' ? 'selected' : '' }}
+                                            value="RG">
+                                            RG</option>
+                                        <option {{ $conjugeComprador->tipo_documento == 'CNH' ? 'selected' : '' }}
+                                            value="CNH">
+                                            CNH</option>
+                                        <option
+                                            {{ $conjugeComprador->tipo_documento == 'Carteira Funcional' ? 'selected' : '' }}
+                                            value="Carteira Funcional">
+                                            Carteira Funcional</option>
+                                        <option
+                                            {{ $conjugeComprador->tipo_documento == 'Identidade Militar' ? 'selected' : '' }}
+                                            value="Identidade Militar">
+                                            Identidade Militar</option>
+                                        <option {{ $conjugeComprador->tipo_documento == 'OAB' ? 'selected' : '' }}
+                                            value="OAB">
+                                            OAB</option>
+                                    </select>
                                 </div>
                                 <div class="col-6">
                                     <label>Nº Documento</label>
@@ -643,9 +680,21 @@
                         <div class="row mt-3">
                             <div class="col-6">
                                 <label>Documento</label>
-                                <input value="{{ old('conjuge.tipo_documento') }}" type="text"
-                                    name="comprador[tipo_documento]" placeholder="Documento"
-                                    class="form-control form-control-border">
+
+                                <select class="custom-select form-control form-control-border"
+                                    name="conjuge[tipo_documento]" id="">
+                                    <option value="">Selecione</option>
+                                    <option value="RG">
+                                        RG</option>
+                                    <option value="CNH">
+                                        CNH</option>
+                                    <option value="Carteira Funcional">
+                                        Carteira Funcional</option>
+                                    <option value="Identidade Militar">
+                                        Identidade Militar</option>
+                                    <option value="OAB">
+                                        OAB</option>
+                                </select>
                             </div>
                             <div class="col-6">
                                 <label>Nº Documento</label>
@@ -681,8 +730,9 @@
                             </div>
                             <div class="col-4">
                                 <label>Data emissão</label>
-                                <input type="date" value="{{ old('conjuge.data_emissao') }}" name="conjuge[data_emissao]"
-                                    placeholder="Data emissão" class="form-control form-control-border">
+                                <input type="date" value="{{ old('conjuge.data_emissao') }}"
+                                    name="conjuge[data_emissao]" placeholder="Data emissão"
+                                    class="form-control form-control-border">
                             </div>
                         </div>
 
@@ -722,8 +772,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <label>Nome da empresa</label>
-                                <input type="text" value="{{ old('conjuge.nome_empresa') }}" name="conjuge[nome_empresa]"
-                                    placeholder="Nome da empresa" class="form-control form-control-border">
+                                <input type="text" value="{{ old('conjuge.nome_empresa') }}"
+                                    name="conjuge[nome_empresa]" placeholder="Nome da empresa"
+                                    class="form-control form-control-border">
                             </div>
                         </div>
 
@@ -866,10 +917,27 @@
                             <div class="row mt-3">
                                 <div class="col-6">
                                     <label>Documento</label>
-                                    <input type="text" name="comprador2[tipo_documento]"
-                                        value="{{ $comprador2->tipo_documento }}" placeholder="Documento"
-                                        class="form-control form-control-border">
 
+                                    <select class="custom-select form-control form-control-border"
+                                        name="comprador2[tipo_documento]" id="">
+                                        <option value="">Selecione</option>
+                                        <option {{ $comprador2->tipo_documento == 'RG' ? 'selected' : '' }} value="RG">
+                                            RG</option>
+                                        <option {{ $comprador2->tipo_documento == 'CNH' ? 'selected' : '' }}
+                                            value="CNH">
+                                            CNH</option>
+                                        <option
+                                            {{ $comprador2->tipo_documento == 'Carteira Funcional' ? 'selected' : '' }}
+                                            value="Carteira Funcional">
+                                            Carteira Funcional</option>
+                                        <option
+                                            {{ $comprador2->tipo_documento == 'Identidade Militar' ? 'selected' : '' }}
+                                            value="Identidade Militar">
+                                            Identidade Militar</option>
+                                        <option {{ $comprador2->tipo_documento == 'OAB' ? 'selected' : '' }}
+                                            value="OAB">
+                                            OAB</option>
+                                    </select>
                                 </div>
                                 <div class="col-6">
                                     <label>Nº Documento</label>
@@ -1135,9 +1203,23 @@
                 <div class="row mt-3">
                     <div class="col-6">
                         <label>Documento</label>
-                        <input type="text" name="conjuge2[tipo_documento]"
-                            value="{{ $conjugeComprador2->tipo_documento }}" placeholder="Documento"
-                            class="form-control form-control-border">
+
+                        <select class="custom-select form-control form-control-border" name="conjuge2[tipo_documento]"
+                            id="">
+                            <option value="">Selecione</option>
+                            <option {{ $conjugeComprador2->tipo_documento == 'RG' ? 'selected' : '' }} value="RG">
+                                RG</option>
+                            <option {{ $conjugeComprador2->tipo_documento == 'CNH' ? 'selected' : '' }} value="CNH">
+                                CNH</option>
+                            <option {{ $conjugeComprador2->tipo_documento == 'Carteira Funcional' ? 'selected' : '' }}
+                                value="Carteira Funcional">
+                                Carteira Funcional</option>
+                            <option {{ $conjugeComprador2->tipo_documento == 'Identidade Militar' ? 'selected' : '' }}
+                                value="Identidade Militar">
+                                Identidade Militar</option>
+                            <option {{ $conjugeComprador2->tipo_documento == 'OAB' ? 'selected' : '' }} value="OAB">
+                                OAB</option>
+                        </select>
                     </div>
                     <div class="col-6">
                         <label>Nº Documento</label>
@@ -1327,8 +1409,20 @@
                 <div class="row mt-3">
                     <div class="col-6">
                         <label>Documento</label>
-                        <input type="text" value="{{ old('conjuge2.tipo_documento') }}" name="conjuge2[tipo_documento]"
-                            placeholder="Documento" class="form-control form-control-border">
+                        <select class="custom-select form-control form-control-border" name="conjuge2[tipo_documento]"
+                            id="">
+                            <option value="">Selecione</option>
+                            <option value="RG">
+                                RG</option>
+                            <option value="CNH">
+                                CNH</option>
+                            <option value="Carteira Funcional">
+                                Carteira Funcional</option>
+                            <option value="Identidade Militar">
+                                Identidade Militar</option>
+                            <option value="OAB">
+                                OAB</option>
+                        </select>
                     </div>
                     <div class="col-6">
                         <label>Nº Documento</label>
@@ -1543,8 +1637,20 @@
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Documento</label>
-                    <input type="text" value="{{ old('comprador2.tipo_documento') }}" name="comprador2[tipo_documento]"
-                        placeholder="Documento" class="form-control form-control-border">
+
+                    <select class="custom-select form-control form-control-border" name="comprador2[tipo_documento]" id="">
+                        <option value="">Selecione</option>
+                        <option value="RG">
+                            RG</option>
+                        <option value="CNH">
+                            CNH</option>
+                        <option value="Carteira Funcional">
+                            Carteira Funcional</option>
+                        <option value="Identidade Militar">
+                            Identidade Militar</option>
+                        <option value="OAB">
+                            OAB</option>
+                    </select>
                 </div>
                 <div class="col-6">
                     <label>Nº Documento</label>
@@ -1817,8 +1923,20 @@
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Documento</label>
-                    <input type="text" value="{{ old('conjuge2.tipo_documento') }}" name="conjuge2[tipo_documento]"
-                        placeholder="Documento" class="form-control form-control-border">
+
+                    <select class="custom-select form-control form-control-border" name="conjuge2[tipo_documento]" id="">
+                        <option value="">Selecione</option>
+                        <option value="RG">
+                            RG</option>
+                        <option value="CNH">
+                            CNH</option>
+                        <option value="Carteira Funcional">
+                            Carteira Funcional</option>
+                        <option value="Identidade Militar">
+                            Identidade Militar</option>
+                        <option value="OAB">
+                            OAB</option>
+                    </select>
                 </div>
                 <div class="col-6">
                     <label>Nº Documento</label>
@@ -2515,8 +2633,10 @@
             </div>
             <div class="col-4">
                 <label>Telefone</label>
-                <input type="text" name="vendedor2_cnpj[telefone]" value="{{ $vendedor2->telefone }}""
-                        placeholder=" Telefone" class="form-control form-control-border telefone">
+                <input type="text" name="vendedor2_cnpj[telefone]"
+                    value="{{ $vendedor2->telefone }}""
+                                                                                                                        placeholder=" Telefone"
+                    class="form-control form-control-border telefone">
             </div>
 
         </div>
