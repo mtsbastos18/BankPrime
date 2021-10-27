@@ -460,8 +460,10 @@ class PropostaController extends Controller
         $vendedorData = $data['vendedor'];
         if ($vendedorData['tipo'] == 2) {
             $tipo = $vendedorData['tipo'];
+            $id = $vendedorData['id'];
             $vendedorData = $data['vendedor_cnpj'];
             $vendedorData['tipo'] = $tipo;
+            $vendedorData['id'] = $id;
         }
 
         if (isset($data['vendedor2'])) {
@@ -470,8 +472,10 @@ class PropostaController extends Controller
 
             if ($vendedor2Data['tipo'] == 2) {
                 $tipo = $vendedor2Data['tipo'];
+                $id = $vendedor2Data['id'];
                 $vendedor2Data = $data['vendedor2_cnpj'];
                 $vendedor2Data['tipo'] = $tipo;
+                $vendedor2Data['id'] = $id;
             }
 
             if ($ativo == 1) {

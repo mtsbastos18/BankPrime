@@ -13,6 +13,24 @@
             <div class="col-12 col-md-2">
                 <a href="{{ route('novo-parceiro') }}" class="btn btn-block btn-outline-primary">Novo parceiro</a>
             </div>
+            <div class="col-12 col-md-10" style="display: flex;justify-content: flex-end;">
+                    <div class="col-4">
+                        <select id="filtro-banco" class="custom-select form-control form-control-border">
+                            <option value="">Filtra por status</option>
+                            <option value="1">Ativo
+                            </option>
+                            <option value="2">
+                                Inativo</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <input type="text" name="filtroProposta" id="input-busca" placeholder="Pesquisar"
+                            class="form-control form-control-border" id="">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <a class="btn btn-block btn-outline-primary" id="filtra-busca">Pesquisar</a>
+                    </div>
+                </div>
         </div>
         <div class="row mt-3">
             <div class="col-12">
@@ -88,6 +106,29 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
+    <script>
+
+        $("#input-busca").on('keyup', function() {
+            let filtro = $(this).val();
+
+            $("#filtra-busca").attr('href', '/parceiros/' + filtro);
+        })
+          $("#filtro-banco").on('change', function() {
+            let filtro = $(this).val();
+            console.log(filtro)
+            $("#filtra-busca").attr('href', '/parceiros/' + filtro);
+            window.location.href = '/parceiros/' + filtro;
+        })
+        $(document).ready(function() {
+            $('.table').DataTable({
+                lengthChange: false,
+                searching: false,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/pt_br.json'
+                }
+            });
+        });
+    </script>
 @endsection
 <style>
 .card-header{ 

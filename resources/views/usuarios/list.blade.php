@@ -81,9 +81,9 @@
                                             <td>{{$u->permissao->permissao}}</td>
                                             <td>{{date_format(new DateTime($u->created_at),'d-m-Y')}}</td>
                                             @if ($u->status == 1) 
-                                                <td class="badge bg-success">Ativo</td>
+                                                <td class=""><a class="badge bg-success">Ativo</a></td>
                                             @else 
-                                                <td class="badge bg-danger">Inativo</td>
+                                                <td class=""><a class="badge bg-danger">Inativo</a></td>
                                             @endif
                                             <td>
                                                 <a  href="{{ route('editar-usuario',$u->id) }}"><i class="far fa-edit"></i> Editar</a>
@@ -121,5 +121,14 @@ $("#id_parceiro").on('change',function(){
 
     $("#filtra-busca").attr('href','/usuarios/' + filtro);
 })
+$(document).ready(function() {
+            $('.table').DataTable({
+                lengthChange: false,
+                searching: false,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.1/i18n/pt_br.json'
+                }
+            });
+        });
 </script>
 @endsection

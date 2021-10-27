@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Parceiro;
 use App\Models\Uf;
 use App\Models\User;
@@ -19,10 +20,15 @@ class ParceiroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($filtro = null)
     {
-        $listaParceiros = Parceiro::all();
-        return view('parceiros.list',['parceiros' => $listaParceiros]);
+        if ($filtro) {
+            $listaParceiros = Parceiro::where('status', $filtro)->orWhere('apelido', $filtro)->get();
+        } else {
+            $listaParceiros = Parceiro::all();
+        }
+
+        return view('parceiros.list', ['parceiros' => $listaParceiros]);
     }
 
     /**
@@ -63,13 +69,10 @@ class ParceiroController extends Controller
 
             User::create($usuarioParceiro);
 
-            return Redirect('parceiros')->with('message','Parceiro adicionado com sucesso');
-
+            return Redirect('parceiros')->with('message', 'Parceiro adicionado com sucesso');
         } catch (\Throwable $th) {
-            return Redirect('parceiros')->with('error','Erro ao salvar parceiro');
-
+            return Redirect('parceiros')->with('error', 'Erro ao salvar parceiro');
         }
-
     }
 
     /**
@@ -96,9 +99,9 @@ class ParceiroController extends Controller
                 $parceiro = Parceiro::find($id);
                 $estados = Uf::getEstados();
 
-                return view('parceiros.edit',["parceiro"=>$parceiro, "estados" => $estados]);
+                return view('parceiros.edit', ["parceiro" => $parceiro, "estados" => $estados]);
             } catch (\Throwable $th) {
-                return Redirect('parceiros')->with('error','Parceiro não encontrado');
+                return Redirect('parceiros')->with('error', 'Parceiro não encontrado');
             }
         }
     }
@@ -111,27 +114,27 @@ class ParceiroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
+    {
         $data = $request->all();
 
         if ($id == $data['id']) {
             $parceiro = Parceiro::findOrFail($id);
 
             $statusParceiro = $parceiro->status;
-            
+
             $parceiro->update($data);
 
             if ($statusParceiro == 1 && $data['status'] == 2) {
-                User::where('id_parceiro',$parceiro->id)->update(['status' => 0]);
+                User::where('id_parceiro', $parceiro->id)->update(['status' => 0]);
             }
 
             if ($statusParceiro == 2 && $data['status'] == 1) {
-                User::where('id_parceiro',$parceiro->id)->update(['status' => 1]);
+                User::where('id_parceiro', $parceiro->id)->update(['status' => 1]);
             }
 
-            return Redirect('parceiros')->with('message','Parceiro atualizado com sucesso');
+            return Redirect('parceiros')->with('message', 'Parceiro atualizado com sucesso');
         }
-        return Redirect('parceiros')->with('error','Erro ao atualizar parceiro');
+        return Redirect('parceiros')->with('error', 'Erro ao atualizar parceiro');
     }
 
     /**

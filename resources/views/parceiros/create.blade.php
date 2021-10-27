@@ -52,7 +52,7 @@
                                 
                                 <div class="col-4">
                                     <label>Celular</label>
-                                    <input type="text" name="celular" placeholder="Celular"  class="form-control form-control-border celular" required>
+                                    <input type="text" name="celular" placeholder="Celular"  class="form-control form-control-border celular" >
                                 </div>
                                 <div class="col-4">
                                     <label>Nome de contato</label>
@@ -61,7 +61,7 @@
 
                                  <div class="col-4">
                                     <label>Telefone do contato</label>
-                                    <input type="text" name="telefone_contato" placeholder="Telefone do contato"  class="form-control form-control-border telefone" required>
+                                    <input type="text" name="telefone_contato" placeholder="Telefone do contato"  class="form-control form-control-border telefone" >
                                 </div>
                                 
                             </div>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-6">
                                     <label>Conta</label>
-                                    <input type="text" name="conta" placeholder="Celular"  class="form-control form-control-border" required>
+                                    <input type="text" name="conta" placeholder="Conta"  class="form-control form-control-border" >
                                 </div>
                             </div>
 
@@ -142,7 +142,7 @@ jQuery(function ($) {
         </div>
         <div class="col-6">
             <label>Razão social</label>
-            <input type="text" name="razao_social" placeholder="CNPJ"  class="form-control form-control-border" required>
+            <input type="text" name="razao_social" placeholder="Razão Social"  class="form-control form-control-border" required>
         </div>
     `;
 

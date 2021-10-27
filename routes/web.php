@@ -42,7 +42,7 @@ Route::get('/excluir-vendedor/{Id}', [\App\Http\Controllers\PropostaController::
 
 
 
-Route::get('/parceiros', [App\Http\Controllers\ParceiroController::class, 'index'])->name('parceiros');
+Route::get('/parceiros/{filtro?}', [App\Http\Controllers\ParceiroController::class, 'index'])->name('parceiros');
 Route::get('/novo-parceiro', [App\Http\Controllers\ParceiroController::class, 'create'])->name('novo-parceiro');
 Route::post('/salvar-parceiro', [App\Http\Controllers\ParceiroController::class, 'store'])->name('salvar-parceiro');
 Route::get('/editar-parceiro/{IdParceiro}', [App\Http\Controllers\ParceiroController::class, 'edit'])->name('editar-parceiro');
