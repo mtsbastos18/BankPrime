@@ -26,6 +26,9 @@
                             <div class="time-label">
                                 <span class="bg-info">{{ $l->tipo_acompanhamento->descricao }} -
                                     {{ date_format(new DateTime($l->data), 'd/m/Y') }}</span>
+                                 @if (auth()->user()->id_permissao == 1) 
+                                    <a href="{{ url('excluir-acompanhamento/' . $idProposta . '/' . $l->id) }}"><i class="fas fa-trash"></i></a>
+                                 @endif
                             </div>
                             @if (auth()->user()->id_permissao != 3)
                                 <div class="detalhes-timeline">
@@ -34,13 +37,19 @@
                                         <i class="
                                     fas fa-clock bg-gray"></i>
                                         <div class="timeline-item mt-2">
-                                            <h3 class="timeline-header">{{ $o->nomeUsuario->name }} adicionou uma
+
+
+                                            <span class="time"><i class="fas fa-clock"></i>
+                                                {{ date_format(new DateTime($o->data), 'd/m/Y') }}</span>
+                                            <h5 class="timeline-header">{{ $o->nomeUsuario->name }} adicionou uma
                                                 observação
 
                                                 <a title="Editar"
                                                     href="{{ url('editar-observacao/' . $idProposta . '/' . $o->id) }}"><i
                                                         class="far fa-edit pull-right"></i> </a>
-                                            </h3>
+                                                <a title="Excluir" href="{{ url('excluir-observacao/' . $o->id) }}"><i
+                                                        class="far fa-trash-alt pull-right"></i> </a>
+                                            </h5>
 
                                             <div class="timeline-body">
                                                 {{ $o->observacao }}
@@ -88,10 +97,20 @@
             display: none;
         }
 
+        .timeline>div>.timeline-item>.timeline-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            color: #495057;
+            font-size: 13px;
+            line-height: 1.1;
+            margin: 0;
+            padding: 10px;
+            font-weight: bold;
+        }
+
     </style>
     <script>
-        $(".time-label").click(function() {
-            $(this).next().toggleClass("hide-timeline");
+        $(".bg-info").click(function() {
+            $('.detalhes-timeline').toggleClass("hide-timeline");
         })
     </script>
 @endsection

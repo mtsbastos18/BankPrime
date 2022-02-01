@@ -26,11 +26,22 @@
                                     <div class="col-12">
                                         <select name="processo[status]" readonly
                                             class="custom-select form-control form-control-border" id="">
-                                            <option value="1" @if ($processo->status == 1) selected @endif>Em andamento</option>
-                                            <option value="2" @if ($processo->status == 2) selected @endif> Aguardando aprovação</option>
-                                            <option value="3" @if ($processo->status == 3) selected @endif> Declinou</option>
-                                            <option value="4" @if ($processo->status == 4) selected @endif> Registrado</option>
-                                            <option value="5" @if ($processo->status == 5) selected @endif> Cancelado</option>
+                                            <option value="1" @if ($processo->status == 1) selected @endif>Em andamento
+                                            </option>
+                                            <option value="2" @if ($processo->status == 2) selected @endif> Aguardando
+                                                aprovação</option>
+                                            <option value="3" @if ($processo->status == 3) selected @endif> Declinou
+                                            </option>
+                                            <option value="4" @if ($processo->status == 4) selected @endif> Registrado
+                                            </option>
+                                            <option value="5" @if ($processo->status == 5) selected @endif> Cancelado
+                                            </option>
+                                            <option value="6" @if ($processo->status == 6) selected @endif> Em análise de Crédito
+                                            </option>
+                                            <option value="7" @if ($processo->status == 7) selected @endif> Em Registro
+                                            </option>
+                                            <option value="8" @if ($processo->status == 8) selected @endif> Crédito Aprovado
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -382,7 +393,7 @@
                                         </div>
                                         <div class="col-6">
                                             <label>Data admissão</label>
-                                            <p>{{ date_format(new DateTime($conjugeComprador2->admissao), 'd/m/Y') }}</p>
+                                            <p>{{ date_format(new DateTime($conjugeComprador->admissao), 'd/m/Y') }}</p>
                                         </div>
 
                                     </div>
@@ -945,12 +956,15 @@
 
 
                                     <div class="row mt-3">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <label>Telefone</label>
                                             <p>{{ $vendedor->telefone }}</p>
                                         </div>
-
-                                        <div class="col-6">
+                                        <div class="col-4">
+                                            <label>Email</label>
+                                            <p>{{ $vendedor->email }}</p>
+                                        </div>
+                                        <div class="col-4">
                                             <label>Profissão</label>
                                             <p>{{ $vendedor->profissao }}</p>
                                         </div>
@@ -1001,7 +1015,7 @@
                                                 <p>{{ $vendedor->email_procurador }}</p>
                                             </div>
                                             <div class="col-6">
-                                                <label for="">Telefone Procurador</label>
+                                                <label for="">Celular Procurador</label>
                                                 <p>{{ $vendedor->telefone_procurador }}</p>
                                             </div>
                                         </div>
@@ -1022,9 +1036,15 @@
                                             <label>CNPJ</label>
                                             <p>{{ $vendedor->cnpj }}</p>
                                         </div>
-                                        <div class="col-3">
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
                                             <label>Telefone</label>
                                             <p>{{ $vendedor->telefone }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Email</label>
+                                            <p>{{ $vendedor->email }}</p>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -1072,7 +1092,7 @@
                                                 <p>{{ $vendedor->email_procurador }}</p>
                                             </div>
                                             <div class="col-6">
-                                                <label for="">Telefone Procurador</label>
+                                                <label for="">Celular Procurador</label>
                                                 <p>{{ $vendedor->telefone_procurador }}</p>
                                             </div>
                                         </div>
@@ -1122,12 +1142,15 @@
 
 
                                         <div class="row mt-3">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <label>Telefone</label>
                                                 <p>{{ $vendedor2->telefone }}</p>
                                             </div>
-
-                                            <div class="col-6">
+                                            <div class="col-4">
+                                                <label>Email</label>
+                                                <p>{{ $vendedor2->email }}</p>
+                                            </div>
+                                            <div class="col-4">
                                                 <label>Profissão</label>
                                                 <p>{{ $vendedor2->profissao }}</p>
                                             </div>
@@ -1179,7 +1202,7 @@
                                 <p>{{ $vendedor2->email_procurador }}</p>
                             </div>
                             <div class="col-6">
-                                <label for="">Telefone Procurador</label>
+                                <label for="">Celular Procurador</label>
                                 <p>{{ $vendedor2->telefone_procurador }}</p>
                             </div>
                         </div>
@@ -1200,9 +1223,16 @@
                         <label>CNPJ</label>
                         <p>{{ $vendedor2->cnpj }}</p>
                     </div>
-                    <div class="col-3">
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
                         <label>Telefone</label>
                         <p>{{ $vendedor2->telefone }}</p>
+                    </div>
+                    <div class="col-6">
+                        <label>Email</label>
+                        <p>{{ $vendedor2->email }}</p>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -1250,7 +1280,7 @@
                             <p>{{ $vendedor2->email_procurador }}</p>
                         </div>
                         <div class="col-6">
-                            <label for="">Telefone Procurador</label>
+                            <label for="">Celular Procurador</label>
                             <p>{{ $vendedor2->telefone_procurador }}</p>
                         </div>
                     </div>
@@ -1362,6 +1392,12 @@
                     @endif
                     @if ($processo->banco == 3)
                         <p>Santander</p>
+                    @endif
+                    @if ($processo->banco == 4)
+                        <p>Caixa</p>
+                    @endif
+                    @if ($processo->banco == 5)
+                        <p>Banrisul</p>
                     @endif
                 </div>
                 <div class="col-6">

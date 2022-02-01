@@ -16,9 +16,19 @@
                     @endif
                 </div>
                 <div class="col-12 col-md-10" style="display: flex;justify-content: flex-end;">
-                    <div class="col-4">
+                    @if (auth()->user()->id_permissao == 1)
+                        <div class="col-3">
+                            <select id="filtro-parceiros" class="custom-select form-control form-control-border">
+                                <option value="">Filtrar por parceiro</option>
+                                @foreach ($parceiros as $p)
+                                    <option value="{{ $p->id }}">{{ $p->apelido }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                    <div class="col-3">
                         <select id="filtro-banco" class="custom-select form-control form-control-border">
-                            <option value="">Filtra por banco</option>
+                            <option value="">Filtrar por banco</option>
                             <option value="1">Itaú
                             </option>
                             <option value="2">
@@ -27,9 +37,11 @@
                                 Santander</option>
                             <option value="4">
                                 Caixa</option>
+                            <option value="5">
+                                Banrisul</option>
                         </select>
                     </div>
-                    <div class="col-12 col-md-5">
+                    <div class="col-12 col-md-3">
                         <input type="text" name="filtroProposta" id="input-busca" placeholder="Pesquisar"
                             class="form-control form-control-border" id="">
                     </div>
@@ -66,7 +78,6 @@
                                             <th>CPF</th>
                                             <th>Cliente</th>
                                             <th>Situação</th>
-                                            <th>Atualizado em</th>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
@@ -92,6 +103,11 @@
                                                         @break
                                                         @case(4)
                                                             <img src="{{ asset('images/caixa.png') }}"
+                                                                style="max-width: 25px;"><span
+                                                                style="visibility:hidden;">{{ $l->banco }}</span>
+                                                        @break
+                                                         @case(5)
+                                                            <img src="{{ asset('images/banrisul.png') }}"
                                                                 style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
@@ -128,11 +144,25 @@
                                                             <a class="badge bg-danger">Cancelado</a>
                                                         </td>
                                                     @break
+                                                    @case(6)
+                                                        <td>
+                                                            <a class="badge bg-info">Em análise de Crédito</a>
+                                                        </td>
+                                                    @break
+                                                    @case(7)
+                                                        <td>
+                                                            <a class="badge bg-secondary">Em Registro</a>
+                                                        </td>
+                                                    @break
+                                                    @case(8)
+                                                        <td>
+                                                            <a class="badge bg-success">Crédito Aprovado</a>
+                                                        </td>
+                                                    @break
                                                     @default
 
                                                 @endswitch
 
-                                                <td>{{ date_format(new DateTime($l->updated_at), 'd-m-Y H:i:s') }}</td>
                                                 <td class="td-acoes">
                                                     <a title="Visualizar"
                                                         href="{{ route('visualizar-proposta', $l->id) }}"><i
@@ -180,18 +210,24 @@
         $("#input-busca").on('keyup', function() {
             let filtro = $(this).val();
 
-            $("#filtra-busca").attr('href', '/propostas/' + filtro);
+            $("#filtra-busca").attr('href', '/sistema/propostas/' + filtro);
         })
 
         $("#filtro-banco").on('change', function() {
             let filtro = $(this).val();
-            console.log(filtro)
-            $("#filtra-busca").attr('href', '/propostas/' + filtro);
-            window.location.href = '/propostas/' + filtro;
+            $("#filtra-busca").attr('href', '/sistema/propostas/' + filtro + '/banco');
+            window.location.href = '/sistema/propostas/' + filtro + '/banco';
+        })
+
+        $("#filtro-parceiros").on('change', function() {
+            let filtro = $(this).val();
+            $("#filtra-busca").attr('href', '/propostas/' + filtro + '/parceiro');
+            window.location.href = '/sistema/propostas/' + filtro + '/parceiro';
         })
 
         $(document).ready(function() {
             $('#tabela-lista').DataTable({
+                order: [],
                 lengthChange: false,
                 searching: false,
                 language: {

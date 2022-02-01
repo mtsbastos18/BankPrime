@@ -25,16 +25,20 @@ class AcompanhamentoController extends Controller
      */
     public function index($IdProposta)
     {
+        if (auth()->user()->id_permissao != 1) {
+            return Redirect('propostas/');
+        }
         $lista = Acompanhamentos::where([
             ['id_processo', $IdProposta]
         ])->with('observacao')->get();
         foreach ($lista as $l) {
             foreach ($l['observacao'] as $o) {
+                $o['data'] == null ? $o['data'] = $o['created_at'] : $o['data'] = $o['data'];
                 $o['nomeUsuario'] = User::find($o['id_usuario_criacao']);
             }
+            $l['observacao'] =  collect($l['observacao'])->sortBy('data');
             $l['tipo_acompanhamento'] = TipoAcompanhamentos::find($l['id_tipo_acompanhamento']);
         }
-
         return view('acompanhamentos.list', [
             'lista' => $lista,
             'idProposta' => $IdProposta
@@ -128,7 +132,6 @@ class AcompanhamentoController extends Controller
                 ['id_processo', '=', $data['id_processo']]
             ])->get();
 
-
             if (count($check) == 0) {
                 $dataAcompanhamento = [
                     'id_tipo_acompanhamento' => $data['id_tipo_acompanhamento'],
@@ -162,18 +165,16 @@ class AcompanhamentoController extends Controller
             } else {
                 $acompanhamentoAtual = Acompanhamentos::where([
                     ['id_processo', '=', $data['id_processo']],
+                    ['id_tipo_acompanhamento', '=', $data['id_tipo_acompanhamento']],
                 ])->orderBy('created_at', 'desc')->first();
 
                 if ($data['observacoes'] != "") {
                     $observacao = [
                         'id_acompanhamento' => $acompanhamentoAtual['id'],
                         'observacao' => $data['observacoes'],
-                        'id_usuario_criacao' => auth()->user()->id
+                        'id_usuario_criacao' => auth()->user()->id,
+                        'data' => $data['data']
                     ];
-
-                    if ($data['data'] == "") {
-                        $observacao['data'] = date("Y-m-d");
-                    }
 
                     ObservacaoAcompanhamentos::create($observacao);
                     return Redirect('acompanhamentos/' . $data['id_processo']);
@@ -205,7 +206,6 @@ class AcompanhamentoController extends Controller
     public function edit($idProposta, $id)
     {
         $observacao = ObservacaoAcompanhamentos::find($id);
-
         return view('acompanhamentos.edit', [
             'observacao' => $observacao,
             'idProposta' => $idProposta
@@ -240,6 +240,24 @@ class AcompanhamentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $observacao = ObservacaoAcompanhamentos::find($id);
+
+        if ($id == $observacao['id']) {
+            $acompanhamento = Acompanhamentos::find($observacao['id_acompanhamento']);
+
+            $observacao->delete();
+
+            return redirect('acompanhamentos/' . $acompanhamento['id_processo']);
+        }
+    }
+
+    public function excluir($idProposta, $idAcompanhamento) 
+    {
+        ObservacaoAcompanhamentos::where('id_acompanhamento', '=', $idAcompanhamento)->delete();
+
+        $acompanhamento = Acompanhamentos::find($idAcompanhamento);
+        $acompanhamento->delete();
+
+        return redirect('acompanhamentos/' . $idProposta);
     }
 }

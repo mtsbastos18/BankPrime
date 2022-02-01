@@ -208,12 +208,15 @@ class UserController extends Controller
                 $usuario = User::find($id);
                 $estados = Uf::getEstados();
                 $parceiros = Parceiro::where('id', '>', 1)->get();
-
+                $gerentes = User::where('id_permissao', 2)->where('id_parceiro', $usuario['id_parceiro'])->get();
+                $vinculo = RelCorretorGerente::where('id_corretor', $id)->first();
                 return view('usuarios.edit', [
                     "usuario" => $usuario,
                     "ufs" => $estados,
                     "permissoes" => $this->buscaPermissoes(),
-                    "parceiros" => $parceiros
+                    "parceiros" => $parceiros,
+                    "gerentes" => $gerentes,
+                    "vinculo" => $vinculo
                 ]);
             } catch (\Throwable $th) {
                 return Redirect('usuarios')->with('error', 'Usuário não encontrado');
@@ -234,6 +237,18 @@ class UserController extends Controller
 
         if ($id == $data['id']) {
             $usuario = User::findOrFail($id);
+
+            RelCorretorGerente::where('id_corretor', $usuario['id'])->delete();
+
+            if ($data['id_permissao'] == 3) {
+                $relCorretorGerente = [
+                    "id_corretor" => $usuario['id'],
+                    "id_gerente" => $data['id_gerente']
+                ];
+
+                RelCorretorGerente::create($relCorretorGerente);
+            }
+
             $usuario->update($data);
 
             return Redirect('usuarios')->with('message', 'Usuário atualizado com sucesso');
@@ -264,7 +279,7 @@ class UserController extends Controller
             ->orWhere([
                 ['id_permissao', '=', '3'],
                 ['id_parceiro', '=', $idParceiro],
-            ])
+            ])->orderBy('name', 'asc')
             ->get();
 
         return response($lista);

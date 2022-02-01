@@ -2,6 +2,8 @@
 
 
 @section('breadcrumb')
+    <li class="breadcrumb-item"><a href="{{ route('propostas') }}">Minha Propostas</a></li>
+
     <li class="breadcrumb-item active">Nova Proposta</li>
 @endsection
 
@@ -79,8 +81,13 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        <input value="{{ old('comprador.pais') }}" type="text" name="comprador[pais]"
-                                            placeholder="Nacionalidade" class="form-control form-control-border">
+                                        
+                                        <select name="comprador[pais]" placeholder="Nacionalidade"
+                                            class="form-control form-control-border">
+                                            @foreach ($nacionalidades as $n)
+                                                <option value="{{ $n }}"> {{ $n }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-6">
                                         <label>Naturalidade</label>
@@ -163,11 +170,13 @@
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
                                             <option {{ old('comprador.regime_bens') == 1 ? 'selected' : '' }} value="1">
-                                                Comunhão parcial de bens</option>
+                                                Comunhão Parcial de Bens</option>
                                             <option {{ old('comprador.regime_bens') == 2 ? 'selected' : '' }} value="2">
                                                 Comunhão Universal de Bens</option>
                                             <option {{ old('comprador.regime_bens') == 3 ? 'selected' : '' }} value="3">
-                                                Separação de bens</option>
+                                                Separação Total de Bens</option>
+                                            <option {{ old('comprador.regime_bens') == 4 ? 'selected' : '' }} value="4">
+                                                Separação Obrigatória de Bens</option>
                                         </select>
                                     </div>
 
@@ -266,12 +275,12 @@
                         </div>
 
                         <div class="card card-navy ">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#test-block">
                                 <h3 class="card-title">
                                     Dados Profissionais Comprador 1
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse" id="test-block">
                                 <div class="row">
                                     <div class="col-12">
                                         <label>Nome da empresa</label>
@@ -366,7 +375,8 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Sexo</label>
-                                        <select name="conjuge[sexo]" class="custom-select form-control form-control-border">
+                                        <select name="conjuge[sexo]"
+                                            class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
                                             <option value="1" {{ old('conjuge.sexo') == 1 ? 'selected' : '' }}>Masculino
                                             </option>
@@ -384,8 +394,13 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        <input value="{{ old('conjuge.pais') }}" type="text" name="conjuge[pais]"
-                                            placeholder="Nacionalidade" class="form-control form-control-border">
+                                        
+                                        <select name="conjuge[pais]" placeholder="Nacionalidade"
+                                            class="form-control form-control-border">
+                                            @foreach ($nacionalidades as $n)
+                                                <option value="{{ $n }}"> {{ $n }}</option>
+                                            @endforeach
+                                        </select>
 
                                     </div>
                                     <div class="col-6">
@@ -489,12 +504,12 @@
                         </div>
 
                         <div class="card card-navy conjuge1" style="display:none;">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#conj-compr1">
                                 <h3 class="card-title">
                                     Dados profissionais do cônjuge do comprador 1
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse" id="conj-compr1">
                                 <div class="row">
                                     <div class="col-12">
                                         <label>Nome da empresa</label>
@@ -634,8 +649,13 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        <input type="text" value="{{ old('comprador2.pais') }}" name="comprador2[pais]"
-                                            placeholder="Nacionalidade" class="form-control form-control-border">
+                                        
+                                        <select name="comprador2[pais]" placeholder="Nacionalidade"
+                                            class="form-control form-control-border">
+                                            @foreach ($nacionalidades as $n)
+                                                <option value="{{ $n }}"> {{ $n }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-6">
                                         <label>Naturalidade</label>
@@ -718,16 +738,14 @@
                                         <select name="comprador2[regime_bens]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1"
-                                                {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }}>
-                                                Comunhão
-                                                parcial de bens</option>
-                                            <option value="2"
-                                                {{ old('comprador2.regime_bens') == 2 ? 'selected' : '' }}>Comunhão
-                                                Universal de Bens</option>
-                                            <option value="3"
-                                                {{ old('comprador2.regime_bens') == 3 ? 'selected' : '' }}>Separação de
-                                                bens</option>
+                                            <option {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }} value="1">
+                                                Comunhão Parcial de Bens</option>
+                                            <option {{ old('comprador2.regime_bens') == 2 ? 'selected' : '' }} value="2">
+                                                Comunhão Universal de Bens</option>
+                                            <option {{ old('comprador2.regime_bens') == 3 ? 'selected' : '' }} value="3">
+                                                Separação Total de Bens</option>
+                                            <option {{ old('comprador2.regime_bens') == 4 ? 'selected' : '' }} value="4">
+                                                Separação Obrigatória de Bens</option>
                                         </select>
                                     </div>
 
@@ -743,21 +761,21 @@
                                     <div class="col-3">
                                         <label>CEP Residencial</label>
                                         <input type="text" value="{{ old('endereco_comprador2.cep') }}"
-                                            onkeyup="pesquisacep(1)" name="endereco_comprador2[cep]" id="cep1"
+                                            onkeyup="pesquisacep(2)" name="endereco_comprador2[cep]" id="cep2"
                                             placeholder="" class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
                                         <label>Endereço residencial</label>
                                         <input type="text" value="{{ old('endereco_comprador2.logradouro') }}"
-                                            name="endereco_comprador2[logradouro]" id="rua1" placeholder=""
+                                            name="endereco_comprador2[logradouro]" id="rua2" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
 
                                     <div class="col-2">
                                         <label>Número</label>
                                         <input type="text" value="{{ old('endereco_comprador2.numero') }}"
-                                            name="endereco_comprador2[numero]" id="numero1" placeholder=""
+                                            name="endereco_comprador2[numero]" id="numero2" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
                                     <div class="col-2">
@@ -772,21 +790,21 @@
                                     <div class="col-4">
                                         <label>Bairro</label>
                                         <input type="text" value="{{ old('endereco_comprador2.bairro') }}"
-                                            name="endereco_comprador2[bairro]" id="bairro1" placeholder=""
+                                            name="endereco_comprador2[bairro]" id="bairro2" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
 
                                     <div class="col-4">
                                         <label>Cidade</label>
                                         <input type="text" value="{{ old('endereco_comprador2.cidade') }}"
-                                            name="endereco_comprador2[cidade]" id="cidade1" placeholder=""
+                                            name="endereco_comprador2[cidade]" id="cidade2" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
 
                                     <div class="col-4">
                                         <label>Estado</label>
                                         <select name="endereco_comprador2[uf]"
-                                            class="custom-select form-control form-control-border" id="uf1">
+                                            class="custom-select form-control form-control-border" id="uf2">
                                             @foreach ($ufs as $k => $v)
                                                 <option {{ old('endereco_comprador2.uf') == $k ? 'selected' : '' }}
                                                     value="{{ $k }}">{{ $v }}</option>
@@ -826,12 +844,12 @@
                         </div>
 
                         <div class="card card-navy comprador2" style="display:none;">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#test-block2">
                                 <h3 class="card-title">
                                     Dados Profissionais Comprador 2
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse" id="test-block2">
                                 <div class="row">
                                     <div class="col-12">
                                         <label>Nome da empresa</label>
@@ -949,8 +967,13 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        <input type="text" value="{{ old('conjuge2.pais') }}" name="conjuge2[pais]"
-                                            placeholder="Nacionalidade" class="form-control form-control-border">
+                                        
+                                        <select name="conjuge2[pais]" placeholder="Nacionalidade"
+                                            class="form-control form-control-border">
+                                            @foreach ($nacionalidades as $n)
+                                                <option value="{{ $n }}"> {{ $n }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-6">
                                         <label>Naturalidade</label>
@@ -1057,12 +1080,12 @@
                         </div>
 
                         <div class="card card-navy conjuge2" style="display:none;">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#conj-compr2">
                                 <h3 class="card-title">
                                     Dados profissionais do cônjuge do comprador 2
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse" id="conj-compr2">
                                 <div class="row">
                                     <div class="col-12">
                                         <label>Nome da empresa</label>
@@ -1206,8 +1229,13 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        <input type="text" value="{{ old('comprador3.pais') }}" name="comprador3[pais]"
-                                            placeholder="Nacionalidade" class="form-control form-control-border">
+                                        
+                                        <select name="comprador3[pais]" placeholder="Nacionalidade"
+                                            class="form-control form-control-border">
+                                            @foreach ($nacionalidades as $n)
+                                                <option value="{{ $n }}"> {{ $n }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-6">
                                         <label>Naturalidade</label>
@@ -1288,15 +1316,14 @@
                                         <select name="comprador3[regime_bens]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1"
-                                                {{ old('comprador3.regime_bens') == 1 ? 'selected' : '' }}>Comunhão
-                                                parcial de bens</option>
-                                            <option value="2"
-                                                {{ old('comprador3.regime_bens') == 2 ? 'selected' : '' }}>Comunhão
-                                                Universal de Bens</option>
-                                            <option value="3"
-                                                {{ old('comprador3.regime_bens') == 3 ? 'selected' : '' }}>Separação de
-                                                bens</option>
+                                            <option {{ old('comprador3.regime_bens') == 1 ? 'selected' : '' }} value="1">
+                                                Comunhão Parcial de Bens</option>
+                                            <option {{ old('comprador3.regime_bens') == 2 ? 'selected' : '' }} value="2">
+                                                Comunhão Universal de Bens</option>
+                                            <option {{ old('comprador3.regime_bens') == 3 ? 'selected' : '' }} value="3">
+                                                Separação Total de Bens</option>
+                                            <option {{ old('comprador3.regime_bens') == 4 ? 'selected' : '' }} value="4">
+                                                Separação Obrigatória de Bens</option>
                                         </select>
                                     </div>
 
@@ -1311,22 +1338,22 @@
                                 <div class="row mt-3">
                                     <div class="col-3">
                                         <label>CEP Residencial</label>
-                                        <input type="text" value="{{ old('comprador3.cep') }}" onkeyup="pesquisacep(1)"
-                                            name="endereco_comprador3[cep]" id="cep1" placeholder=""
+                                        <input type="text" value="{{ old('comprador3.cep') }}" onkeyup="pesquisacep(3)"
+                                            name="endereco_comprador3[cep]" id="cep3" placeholder=""
                                             class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
                                         <label>Endereço residencial</label>
                                         <input type="text" value="{{ old('comprador3.logradouro') }}"
-                                            name="endereco_comprador3[logradouro]" id="rua1" placeholder=""
+                                            name="endereco_comprador3[logradouro]" id="rua3" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
 
                                     <div class="col-2">
                                         <label>Número</label>
                                         <input type="text" value="{{ old('comprador3.numero') }}"
-                                            name="endereco_comprador3[numero]" id="numero1" placeholder=""
+                                            name="endereco_comprador3[numero]" id="numero3" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
                                     <div class="col-2">
@@ -1341,14 +1368,14 @@
                                     <div class="col-4">
                                         <label>Bairro</label>
                                         <input type="text" value="{{ old('comprador3.bairro') }}"
-                                            name="endereco_comprador3[bairro]" id="bairro1" placeholder=""
+                                            name="endereco_comprador3[bairro]" id="bairro3" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
 
                                     <div class="col-4">
                                         <label>Cidade</label>
                                         <input type="text" value="{{ old('comprador3.cidade') }}"
-                                            name="endereco_comprador3[cidade]" id="cidade1" placeholder=""
+                                            name="endereco_comprador3[cidade]" id="cidade3" placeholder=""
                                             class="form-control form-control-border">
                                     </div>
 
@@ -1356,7 +1383,7 @@
                                         <label>Estado</label>
 
                                         <select name="endereco_comprador3[uf]"
-                                            class="custom-select form-control form-control-border" id="uf1">
+                                            class="custom-select form-control form-control-border" id="uf3">
                                             @foreach ($ufs as $k => $v)
                                                 <option {{ old('endereco_comprador3.uf') == $k ? 'selected' : '' }}
                                                     value="{{ $k }}">{{ $v }}</option>
@@ -1396,12 +1423,12 @@
                         </div>
 
                         <div class="card card-navy comprador3" style="display:none;">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#test-block3">
                                 <h3 class="card-title">
                                     Dados Profissionais Comprador 3
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse" id="test-block">
                                 <div class="row">
                                     <div class="col-12">
                                         <label>Nome da empresa</label>
@@ -1520,8 +1547,12 @@
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
 
-                                        <input type="text" value="{{ old('conjuge3.pais') }}" name="conjuge3[pais]"
-                                            placeholder="Nacionalidade" class="form-control form-control-border">
+                                        <select name="conjuge3[pais]" placeholder="Nacionalidade"
+                                            class="form-control form-control-border">
+                                            @foreach ($nacionalidades as $n)
+                                                <option value="{{ $n }}"> {{ $n }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-6">
                                         <label>Naturalidade</label>
@@ -1780,51 +1811,7 @@
                                 </div>
 
 
-                                <div class="row mt-3">
 
-
-
-                                    <div class="col-2 mr-2">
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="tipo_imovel1"
-                                                name="processo[tipo_imovel]" value="1">
-                                            <label for="tipo_imovel1" class="custom-control-label">Residencial</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="tipo_imovel2"
-                                                name="processo[tipo_imovel]" value="2">
-                                            <label for="tipo_imovel2" class="custom-control-label">Comercial</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="tipo_imovel3"
-                                                name="processo[tipo_imovel]" value="3">
-                                            <label for="tipo_imovel3" class="custom-control-label">Terreno</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="tipo_imovel4"
-                                                name="processo[tipo_imovel]" value="4">
-                                            <label for="tipo_imovel4" class="custom-control-label">Construção</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="custom-control custom-radio">
-                                            <input class="custom-control-input" type="radio" id="tipo_imovel5"
-                                                name="processo[tipo_imovel]" value="5">
-                                            <label for="tipo_imovel5" class="custom-control-label">Terreno +
-                                                Construção</label>
-                                        </div>
-                                    </div>
-
-                                </div>
 
                                 <div class="row mt-3">
 
@@ -1898,14 +1885,20 @@
                                     </div>
 
                                     <div class="row mt-3">
-                                        <div class="col-6">
-                                            <label>Telefone</label>
+                                        <div class="col-4">
+                                            <label>Celular</label>
                                             <input type="text" value="{{ old('vendedor.telefone') }}"
-                                                name="vendedor[telefone]" placeholder="Telefone"
-                                                class="form-control form-control-border telefone">
+                                                name="vendedor[telefone]" placeholder="Celular"
+                                                class="form-control form-control-border telefone-vendedor">
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Email</label>
+                                            <input type="email" value="{{ old('vendedor.email') }}"
+                                                name="vendedor[email]" placeholder="E-mail"
+                                                class="form-control form-control-border ">
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <label>Profissão</label>
                                             <input type="text" value="{{ old('vendedor.profissao') }}"
                                                 name="vendedor[profissao]" placeholder="Profissão"
@@ -1950,17 +1943,27 @@
 
                                     <div class="sessao-procurador-1" style="display: none;">
                                         <div class="row mt-3">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <label for="">Nome Procurador</label>
                                                 <input type="text" value="{{ old('vendedor.nome_procurado') }}"
                                                     name="vendedor[nome_procurador]" placeholder="Nome Procurador"
                                                     class="form-control form-control-border">
                                             </div>
-                                            <div class="col-6">
-                                                <label for="">CPF Procurador</label>
+                                            <div class="col-4">
+                                                <label for="">Tipo procurador</label>
+                                                <select name="vendedor[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-1')"
+                                                class="custom-select form-control form-control-border"
+                                                id="tipo-procurador">
+                                                    <option>Selecione</option>
+                                                    <option value="0">Pessoa Física</option>
+                                                    <option value="1">Pessoa Jurídica</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="" id="label-target-tipo">CPF Procurador</label>
                                                 <input type="text" value="{{ old('vendedor.cpf_procurador') }}"
                                                     name="vendedor[cpf_procurador]" placeholder="CPF Procurador"
-                                                    class="form-control form-control-border cpf">
+                                                    class="form-control form-control-border cpf" id="target-tipo">
                                             </div>
                                         </div>
 
@@ -1972,10 +1975,10 @@
                                                     class="form-control form-control-border">
                                             </div>
                                             <div class="col-6">
-                                                <label for="">Telefone</label>
+                                                <label for="">Celular Procurador</label>
                                                 <input type="text" value="{{ old('vendedor.telefone_procurador') }}"
-                                                    name="vendedor[telefone_procurador]" placeholder="Telefone Procurador"
-                                                    class="form-control form-control-border telefone">
+                                                    name="vendedor[telefone_procurador]" placeholder="Celular Procurador"
+                                                    class="form-control form-control-border celular">
                                             </div>
                                         </div>
                                     </div>
@@ -1996,11 +1999,21 @@
                                             <input type="text" value="{{ old('vendedor.cnpj') }}" name="vendedor[cnpj]"
                                                 placeholder="CNPJ" class="form-control form-control-border cnpj">
                                         </div>
-                                        <div class="col-4">
+
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-6">
                                             <label>Telefone</label>
                                             <input type="text" value="{{ old('vendedor.telefone') }}"
                                                 name="vendedor[telefone]" placeholder="Telefone"
                                                 class="form-control form-control-border telefone">
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Email</label>
+                                            <input type="email" value="{{ old('vendedor.email') }}"
+                                                name="vendedor[email]" placeholder="E-mail"
+                                                class="form-control form-control-border ">
                                         </div>
                                     </div>
 
@@ -2040,17 +2053,27 @@
 
                                     <div class="sessao-procurador-2" style="display: none;">
                                         <div class="row mt-3">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <label for="">Nome Procurador</label>
                                                 <input type="text" value="{{ old('vendedor.nome_procurador') }}"
                                                     name="vendedor[nome_procurador]" placeholder="Nome Procurador"
                                                     class="form-control form-control-border">
                                             </div>
-                                            <div class="col-6">
-                                                <label for="">CPF Procurador</label>
+                                            <div class="col-4">
+                                                <label for="">Tipo procurador</label>
+                                                <select name="vendedor[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-2')"
+                                                class="custom-select form-control form-control-border"
+                                                id="tipo-procurador">
+                                                    <option>Selecione</option>
+                                                    <option value="0">Pessoa Física</option>
+                                                    <option value="1">Pessoa Jurídica</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="" id="label-target-tipo">CPF Procurador</label>
                                                 <input type="text" value="{{ old('vendedor.cpf_procurador') }}"
                                                     name="vendedor[cpf_procurador]" placeholder="CPF Procurador"
-                                                    class="form-control form-control-border cpf">
+                                                    class="form-control form-control-border cpf" id="target-tipo">
                                             </div>
                                         </div>
 
@@ -2062,10 +2085,10 @@
                                                     class="form-control form-control-border">
                                             </div>
                                             <div class="col-6">
-                                                <label for="">Telefone</label>
+                                                <label for="">Celular Procurador</label>
                                                 <input type="text" value="{{ old('vendedor.telefone_procurador') }}"
-                                                    name="vendedor[telefone_procurador]" placeholder="Telefone Procurador"
-                                                    class="form-control form-control-border telefone">
+                                                    name="vendedor[telefone_procurador]" placeholder="Celular Procurador"
+                                                    class="form-control form-control-border celular">
                                             </div>
                                         </div>
                                     </div>
@@ -2140,14 +2163,19 @@
                                     </div>
 
                                     <div class="row mt-3">
-                                        <div class="col-6">
-                                            <label>Telefone</label>
+                                        <div class="col-4">
+                                            <label>Celular</label>
                                             <input type="text" value="{{ old('vendedor2.telefone') }}"
                                                 name="vendedor2[telefone]" placeholder="Telefone"
-                                                class="form-control form-control-border telefone">
+                                                class="form-control form-control-border celular">
                                         </div>
-
-                                        <div class="col-6">
+                                        <div class="col-4">
+                                            <label>Email</label>
+                                            <input type="email" value="{{ old('vendedor2.email') }}"
+                                                name="vendedor2[email]" placeholder="E-mail"
+                                                class="form-control form-control-border ">
+                                        </div>
+                                        <div class="col-4">
                                             <label>Profissão</label>
                                             <input type="text" value="{{ old('vendedor2.profissao') }}"
                                                 name="vendedor2[profissao]" placeholder="Profissão"
@@ -2180,9 +2208,9 @@
                                     <div class="row mt-3">
                                         <div class="col-12">
                                             <label for="">Possui procurador?</label>
-                                            <select name="vendedor2[procurador]" onchange="selectProcurador(1)"
+                                            <select name="vendedor2[procurador]" onchange="selectProcurador2(1)"
                                                 class="custom-select form-control form-control-border"
-                                                id="possui-procurador">
+                                                id="possui-procurador-outro">
                                                 <option>Selecione</option>
                                                 <option value="1">Sim</option>
                                                 <option value="0">Não</option>
@@ -2190,19 +2218,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="sessao-procurador-1" style="display: none;">
+                                    <div class="sessao-procurador-1-outro" style="display: none;">
                                         <div class="row mt-3">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <label for="">Nome Procurador</label>
                                                 <input type="text" value="{{ old('vendedor2.nome_procurador') }}"
                                                     name="vendedor2[nome_procurador]" placeholder="Nome Procurador"
                                                     class="form-control form-control-border">
                                             </div>
-                                            <div class="col-6">
-                                                <label for="">CPF Procurador</label>
+                                            <div class="col-4">
+                                                <label for="">Tipo procurador</label>
+                                                <select name="vendedor2[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-1-outro')"
+                                                class="custom-select form-control form-control-border"
+                                                id="tipo-procurador">
+                                                    <option>Selecione</option>
+                                                    <option value="0">Pessoa Física</option>
+                                                    <option value="1">Pessoa Jurídica</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="" id="label-target-tipo">CPF Procurador</label>
                                                 <input type="text" value="{{ old('vendedor2.cpf_procurador') }}"
                                                     name="vendedor2[cpf_procurador]" placeholder="CPF Procurador"
-                                                    class="form-control form-control-border cpf">
+                                                    class="form-control form-control-border cpf" id="target-tipo">
                                             </div>
                                         </div>
 
@@ -2214,10 +2252,10 @@
                                                     class="form-control form-control-border">
                                             </div>
                                             <div class="col-6">
-                                                <label for="">Telefone</label>
+                                                <label for="">Celular Procurador</label>
                                                 <input type="text" value="{{ old('vendedor2.telefone_procurador') }}"
-                                                    name="vendedor2[telefone_procurador]" placeholder="Telefone Procurador"
-                                                    class="form-control form-control-border telefone">
+                                                    name="vendedor2[telefone_procurador]" placeholder="Celular Procurador"
+                                                    class="form-control form-control-border celular">
                                             </div>
                                         </div>
                                     </div>
@@ -2240,11 +2278,19 @@
                                                 name="vendedor2[cnpj]" placeholder="CNPJ"
                                                 class="form-control form-control-border cnpj">
                                         </div>
-                                        <div class="col-4">
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
                                             <label>Telefone</label>
                                             <input type="text" value="{{ old('vendedor2.telefone') }}"
-                                                name="vendedor2[telefone]" placeholder="Telefone"
-                                                class="form-control form-control-border">
+                                                name="vendedor2[telefone]" placeholder="Celular"
+                                                class="form-control form-control-border telefone">
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Email</label>
+                                            <input type="email" value="{{ old('vendedor2.email') }}"
+                                                name="vendedor2[email]" placeholder="E-mail"
+                                                class="form-control form-control-border ">
                                         </div>
                                     </div>
 
@@ -2274,7 +2320,7 @@
                                             <label for="">Possui procurador?</label>
                                             <select name="vendedor2[procurador]"
                                                 class="custom-select form-control form-control-border"
-                                                onchange="selectProcurador(2)" id="possui-procurador-2">
+                                                onchange="selectProcurador2(2)" id="possui-procurador2-outro">
                                                 <option>Selecione</option>
                                                 <option value="1">Sim</option>
                                                 <option value="0">Não</option>
@@ -2282,19 +2328,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="sessao-procurador-2" style="display: none;">
+                                    <div class="sessao-procurador-2-outro" style="display: none;">
                                         <div class="row mt-3">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <label for="">Nome Procurador</label>
                                                 <input type="text" value="{{ old('vendedor2.nome_procurador') }}"
                                                     name="vendedor2[nome_procurador]" placeholder="Nome Procurador"
                                                     class="form-control form-control-border">
                                             </div>
-                                            <div class="col-6">
-                                                <label for="">CPF Procurador</label>
+                                            <div class="col-4">
+                                                <label for="">Tipo procurador</label>
+                                                <select name="vendedor2[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-2-outro')"
+                                                class="custom-select form-control form-control-border"
+                                                id="tipo-procurador">
+                                                    <option>Selecione</option>
+                                                    <option value="0">Pessoa Física</option>
+                                                    <option value="1">Pessoa Jurídica</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="" id="label-target-tipo">CPF Procurador</label>
                                                 <input type="text" value="{{ old('vendedor2.cpf_procurador') }}"
                                                     name="vendedor2[cpf_procurador]" placeholder="CPF Procurador"
-                                                    class="form-control form-control-border cpf">
+                                                    class="form-control form-control-border cpf" id="target-tipo">
                                             </div>
                                         </div>
 
@@ -2306,10 +2362,10 @@
                                                     class="form-control form-control-border">
                                             </div>
                                             <div class="col-6">
-                                                <label for="">Telefone</label>
+                                                <label for="">Celular Procurador</label>
                                                 <input type="text" value="{{ old('vendedor2.telefone_procurador') }}"
-                                                    name="vendedor2[telefone_procurador]" placeholder="Telefone Procurador"
-                                                    class="form-control form-control-border telefone">
+                                                    name="vendedor2[telefone_procurador]" placeholder="Celular Procurador"
+                                                    class="form-control form-control-border celular">
                                             </div>
                                         </div>
                                     </div>
@@ -2329,18 +2385,21 @@
                                 <div class="row mt-3">
                                     <div class="col-3">
                                         <label>CEP</label>
-                                        <input type="text" value="{{ old('imovel.cpf') }}" name="imovel[cep]"
-                                            placeholder="CEP do imóvel" class="form-control form-control-border cep">
+                                        <input type="text" value="{{ old('imovel.cpf') }}" id="cep4" name="imovel[cep]"
+                                            onkeyup="pesquisacep(4)" placeholder="CEP do imóvel"
+                                            class="form-control form-control-border cep">
                                     </div>
                                     <div class="col-5">
                                         <label>Endereço</label>
-                                        <input type="text" value="{{ old('imovel.endereco') }}" name="imovel[endereco]"
-                                            placeholder="Endereço do imóvel" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('imovel.endereco') }}" id="rua4"
+                                            name="imovel[endereco]" placeholder="Endereço do imóvel"
+                                            class="form-control form-control-border">
                                     </div>
                                     <div class="col-2">
                                         <label>Número</label>
-                                        <input type="text" value="{{ old('imovel.numero') }}" name="imovel[numero]"
-                                            placeholder="Número" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('imovel.numero') }}" id="numero4"
+                                            name="imovel[numero]" placeholder="Número"
+                                            class="form-control form-control-border">
                                     </div>
                                     <div class="col-2">
                                         <label>Complemento</label>
@@ -2353,18 +2412,20 @@
 
                                     <div class="col-4">
                                         <label>Bairro</label>
-                                        <input type="text" value="{{ old('imovel.bairro') }}" name="imovel[bairro]"
-                                            placeholder="Bairro" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('imovel.bairro') }}" id="bairro4"
+                                            name="imovel[bairro]" placeholder="Bairro"
+                                            class="form-control form-control-border">
                                     </div>
                                     <div class="col-4">
                                         <label>Cidade</label>
-                                        <input type="text" value="{{ old('imovel.cidade') }}" name="imovel[cidade]"
-                                            placeholder="Cidade" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('imovel.cidade') }}" id="cidade4"
+                                            name="imovel[cidade]" placeholder="Cidade"
+                                            class="form-control form-control-border">
                                     </div>
                                     <div class="col-4">
                                         <label>Estado</label>
                                         <select name="imovel[estado]"
-                                            class="custom-select form-control form-control-border">
+                                            class="custom-select form-control form-control-border" id="uf4">
                                             <option value="">Selecione</option>
 
                                             @foreach ($ufs as $k => $v)
@@ -2379,7 +2440,7 @@
                                 <div class="row mt-3">
 
                                     <div class="col-6">
-                                        <label>Vagas na garagem</label>
+                                        <label>Vagas de garagem</label>
                                         <input type="number" value="{{ old('imovel.vagas') }}" name="imovel[vagas]"
                                             placeholder="Quantidade de vagas" min="0"
                                             class="form-control form-control-border">
@@ -2408,11 +2469,11 @@
                                         <label>Telefone do contato</label>
                                         <input type="text" value="{{ old('imovel.telefone_contato') }}"
                                             name="imovel[telefone_contato]" placeholder="Contato de avaliação"
-                                            class="form-control form-control-border">
+                                            class="form-control form-control-border celular">
                                     </div>
 
                                     <div class="col-4">
-                                        <label>Tipo </label>
+                                        <label>Condição do imóvel </label>
                                         <select name="imovel[novo_usado]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
@@ -2423,6 +2484,52 @@
                                             </option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="row mt-3">
+
+
+
+                                    <div class="col-2 mr-2">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" id="tipo_imovel1"
+                                                name="processo[tipo_imovel]" value="1">
+                                            <label for="tipo_imovel1" class="custom-control-label">Residencial</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" id="tipo_imovel2"
+                                                name="processo[tipo_imovel]" value="2">
+                                            <label for="tipo_imovel2" class="custom-control-label">Comercial</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" id="tipo_imovel3"
+                                                name="processo[tipo_imovel]" value="3">
+                                            <label for="tipo_imovel3" class="custom-control-label">Terreno</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" id="tipo_imovel4"
+                                                name="processo[tipo_imovel]" value="4">
+                                            <label for="tipo_imovel4" class="custom-control-label">Construção</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" id="tipo_imovel5"
+                                                name="processo[tipo_imovel]" value="5">
+                                            <label for="tipo_imovel5" class="custom-control-label">Terreno +
+                                                Construção</label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -2448,6 +2555,8 @@
                                                 Santander</option>
                                             <option value="4" {{ old('processo.banco') == 4 ? 'selected' : '' }}>
                                                 Caixa</option>
+                                            <option value="5" {{ old('processo.banco') == 5 ? 'selected' : '' }}>
+                                                Banrisul</option>
                                         </select>
                                     </div>
                                     <div class="col-6">
@@ -2535,16 +2644,16 @@
     </div>
     <!-- /.content -->
     <style>
-        .card - header {
-            padding - bottom: 0 !important;
+        .card-header {
+            padding-bottom: 0 !important;
         }
 
-        .card - title {
-            font - size: 13px !important;
+        .card-title {
+            font-size: 13px !important;
         }
 
         label {
-            font - size: 12px !important;
+            font-size: 12px !important;
         }
 
     </style>
@@ -2555,6 +2664,9 @@
         jQuery(function($) {
             $(".telefone").each(function() {
                 $(this).mask('(99) 9999-9999');
+            })
+            $(".telefone-vendedor").each(function() {
+                $(this).mask('(99) 99999-9999');
             })
             $(".celular").each(function() {
                 $(this).mask('(99) 99999-9999');
@@ -2578,12 +2690,41 @@
             })
         });
 
+        function rodaMascaras() {
+            $(".cpf").each(function() {
+                $(this).mask('999.999.999-99');
+            })
+
+            $(".cnpj").each(function() {
+                $(this).mask('00.000.000/0000-00');
+            })
+        }
+
         function campoFgts() {
             if ($('#utilizar_fgts').is(':checked')) {
                 $('.valor_fgts').show()
             } else {
                 $('.valor_fgts').hide()
 
+            }
+        }
+        function tipoProcurador(target) {
+            let val = $('.' + target + ' #tipo-procurador').val();
+            console.log(val)
+            if (val == 0) {
+                $('.' + target + ' #target-tipo').removeClass('cnpj');
+                $('.' + target + ' #target-tipo').addClass('cpf');
+                $('.' + target + ' #target-tipo').attr('placeholder','CPF Procurador');
+                $('.' + target + ' #label-target-tipo').html('CPF Procurador');
+
+                rodaMascaras()
+            } else if (val == 1) {
+                $('.' + target + ' #target-tipo').removeClass('cpf');
+                $('.' + target + ' #target-tipo').addClass('cnpj');
+                $('.' + target + ' #target-tipo').attr('placeholder','CNPJ Procurador');
+                $('.' + target + ' #label-target-tipo').html('CNPJ Procurador');
+
+                rodaMascaras()
             }
         }
 
@@ -2595,10 +2736,27 @@
                     $('.sessao-procurador-1').hide();
                 }
             } else {
-                if ($('#possui-procurador2').val() == 1) {
+                if ($('#possui-procurador-2').val() == 1) {
                     $('.sessao-procurador-2').show();
                 } else {
                     $('.sessao-procurador-2').hide();
+                }
+            }
+
+        }
+
+        function selectProcurador2(tipo) {
+            if (tipo == 1) {
+                if ($('#possui-procurador-outro').val() == 1) {
+                    $('.sessao-procurador-1-outro').show();
+                } else {
+                    $('.sessao-procurador-1-outro').hide();
+                }
+            } else {
+                if ($('#possui-procurador2-outro').val() == 1) {
+                    $('.sessao-procurador-2-outro').show();
+                } else {
+                    $('.sessao-procurador-2-outro').hide();
                 }
             }
 
@@ -2775,6 +2933,8 @@
                     url: "busca-corretor/" + parceiro,
                 })
                 .done(function(data) {
+                    $('#id_corretor').html('<option>Selecione</option>');
+
                     data.map((el) => {
                         optionTemp.remove();
                         console.log(el)

@@ -28,5 +28,7 @@ class Vendedor extends Model
         'cpf_procurador',
         'email_procurador',
         'telefone_procurador',
+        'email',
+        'tipo_procurador'
     ];
 }

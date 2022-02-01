@@ -22,7 +22,7 @@
                         <div class="icon">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('propostas') }}" class="small-box-footer">
                             Ver mais <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -49,14 +49,14 @@
                     <!-- small card -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ $processos }}</h3>
+                            <h3>{{ $emAndamento }}</h3>
 
                             <p>Propostas em andamento</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-user-plus"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('propostas') }}" class="small-box-footer">
                             Ver mais <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -73,7 +73,7 @@
                         <div class="icon">
                             <i class="fas fa-chart-pie"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ route('propostas') }}" class="small-box-footer">
                             Ver mais <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>

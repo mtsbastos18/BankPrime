@@ -29,7 +29,7 @@ Route::post('/login', [
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/propostas/{filtro?}', [App\Http\Controllers\PropostaController::class, 'index'])->name('propostas');
+Route::get('/propostas/{filtro?}/{filtro2?}', [App\Http\Controllers\PropostaController::class, 'index'])->name('propostas');
 Route::get('/nova-proposta', [App\Http\Controllers\PropostaController::class, 'create'])->name('nova-proposta');
 Route::post('/salvar-proposta', [App\Http\Controllers\PropostaController::class, 'store'])->name('salvar-proposta');
 Route::get('/editar-proposta/{IdProposta}', [App\Http\Controllers\PropostaController::class, 'edit'])->name('editar-proposta');
@@ -70,3 +70,5 @@ Route::get('/acompanhamento-cliente/{IdProposta}', [App\Http\Controllers\Acompan
 Route::post('/acompanhamento-cliente-logado', [App\Http\Controllers\AcompanhamentoController::class, 'indexCliente'])->name('acompanhamento-cliente-logado');
 Route::get('/editar-observacao/{IdProposta}/{IdObservacao}', [App\Http\Controllers\AcompanhamentoController::class, 'edit'])->name('editar-observacao');
 Route::post('/editar-observacao/{IdObservacao}', [App\Http\Controllers\AcompanhamentoController::class, 'update'])->name('editar-observacao');
+Route::get('/excluir-observacao/{IdObservacao}', [App\Http\Controllers\AcompanhamentoController::class, 'destroy'])->name('excluir-observacao');
+Route::get('/excluir-acompanhamento/{IdProposta}/{IdAcompanhamento}', [App\Http\Controllers\AcompanhamentoController::class, 'excluir'])->name('excluir-acompanhamento');

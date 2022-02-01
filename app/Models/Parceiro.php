@@ -26,7 +26,8 @@ class Parceiro extends Model
         'agencia',
         'conta',
         'observacoes',
-        'status'
+        'status',
+        'id_usuario'
     ];
 
 

@@ -54,12 +54,13 @@ class ParceiroController extends Controller
         try {
             $parceiro = Parceiro::create($data);
 
+
             $usuarioParceiro = [
                 'name' => $parceiro->apelido,
                 'email' => $parceiro->email,
                 'login' => $parceiro->cnpj,
                 'id_permissao' => 4,
-                'password' => Hash::make($parceiro->telefone),
+                'password' => Hash::make($this->limpaTelefone($parceiro->telefone)),
                 'id_parceiro' => $parceiro->id
             ];
 
@@ -67,7 +68,11 @@ class ParceiroController extends Controller
                 $usuarioParceiro['login'] = $parceiro->cpf;
             }
 
-            User::create($usuarioParceiro);
+            $usuarioParceiro['login'] = $this->limpaCPF_CNPJ($usuarioParceiro['login']);
+
+            $user = User::create($usuarioParceiro);
+
+            $parceiro->update(['id_usuario' => $user['id']]);
 
             return Redirect('parceiros')->with('message', 'Parceiro adicionado com sucesso');
         } catch (\Throwable $th) {
@@ -132,6 +137,14 @@ class ParceiroController extends Controller
                 User::where('id_parceiro', $parceiro->id)->update(['status' => 1]);
             }
 
+            $user = User::find($parceiro['id_usuario']);
+
+            if ($user) {
+                $userNovo['login'] = $this->limpaCPF_CNPJ($parceiro['tipo'] == 1 ? $parceiro['cpf'] : $parceiro['cnpj']);
+                $userNovo['password'] = Hash::make($this->limpaTelefone($parceiro['telefone']));
+                $user->update($userNovo);
+            }
+
             return Redirect('parceiros')->with('message', 'Parceiro atualizado com sucesso');
         }
         return Redirect('parceiros')->with('error', 'Erro ao atualizar parceiro');
@@ -146,5 +159,26 @@ class ParceiroController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function limpaCPF_CNPJ($valor){
+        $valor = trim($valor);
+        $valor = str_replace(".", "", $valor);
+        $valor = str_replace(",", "", $valor);
+        $valor = str_replace("-", "", $valor);
+        $valor = str_replace("/", "", $valor);
+        $valor = str_replace(" ", "", $valor);
+
+        return $valor;
+    }
+
+    function limpaTelefone($valor){
+        $valor = trim($valor);
+        $valor = str_replace("-", "", $valor);
+        $valor = str_replace("(", "", $valor);
+        $valor = str_replace(")", "", $valor);
+        $valor = str_replace(" ", "", $valor);
+
+        return $valor;
     }
 }

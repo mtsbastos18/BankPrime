@@ -27,7 +27,11 @@
 
 
                                 <div class="row mt-3">
-
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label for="">Data</label>
+                                        <input type="date" class="form-control form-control-border"
+                                            value="{{ $observacao->data }}" name="data">
+                                    </div>
                                     <div class="col-12">
                                         <label>Observações</label>
                                         <textarea name="observacao" id="" cols="30" rows="10"

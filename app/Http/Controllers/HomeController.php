@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $processos = Processo::whereDate('created_at', '>', Carbon::now()->subDays(30))->get();
+        
         $processosEmAndamento = Processo::where('status', 1)->get();
         $processosFinalizados = Processo::where('status', 4)->get();
 

@@ -34,6 +34,7 @@ class Processo extends Model
         'amortizacao',
         'indexador',
         'id_corretor',
-        'id_vendedor2'
+        'id_vendedor2',
+        'updated_at'
     ];
 }
