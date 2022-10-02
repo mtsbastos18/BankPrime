@@ -25,9 +25,9 @@ class AcompanhamentoController extends Controller
      */
     public function index($IdProposta)
     {
-        if (auth()->user()->id_permissao != 1) {
-            return Redirect('propostas/');
-        }
+        // if (auth()->user()->id_permissao != 1 || auth()->user()->id_permissao != 2) {
+        //     return Redirect('propostas/');
+        // }
         $lista = Acompanhamentos::where([
             ['id_processo', $IdProposta]
         ])->with('observacao')->get();
@@ -94,6 +94,20 @@ class AcompanhamentoController extends Controller
         // return view('acompanhamentos.cliente', [
         //     'atual' => $acompanhamentoAtual
         // ]);
+    }
+
+    public function exibeAcompanhamento($id)
+    {
+        $acompanhamentoAtual = Acompanhamentos::where([
+            ['id_processo', '=', $id],
+        ])->orderBy('created_at', 'desc')->first();
+
+        if (!$acompanhamentoAtual) {
+            $acompanhamentoAtual['id_tipo_acompanhamento'] = 0;
+        }
+        return view('acompanhamentos.cliente', [
+            'atual' => $acompanhamentoAtual
+        ]);
     }
 
     /**
@@ -251,7 +265,7 @@ class AcompanhamentoController extends Controller
         }
     }
 
-    public function excluir($idProposta, $idAcompanhamento) 
+    public function excluir($idProposta, $idAcompanhamento)
     {
         ObservacaoAcompanhamentos::where('id_acompanhamento', '=', $idAcompanhamento)->delete();
 

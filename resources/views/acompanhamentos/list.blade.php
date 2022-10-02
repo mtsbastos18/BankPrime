@@ -11,8 +11,11 @@
         <div class="container-fluid">
             <div class="row justify-content-end">
                 <div class="col-12 col-md-2">
-                    <a href="{{ route('novo-acompanhamento', $idProposta) }}"
+                @if (auth()->user()->id_permissao == 1)
+<a href="{{ route('novo-acompanhamento', $idProposta) }}"
                         class="btn btn-block btn-outline-primary">Novo</a>
+                @endif
+                    
                 </div>
             </div>
             <div class="row">
@@ -21,8 +24,39 @@
 
                     <!-- The time line -->
                     <div class="timeline">
+                    @if (auth()->user()->id_permissao == 2 || auth()->user()->id_permissao == 4)
 
-                        @foreach ($lista as $l)
+                        <div class="time-label">
+                                <span class="bg-info">{{ $lista[sizeof($lista)-1]['tipo_acompanhamento']['descricao'] }} -
+                                    {{ date_format(new DateTime($lista[sizeof($lista)-1]['data']), 'd/m/Y') }}</span>
+                            </div>
+                            
+                                <div class="detalhes-timeline">
+
+                                        <i class="
+                                    fas fa-clock bg-gray"></i>
+                                        <div class="timeline-item mt-2">
+                                            @php
+                                                $observacao = $lista[sizeof($lista)-1]['observacao'][sizeof($lista[sizeof($lista)-1]['observacao'])-1]
+                                            @endphp
+
+                                            <span class="time"><i class="fas fa-clock"></i>
+                                                {{ date_format(new DateTime($observacao['data']), 'd/m/Y') }}</span>
+                                            <h5 class="timeline-header">{{ $observacao['nomeUsuario']['name'] }} adicionou uma
+                                                observação
+
+                                               
+                                            </h5>
+
+                                            <div class="timeline-body">
+                                                {{ $observacao['observacao'] }}
+                                            </div>
+                                        </div>
+
+                                </div>
+                            
+                    @else
+ @foreach ($lista as $l)
                             <div class="time-label">
                                 <span class="bg-info">{{ $l->tipo_acompanhamento->descricao }} -
                                     {{ date_format(new DateTime($l->data), 'd/m/Y') }}</span>
@@ -61,6 +95,8 @@
                             @endif
 
                         @endforeach
+                    @endif
+                       
 
 
                     </div>

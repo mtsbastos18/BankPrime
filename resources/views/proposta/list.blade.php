@@ -19,25 +19,28 @@
                     @if (auth()->user()->id_permissao == 1)
                         <div class="col-3">
                             <select id="filtro-parceiros" class="custom-select form-control form-control-border">
-                                <option value="">Filtrar por parceiro</option>
+                                <option value="0">Filtrar por parceiro</option>
                                 @foreach ($parceiros as $p)
-                                    <option value="{{ $p->id }}">{{ $p->apelido }}</option>
+                                 @if ($p->id != 1) 
+                                    <option value="{{ $p->id }}" {{session('filtro2') == 'parceiro' && session('filtro1') == $p->id ? 'selected' : ''}}>{{ $p->apelido }}</option>
+
+                                 @endif
                                 @endforeach
                             </select>
                         </div>
                     @endif
                     <div class="col-3">
                         <select id="filtro-banco" class="custom-select form-control form-control-border">
-                            <option value="">Filtrar por banco</option>
-                            <option value="1">Itaú
+                            <option value="0">Filtrar por banco</option>
+                            <option value="1" {{session('filtro2') == 'banco' && session('filtro1') == 1 ? 'selected' : ''}}>Itaú
                             </option>
-                            <option value="2">
+                            <option value="2" {{session('filtro2') == 'banco' && session('filtro1') == 2 ? 'selected' : ''}}>
                                 Bradesco</option>
-                            <option value="3">
+                            <option value="3" {{session('filtro2') == 'banco' && session('filtro1') == 3 ? 'selected' : ''}}>
                                 Santander</option>
-                            <option value="4">
+                            <option value="4" {{session('filtro2') == 'banco' && session('filtro1') == 4 ? 'selected' : ''}}>
                                 Caixa</option>
-                            <option value="5">
+                            <option value="5" {{session('filtro2') == 'banco' && session('filtro1') == 5 ? 'selected' : ''}}>
                                 Banrisul</option>
                         </select>
                     </div>
@@ -87,32 +90,35 @@
                                                 <td>
                                                     @switch($l->banco)
                                                         @case(1)
-                                                            <img src="{{ asset('images/itau.png') }}"
-                                                                style="max-width: 25px;"><span
+                                                            <img src="{{ asset('images/itau.png') }}" style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
+
                                                         @case(2)
                                                             <img src="{{ asset('images/bradesco.png') }}"
                                                                 style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
+
                                                         @case(3)
                                                             <img src="{{ asset('images/santander.png') }}"
                                                                 style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
+
                                                         @case(4)
                                                             <img src="{{ asset('images/caixa.png') }}"
                                                                 style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
-                                                         @case(5)
+
+                                                        @case(5)
                                                             <img src="{{ asset('images/banrisul.png') }}"
                                                                 style="max-width: 25px;"><span
                                                                 style="visibility:hidden;">{{ $l->banco }}</span>
                                                         @break
-                                                        @default
 
+                                                        @default
                                                     @endswitch
                                                 </td>
                                                 <td>{{ $l->cpf }}</td>
@@ -124,57 +130,73 @@
                                                             <a class="badge bg-info">Em andamento</a>
                                                         </td>
                                                     @break
+
                                                     @case(2)
                                                         <td>
                                                             <a class="badge bg-secondary">Aguardando aprovação</a>
                                                         </td>
                                                     @break
+
                                                     @case(3)
                                                         <td>
                                                             <a class="badge bg-warning">Declinou</a>
                                                         </td>
                                                     @break
+
                                                     @case(4)
                                                         <td>
                                                             <a class="badge bg-success">Registrado</a>
                                                         </td>
                                                     @break
+
                                                     @case(5)
                                                         <td>
                                                             <a class="badge bg-danger">Cancelado</a>
                                                         </td>
                                                     @break
+
                                                     @case(6)
                                                         <td>
                                                             <a class="badge bg-info">Em análise de Crédito</a>
                                                         </td>
                                                     @break
+
                                                     @case(7)
                                                         <td>
                                                             <a class="badge bg-secondary">Em Registro</a>
                                                         </td>
                                                     @break
+
                                                     @case(8)
                                                         <td>
                                                             <a class="badge bg-success">Crédito Aprovado</a>
                                                         </td>
                                                     @break
-                                                    @default
 
+                                                    @default
                                                 @endswitch
 
                                                 <td class="td-acoes">
-                                                    <a title="Visualizar"
-                                                        href="{{ route('visualizar-proposta', $l->id) }}"><i
-                                                            class="far fa-eye"></i> </a>
+                                                    @if (auth()->user()->id_permissao == 3)
+                                                        <a title="Visualizar"
+                                                            href="{{ route('exibe-acompanhamento-cliente', $l->id) }}"><i
+                                                                class="far fa-eye"></i> </a>
+                                                    @endif
+                                                    @if (auth()->user()->id_permissao == 2 || auth()->user()->id_permissao == 4)
+                                                     <a title="Acompanhamentos"
+                                                            href="{{ route('acompanhamentos', $l->id) }}"><i
+                                                                class="fas fa-briefcase"></i></a>
+                                                    @endif
                                                     @if (auth()->user()->id_permissao == 1)
-                                                        <a title="Editar"
-                                                            href="{{ route('editar-proposta', $l->id) }}"><i
+                                                        <a title="Editar" href="{{ route('editar-proposta', $l->id) }}"><i
                                                                 class="far fa-edit"></i> </a>
 
                                                         <a title="Acompanhamentos"
                                                             href="{{ route('acompanhamentos', $l->id) }}"><i
                                                                 class="fas fa-briefcase"></i></a>
+                                                                <a title="Visualizar"
+                                                            href="{{ route('visualizar-proposta', $l->id) }}"><i
+                                                                class="far fa-eye"></i> </a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -204,7 +226,6 @@
         label {
             font-size: 12px !important;
         }
-
     </style>
     <script>
         $("#input-busca").on('keyup', function() {

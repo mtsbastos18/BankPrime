@@ -50,3 +50,9 @@ td.td-acoes {
 .cp {
     cursor: pointer;
 }
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    background-color: #d79c4e !important;
+    border-color: #d79c4e !important;
+}

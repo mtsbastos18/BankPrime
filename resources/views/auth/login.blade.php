@@ -27,7 +27,7 @@
 
 <body class="hold-transition login-page">
 
-{{-- <div class="container">
+    {{-- <div class="container">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-8">
             <div class="card">
@@ -94,57 +94,82 @@
         </div>
     </div>
 </div> --}}
-<div class="login-box">
-  <div class="login-logo">
-     <img src="{{ asset('images/logo-bank-prime.png') }}" style="max-width: 100%;" class="img-responsive">
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="{{ asset('images/logo-bank-prime.png') }}" style="max-width: 100%;" class="img-responsive">
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
 
-      <form method="POST" action="{{ route('login') }}">
-      @csrf
-        <div class="input-group mb-3">
-          <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" placeholder="Login" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
-          <div class="input-group-append">
-            <div class="input-group-text">
-            <span class="fas fa-user"></span>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <p>Tipo de acesso:</p>
+                    <div class="input-group mb-2">
+
+                        <label class="checkbox-inline mr-2">
+                            <input type="radio" name="tipo_acesso" value="1" required> Corretor
+                        </label>
+
+                        <label class="checkbox-inline mr-2">
+                            <input type="radio" name="tipo_acesso" value="2" required> Cliente
+                        </label>
+
+                        <label class="checkbox-inline">
+                            <input type="radio" name="tipo_acesso" value="1" required> Analista
+                        </label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="login" type="text" class="form-control @error('login') is-invalid @enderror"
+                            placeholder="Login" name="login" value="{{ old('login') }}" required autocomplete="login"
+                            autofocus>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="input-group mb-3">
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" placeholder="Senha"
+                            name="password" required autocomplete="current-password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="row ml-2">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                    {{ old('remember') ? 'checked' : '' }}>
+                                <label for="remember">
+                                    {{ __('Lembrar') }}
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-block btn-primary">{{ __('Login') }}</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="/sistema/recuperar-senha">Esqueci minha senha</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          
+            <!-- /.login-card-body -->
+
         </div>
-        <div class="input-group mb-3">
-          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Senha" name="password" required autocomplete="current-password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-            <span class="fas fa-lock"></span>
-            </div>
-          </div>
-            @error('password')
-                 <span class="invalid-feedback" role="alert">
-                     <strong>{{ $message }}</strong>
-                 </span>
-            @enderror
-        </div>
-        <div class="row ml-2">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-              <label for="remember">
-                {{ __('Lembrar') }}
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-block btn-primary">{{ __('Login') }}</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-     
     </div>
-    <!-- /.login-card-body -->
-  </div>
-</div>
 </body>

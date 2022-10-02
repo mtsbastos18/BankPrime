@@ -94,8 +94,7 @@
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <label>Observações</label>
-                                        <textarea name="observacoes" id="" cols="30" rows="5"
-                                            class='form-control form-control-border'></textarea>
+                                        <textarea name="observacoes" id="" cols="30" rows="5" class='form-control form-control-border'></textarea>
                                     </div>
                                 </div>
                                 <div class="row justify-content-end">
@@ -125,7 +124,6 @@
         label {
             font-size: 12px !important;
         }
-
     </style>
 
     <script>
@@ -139,11 +137,14 @@
             $(".cpf").each(function() {
                 $(this).mask('999.999.999-99');
             })
+            $(".cnpj").each(function() {
+                $(this).mask('99.999.999/9999-99');
+            })
         });
         var templateJuridica = ` 
         <div class="col-6">
             <label>CNPJ</label>
-            <input type="text" name="cnpj" placeholder="CNPJ"  class="form-control form-control-border cpnj" required>
+            <input type="text" name="cnpj" placeholder="CNPJ"  class="form-control form-control-border cnpj" required>
         </div>
         <div class="col-6">
             <label>Apelido (Exibido no sistema)</label>
@@ -186,9 +187,8 @@
             } else {
                 document.querySelector('#target-tipo-parceiro').innerHTML = '';
                 document.querySelector('#target-tipo-parceiro').innerHTML = templateJuridica;
-                $(".cnpj").each(function() {
-                    $(this).mask('99.999.999/9999-99');
-                })
+                $(".cnpj").mask('99.999.999/9999-99');
+
             }
         }
 

@@ -68,7 +68,7 @@
                                         <div class="col-12" id="row-gerente">
                                             <label>Gerente</label>
                                             <select name="id_gerente" id="id_gerente"
-                                                class="custom-select form-control form-control-border">
+                                                class="custom-select form-control form-control-border" required>
                                                 <option value="">Selecione</option>
                                                 @foreach ($gerentes as $g)
                                                     @if ($vinculo)
@@ -81,9 +81,7 @@
                                                         @endif
                                                     @else
                                                         <option value="{{ $g->id }}">{{ $g->name }}</option>
-
                                                     @endif
-
                                                 @endforeach
                                             </select>
                                         </div>
@@ -111,19 +109,22 @@
                                 <div class="row mt-2">
                                     <div class="col-6">
                                         <label>Nome</label>
+
                                         <input type="text" name="name" placeholder="Nome completo"
-                                            value={{ $usuario->name }} class="form-control form-control-border" required>
+                                            value="{{ $usuario->name }}" class="form-control form-control-border" required>
                                     </div>
                                     <div class="col-6">
                                         <label>Data de nascimento</label>
-                                        <input type="date" name="data_nascimento" value={{ $usuario->data_nascimento }}
+                                        <input type="date" name="data_nascimento"
+                                            value="{{ $usuario->data_nascimento }}"
                                             class="form-control form-control-border" required>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-6">
                                         <label>Sexo</label>
-                                        <select name="sexo" class="custom-select form-control form-control-border" required>
+                                        <select name="sexo" class="custom-select form-control form-control-border"
+                                            required>
                                             <option value="{{ $usuario->sexo }}" selected>{{ $usuario->sexo }}
                                             </option>
                                             <option value="Feminino">Feminino</option>
@@ -184,22 +185,20 @@
     label {
         font-size: 12px !important;
     }
-
 </style>
 
 <script>
-  
-        jQuery(function($) {
-            $(".telefone").each(function() {
-                $(this).mask('(99) 9999-9999');
-            })
-            $(".celular").each(function() {
-                $(this).mask('(99) 99999-9999');
-            })
-            $(".cpf").each(function() {
-                $(this).mask('999.999.999-99');
-            })
-        });
+    jQuery(function($) {
+        $(".telefone").each(function() {
+            $(this).mask('(99) 9999-9999');
+        })
+        $(".celular").each(function() {
+            $(this).mask('(99) 99999-9999');
+        })
+        $(".cpf").each(function() {
+            $(this).mask('999.999.999-99');
+        })
+    });
 
     function parceiro() {
         var valor = document.getElementById('id_permissao').value;

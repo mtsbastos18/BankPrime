@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\PasswordReset; // Or the location that you store your notifications (this is default).
 
 class User extends Authenticatable
 {
@@ -28,7 +29,8 @@ class User extends Authenticatable
         'password',
         'id_permissao',
         'id_parceiro',
-        'status'
+        'status',
+        'primeiro_login'
     ];
 
 
@@ -51,7 +53,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function permissao() {
-        return $this->hasOne(PermissaoUsuario::class,'id','id_permissao');
+    public function permissao()
+    {
+        return $this->hasOne(PermissaoUsuario::class, 'id', 'id_permissao');
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
     }
 }
+
+
+// ALTER TABLE `bankprime2`.`users` 
+// ADD COLUMN `primeiro_login` INT NULL DEFAULT 1 AFTER `updated_at`;

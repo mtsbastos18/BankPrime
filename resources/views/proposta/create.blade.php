@@ -17,12 +17,12 @@
                         @csrf
 
                         <div class="card card-navy ">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#comp1">
                                 <h3 class="card-title">
                                     Dados Pessoais Comprador 1
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse show" id="comp1">
                                 @if (session()->has('error'))
                                     <div class="alert alert-danger">
                                         {{ session()->get('error') }}
@@ -45,16 +45,24 @@
                                         <select name="comprador[estado_civil]" onchange="setEstadoCivil()"
                                             class="custom-select form-control form-control-border" id="estado-civil-1">
                                             <option value="">Selecione</option>
-                                            <option {{ old('comprador.estado_civil') == 1 ? 'selected' : '' }} value="1">
+                                            <option {{ old('comprador.estado_civil') == 1 ? 'selected' : '' }}
+                                                value="1">
                                                 Solteiro(a)</option>
-                                            <option {{ old('comprador.estado_civil') == 2 ? 'selected' : '' }} value="2">
+                                            <option {{ old('comprador.estado_civil') == 2 ? 'selected' : '' }}
+                                                value="2">
                                                 Casado(a)</option>
-                                            <option {{ old('comprador.estado_civil') == 3 ? 'selected' : '' }} value="3">
+                                            <option {{ old('comprador.estado_civil') == 3 ? 'selected' : '' }}
+                                                value="3">
                                                 União estável</option>
-                                            <option {{ old('comprador.estado_civil') == 4 ? 'selected' : '' }} value="4">
+                                            <option {{ old('comprador.estado_civil') == 4 ? 'selected' : '' }}
+                                                value="4">
                                                 Divorciado(a)</option>
-                                            <option {{ old('comprador.estado_civil') == 5 ? 'selected' : '' }} value="5">
+                                            <option {{ old('comprador.estado_civil') == 5 ? 'selected' : '' }}
+                                                value="5">
                                                 Viúvo(a)</option>
+                                            <option {{ old('comprador.estado_civil') == 6 ? 'selected' : '' }}
+                                                value="6">
+                                                Separado(a)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -81,7 +89,7 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        
+
                                         <select name="comprador[pais]" placeholder="Nacionalidade"
                                             class="form-control form-control-border">
                                             @foreach ($nacionalidades as $n)
@@ -98,7 +106,7 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Documento</label>
                                         <select class="custom-select form-control form-control-border"
                                             name="comprador[tipo_documento]" id="">
@@ -123,10 +131,16 @@
                                         </select>
 
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Nº Documento</label>
                                         <input value="{{ old('comprador.num_documento') }}" type="text"
                                             name="comprador[num_documento]" placeholder="Nº Documento"
+                                            class="form-control form-control-border">
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Profissão</label>
+                                        <input value="{{ old('comprador.profissao') }}" type="text"
+                                            name="comprador[profissao]" placeholder="Profissão"
                                             class="form-control form-control-border">
                                     </div>
 
@@ -169,13 +183,17 @@
                                         <select name="comprador[regime_bens]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option {{ old('comprador.regime_bens') == 1 ? 'selected' : '' }} value="1">
+                                            <option {{ old('comprador.regime_bens') == 1 ? 'selected' : '' }}
+                                                value="1">
                                                 Comunhão Parcial de Bens</option>
-                                            <option {{ old('comprador.regime_bens') == 2 ? 'selected' : '' }} value="2">
+                                            <option {{ old('comprador.regime_bens') == 2 ? 'selected' : '' }}
+                                                value="2">
                                                 Comunhão Universal de Bens</option>
-                                            <option {{ old('comprador.regime_bens') == 3 ? 'selected' : '' }} value="3">
+                                            <option {{ old('comprador.regime_bens') == 3 ? 'selected' : '' }}
+                                                value="3">
                                                 Separação Total de Bens</option>
-                                            <option {{ old('comprador.regime_bens') == 4 ? 'selected' : '' }} value="4">
+                                            <option {{ old('comprador.regime_bens') == 4 ? 'selected' : '' }}
+                                                value="4">
                                                 Separação Obrigatória de Bens</option>
                                         </select>
                                     </div>
@@ -192,8 +210,8 @@
                                     <div class="col-3">
                                         <label>CEP Residencial</label>
                                         <input value="{{ old('endereco_comprador.cep') }}" type="text"
-                                            onkeyup="pesquisacep(1)" name="endereco_comprador[cep]" id="cep1" placeholder=""
-                                            class="form-control form-control-border cep">
+                                            onkeyup="pesquisacep(1)" name="endereco_comprador[cep]" id="cep1"
+                                            placeholder="" class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
@@ -263,8 +281,9 @@
 
                                     <div class="col-4">
                                         <label>E-mail</label>
-                                        <input type="text" value="{{ old('comprador.email') }}" name="comprador[email]"
-                                            placeholder="" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('comprador.email') }}"
+                                            name="comprador[email]" placeholder=""
+                                            class="form-control form-control-border">
                                     </div>
 
 
@@ -348,19 +367,19 @@
                         </div>
 
                         <div class="card card-navy conjuge1" style="display:none;">
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#conj1">
                                 <h3 class="card-title">
                                     Dados Pessoais do cônjuge do Comprador 1
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse show" id=conj1>
                                 <div class="row mt-2">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>CPF cônjuge 1</label>
                                         <input type="text" value="{{ old('conjuge.cpf') }}" name="conjuge[cpf]"
                                             placeholder="CPF" class="form-control form-control-border cpf">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Data de Nascimento</label>
                                         <input type="date" value="{{ old('conjuge.data_nascimento') }}"
                                             name="conjuge[data_nascimento]" placeholder="Data de Nascimento"
@@ -368,33 +387,35 @@
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Nome</label>
                                         <input type="text" value="{{ old('conjuge.nome') }}" name="conjuge[nome]"
                                             placeholder="Nome" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Sexo</label>
                                         <select name="conjuge[sexo]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('conjuge.sexo') == 1 ? 'selected' : '' }}>Masculino
+                                            <option value="1" {{ old('conjuge.sexo') == 1 ? 'selected' : '' }}>
+                                                Masculino
                                             </option>
-                                            <option value="2" {{ old('conjuge.sexo') == 2 ? 'selected' : '' }}>Feminino
+                                            <option value="2" {{ old('conjuge.sexo') == 2 ? 'selected' : '' }}>
+                                                Feminino
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Nome da mãe</label>
                                         <input type="text" value="{{ old('conjuge.nome_mae') }}" name="conjuge[nome_mae]"
                                             placeholder="Nome da mãe" class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        
+
                                         <select name="conjuge[pais]" placeholder="Nacionalidade"
                                             class="form-control form-control-border">
                                             @foreach ($nacionalidades as $n)
@@ -482,14 +503,16 @@
                                 <div class="row mt-3">
                                     <div class="col-4">
                                         <label>Telefone</label>
-                                        <input type="text" value="{{ old('conjuge.telefone') }}" name="conjuge[telefone]"
-                                            placeholder="" class="form-control form-control-border telefone">
+                                        <input type="text" value="{{ old('conjuge.telefone') }}"
+                                            name="conjuge[telefone]" placeholder=""
+                                            class="form-control form-control-border telefone">
                                     </div>
 
                                     <div class="col-4">
                                         <label>Celular</label>
-                                        <input type="text" value="{{ old('conjuge.celular') }}" name="conjuge[celular]"
-                                            placeholder="" class="form-control form-control-border celular">
+                                        <input type="text" value="{{ old('conjuge.celular') }}"
+                                            name="conjuge[celular]" placeholder=""
+                                            class="form-control form-control-border celular">
                                     </div>
 
                                     <div class="col-4">
@@ -525,22 +548,27 @@
                                         <select name="conjuge[contratacao]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('conjuge.contratacao') == 1 ? 'selected' : '' }}>
+                                            <option value="1"
+                                                {{ old('conjuge.contratacao') == 1 ? 'selected' : '' }}>
                                                 Assalariado</option>
-                                            <option value="2" {{ old('conjuge.contratacao') == 2 ? 'selected' : '' }}>
+                                            <option value="2"
+                                                {{ old('conjuge.contratacao') == 2 ? 'selected' : '' }}>
                                                 Aposentado</option>
-                                            <option value="3" {{ old('conjuge.contratacao') == 3 ? 'selected' : '' }}>
+                                            <option value="3"
+                                                {{ old('conjuge.contratacao') == 3 ? 'selected' : '' }}>
                                                 Sócio Proprietário</option>
-                                            <option value="4" {{ old('conjuge.contratacao') == 4 ? 'selected' : '' }}>
+                                            <option value="4"
+                                                {{ old('conjuge.contratacao') == 4 ? 'selected' : '' }}>
                                                 Autônomo</option>
-                                            <option value="5" {{ old('conjuge.contratacao') == 5 ? 'selected' : '' }}>
+                                            <option value="5"
+                                                {{ old('conjuge.contratacao') == 5 ? 'selected' : '' }}>
                                                 Profissional liberal</option>
                                         </select>
                                     </div>
                                     <div class="col-4">
                                         <label>Data admissão</label>
-                                        <input type="date" value="{{ old('conjuge.admissao') }}" name="conjuge[admissao]"
-                                            class="form-control form-control-border">
+                                        <input type="date" value="{{ old('conjuge.admissao') }}"
+                                            name="conjuge[admissao]" class="form-control form-control-border">
                                     </div>
                                     {{-- <div class="col-4">
                                         <label>Cargo</label>
@@ -575,20 +603,24 @@
 
                         <div class="row justify-content-end mb-2">
                             <div class="col-12 col-md-3 pull-right">
-                                <button type="button" class="btn btn-block btn-outline-primary"
+                                <button type="button" class="btn btn-block btn-outline-primary btn-comprador2"
                                     onclick="addComprador2()"><i class='fas fa-plus'></i> Comprador</button>
+
+                                <button type="button" class="btn btn-block btn-outline-danger btn-remove-comprador2"
+                                    onclick="removerComprador2()" style="display:none;"><i class='fas fa-plus'></i>
+                                    Remover Comprador 2</button>
                             </div>
                         </div>
 
                         {{-- comprador 2 --}}
                         <div class="card card-navy comprador2"
                             {{ old('comprador2.ativo') != 1 ? 'style=display:none;' : '' }}>
-                            <div class="card-header">
+                            <div class="card-header cp" data-toggle="collapse" href="#comp2">
                                 <h3 class="card-title">
                                     Dados Pessoais Comprador 2
                                 </h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body collapse show" id="comp2">
                                 <input type="hidden" value="{{ old('comprador2.ativo') }}" id="seleciona-comprador-2"
                                     name="comprador2[ativo]">
                                 <div class="row">
@@ -623,14 +655,18 @@
                                             <option value="5"
                                                 {{ old('comprador2.estado_civil') == 5 ? 'selected' : '' }}>
                                                 Viúvo(a)</option>
+                                                <option value="6"
+                                                {{ old('comprador2.estado_civil') == 6 ? 'selected' : '' }}>
+                                                Separado(a)</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nome</label>
-                                        <input type="text" value="{{ old('comprador2.nome') }}" name="comprador2[nome]"
-                                            placeholder="Nome" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('comprador2.nome') }}"
+                                            name="comprador2[nome]" placeholder="Nome"
+                                            class="form-control form-control-border">
                                     </div>
                                     <div class="col-6">
                                         <label>Sexo</label>
@@ -649,7 +685,7 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        
+
                                         <select name="comprador2[pais]" placeholder="Nacionalidade"
                                             class="form-control form-control-border">
                                             @foreach ($nacionalidades as $n)
@@ -666,7 +702,7 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Documento</label>
                                         <select class="custom-select form-control form-control-border"
                                             name="comprador2[tipo_documento]" id="">
@@ -692,13 +728,18 @@
 
 
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Nº Documento</label>
                                         <input type="text" value="{{ old('comprador2.num_documento') }}"
                                             name="comprador2[num_documento]" placeholder="Nº Documento"
                                             class="form-control form-control-border">
                                     </div>
-
+                                    <div class="col-4">
+                                        <label>Profissão</label>
+                                        <input value="{{ old('comprador2.profissao') }}" type="text"
+                                            name="comprador2[profissao]" placeholder="Profissão"
+                                            class="form-control form-control-border">
+                                    </div>
                                 </div>
 
 
@@ -738,13 +779,17 @@
                                         <select name="comprador2[regime_bens]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }} value="1">
+                                            <option {{ old('comprador2.regime_bens') == 1 ? 'selected' : '' }}
+                                                value="1">
                                                 Comunhão Parcial de Bens</option>
-                                            <option {{ old('comprador2.regime_bens') == 2 ? 'selected' : '' }} value="2">
+                                            <option {{ old('comprador2.regime_bens') == 2 ? 'selected' : '' }}
+                                                value="2">
                                                 Comunhão Universal de Bens</option>
-                                            <option {{ old('comprador2.regime_bens') == 3 ? 'selected' : '' }} value="3">
+                                            <option {{ old('comprador2.regime_bens') == 3 ? 'selected' : '' }}
+                                                value="3">
                                                 Separação Total de Bens</option>
-                                            <option {{ old('comprador2.regime_bens') == 4 ? 'selected' : '' }} value="4">
+                                            <option {{ old('comprador2.regime_bens') == 4 ? 'selected' : '' }}
+                                                value="4">
                                                 Separação Obrigatória de Bens</option>
                                         </select>
                                     </div>
@@ -885,7 +930,8 @@
                                     <div class="col-4">
                                         <label>Data admissão</label>
                                         <input type="date" value="{{ old('profissao_comprador2.admissao') }}"
-                                            name="profissao_comprador2[admissao]" class="form-control form-control-border">
+                                            name="profissao_comprador2[admissao]"
+                                            class="form-control form-control-border">
                                     </div>
                                     {{-- <div class="col-4">
                                         <label>Cargo</label>
@@ -904,8 +950,10 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
-                                        <input type="text" value="{{ old('profissao_comprador2.outra_renda_mensal') }}"
-                                            name="profissao_comprador2[outra_renda_mensal]" placeholder="Outra renda mensal"
+                                        <input type="text"
+                                            value="{{ old('profissao_comprador2.outra_renda_mensal') }}"
+                                            name="profissao_comprador2[outra_renda_mensal]"
+                                            placeholder="Outra renda mensal"
                                             class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
@@ -927,12 +975,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="row mt-2">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>CPF cônjuge 2</label>
                                         <input type="text" value="{{ old('conjuge2.cpf') }}" name="conjuge2[cpf]"
                                             placeholder="CPF" class="form-control form-control-border cpf">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Data de Nascimento</label>
                                         <input type="date" value="{{ old('conjuge2.data_nascimento') }}"
                                             name="conjuge2[data_nascimento]" placeholder="Data de Nascimento"
@@ -940,34 +988,35 @@
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Nome</label>
                                         <input type="text" value="{{ old('conjuge2.nome') }}" name="conjuge2[nome]"
                                             placeholder="Nome" class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Sexo</label>
                                         <select name="conjuge2[sexo]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
                                             <option value="1" {{ old('conjuge2.sexo') == 1 ? 'selected' : '' }}>
                                                 Masculino</option>
-                                            <option value="2" {{ old('conjuge2.sexo') == 2 ? 'selected' : '' }}>Feminino
+                                            <option value="2" {{ old('conjuge2.sexo') == 2 ? 'selected' : '' }}>
+                                                Feminino
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Nome da mãe</label>
                                         <input type="text" value="{{ old('conjuge2.nome_mae') }}"
                                             name="conjuge2[nome_mae]" placeholder="Nome da mãe"
                                             class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        
+
                                         <select name="conjuge2[pais]" placeholder="Nacionalidade"
                                             class="form-control form-control-border">
                                             @foreach ($nacionalidades as $n)
@@ -1070,8 +1119,9 @@
 
                                     <div class="col-4">
                                         <label>E-mail</label>
-                                        <input type="text" value="{{ old('conjuge2.email') }}" name="conjuge2[email]"
-                                            placeholder="" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('conjuge2.email') }}"
+                                            name="conjuge2[email]" placeholder=""
+                                            class="form-control form-control-border">
                                     </div>
                                 </div>
 
@@ -1101,15 +1151,20 @@
                                         <select name="conjuge2[contratacao]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('conjuge2.contratacao') == 1 ? 'selected' : '' }}>
+                                            <option value="1"
+                                                {{ old('conjuge2.contratacao') == 1 ? 'selected' : '' }}>
                                                 Assalariado</option>
-                                            <option value="2" {{ old('conjuge2.contratacao') == 2 ? 'selected' : '' }}>
+                                            <option value="2"
+                                                {{ old('conjuge2.contratacao') == 2 ? 'selected' : '' }}>
                                                 Aposentado</option>
-                                            <option value="3" {{ old('conjuge2.contratacao') == 3 ? 'selected' : '' }}>
+                                            <option value="3"
+                                                {{ old('conjuge2.contratacao') == 3 ? 'selected' : '' }}>
                                                 Sócio Proprietário</option>
-                                            <option value="4" {{ old('conjuge2.contratacao') == 4 ? 'selected' : '' }}>
+                                            <option value="4"
+                                                {{ old('conjuge2.contratacao') == 4 ? 'selected' : '' }}>
                                                 Autônomo</option>
-                                            <option value="5" {{ old('conjuge2.contratacao') == 5 ? 'selected' : '' }}>
+                                            <option value="5"
+                                                {{ old('conjuge2.contratacao') == 5 ? 'selected' : '' }}>
                                                 Profissional liberal</option>
                                         </select>
                                     </div>
@@ -1172,8 +1227,9 @@
                                             id="seleciona-comprador-3" name="comprador3[ativo]">
 
                                         <label>CPF comprador </label>
-                                        <input type="text" value="{{ old('comprador3.cpf') }}" name="comprador3[cpf]"
-                                            placeholder="CPF" class="form-control form-control-border cpf">
+                                        <input type="text" value="{{ old('comprador3.cpf') }}"
+                                            name="comprador3[cpf]" placeholder="CPF"
+                                            class="form-control form-control-border cpf">
                                     </div>
                                     <div class="col-4">
                                         <label>Data de Nascimento</label>
@@ -1201,14 +1257,18 @@
                                             <option value="5"
                                                 {{ old('comprador3.estado_civil') == 5 ? 'selected' : '' }}>Viúvo(a)
                                             </option>
+                                            <option value="6"
+                                                {{ old('comprador3.estado_civil') == 6 ? 'selected' : '' }}>Separado(a)
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nome</label>
-                                        <input type="text" value="{{ old('comprador3.nome') }}" name="comprador3[nome]"
-                                            placeholder="Nome" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('comprador3.nome') }}"
+                                            name="comprador3[nome]" placeholder="Nome"
+                                            class="form-control form-control-border">
                                     </div>
                                     <div class="col-6">
                                         <label>Sexo</label>
@@ -1229,7 +1289,7 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Nacionalidade</label>
-                                        
+
                                         <select name="comprador3[pais]" placeholder="Nacionalidade"
                                             class="form-control form-control-border">
                                             @foreach ($nacionalidades as $n)
@@ -1246,7 +1306,7 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Documento</label>
                                         <select class="custom-select form-control form-control-border"
                                             name="comprador3[tipo_documento]" id="">
@@ -1270,10 +1330,16 @@
                                                 OAB</option>
                                         </select>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Nº Documento</label>
                                         <input type="text" value="{{ old('comprador3.num_documento') }}"
                                             name="comprador3[num_documento]" placeholder="Nº Documento"
+                                            class="form-control form-control-border">
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Profissão</label>
+                                        <input value="{{ old('comprador3.profissao') }}" type="text"
+                                            name="comprador3[profissao]" placeholder="Profissão"
                                             class="form-control form-control-border">
                                     </div>
 
@@ -1316,13 +1382,17 @@
                                         <select name="comprador3[regime_bens]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option {{ old('comprador3.regime_bens') == 1 ? 'selected' : '' }} value="1">
+                                            <option {{ old('comprador3.regime_bens') == 1 ? 'selected' : '' }}
+                                                value="1">
                                                 Comunhão Parcial de Bens</option>
-                                            <option {{ old('comprador3.regime_bens') == 2 ? 'selected' : '' }} value="2">
+                                            <option {{ old('comprador3.regime_bens') == 2 ? 'selected' : '' }}
+                                                value="2">
                                                 Comunhão Universal de Bens</option>
-                                            <option {{ old('comprador3.regime_bens') == 3 ? 'selected' : '' }} value="3">
+                                            <option {{ old('comprador3.regime_bens') == 3 ? 'selected' : '' }}
+                                                value="3">
                                                 Separação Total de Bens</option>
-                                            <option {{ old('comprador3.regime_bens') == 4 ? 'selected' : '' }} value="4">
+                                            <option {{ old('comprador3.regime_bens') == 4 ? 'selected' : '' }}
+                                                value="4">
                                                 Separação Obrigatória de Bens</option>
                                         </select>
                                     </div>
@@ -1338,9 +1408,9 @@
                                 <div class="row mt-3">
                                     <div class="col-3">
                                         <label>CEP Residencial</label>
-                                        <input type="text" value="{{ old('comprador3.cep') }}" onkeyup="pesquisacep(3)"
-                                            name="endereco_comprador3[cep]" id="cep3" placeholder=""
-                                            class="form-control form-control-border cep">
+                                        <input type="text" value="{{ old('comprador3.cep') }}"
+                                            onkeyup="pesquisacep(3)" name="endereco_comprador3[cep]" id="cep3"
+                                            placeholder="" class="form-control form-control-border cep">
                                     </div>
 
                                     <div class="col-5">
@@ -1464,7 +1534,8 @@
                                     <div class="col-4">
                                         <label>Data admissão</label>
                                         <input type="date" value="{{ old('profissao_comprador3.admissao') }}"
-                                            name="profissao_comprador3[admissao]" class="form-control form-control-border">
+                                            name="profissao_comprador3[admissao]"
+                                            class="form-control form-control-border">
                                     </div>
                                     {{-- <div class="col-4">
                                         <label>Cargo</label>
@@ -1483,8 +1554,10 @@
                                     </div>
                                     <div class="col-4">
                                         <label>Outra renda mensal</label>
-                                        <input type="text" value="{{ old('profissao_comprador3.outra_renda_mensal') }}"
-                                            name="profissao_comprador3[outra_renda_mensal]" placeholder="Outra renda mensal"
+                                        <input type="text"
+                                            value="{{ old('profissao_comprador3.outra_renda_mensal') }}"
+                                            name="profissao_comprador3[outra_renda_mensal]"
+                                            placeholder="Outra renda mensal"
                                             class="form-control form-control-border decimal">
                                     </div>
                                     <div class="col-4">
@@ -1506,12 +1579,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="row mt-2">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>CPF cônjuge 1</label>
                                         <input type="text" value="{{ old('conjuge3.cpf') }}" name="conjuge3[cpf]"
                                             placeholder="CPF" class="form-control form-control-border cpf">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Data de Nascimento</label>
                                         <input type="date" value="{{ old('conjuge3.data_nascimento') }}"
                                             name="conjuge3[data_nascimento]" placeholder="Data de Nascimento"
@@ -1519,28 +1592,30 @@
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Nome</label>
-                                        <input type="text" value="{{ old('conjuge3.nome') }}" name="conjuge3[nome]"
-                                            placeholder="Nome" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('conjuge3.nome') }}"
+                                            name="conjuge3[nome]" placeholder="Nome"
+                                            class="form-control form-control-border">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <label>Sexo</label>
                                         <select name="conjuge3[sexo]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
                                             <option value="1" {{ old('conjuge3.sexo') == 1 ? 'selected' : '' }}>
                                                 Masculino</option>
-                                            <option value="2" {{ old('conjuge3.sexo') == 2 ? 'selected' : '' }}>Feminino
+                                            <option value="2" {{ old('conjuge3.sexo') == 2 ? 'selected' : '' }}>
+                                                Feminino
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <label>Nome da mãe</label>
                                         <input type="text" value="{{ old('conjuge3.nome_mae') }}"
                                             name="conjuge3[nome_mae]" placeholder="Nome da mãe"
                                             class="form-control form-control-border">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row mt-3">
@@ -1647,8 +1722,9 @@
 
                                     <div class="col-4">
                                         <label>E-mail</label>
-                                        <input type="text" value="{{ old('conjuge3.email') }}" name="conjuge3[email]"
-                                            placeholder="" class="form-control form-control-border">
+                                        <input type="text" value="{{ old('conjuge3.email') }}"
+                                            name="conjuge3[email]" placeholder=""
+                                            class="form-control form-control-border">
                                     </div>
                                 </div>
 
@@ -1678,15 +1754,20 @@
                                         <select name="conjuge3[contratacao]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('conjuge3.contratacao') == 1 ? 'selected' : '' }}>
+                                            <option value="1"
+                                                {{ old('conjuge3.contratacao') == 1 ? 'selected' : '' }}>
                                                 Assalariado</option>
-                                            <option value="2" {{ old('conjuge3.contratacao') == 2 ? 'selected' : '' }}>
+                                            <option value="2"
+                                                {{ old('conjuge3.contratacao') == 2 ? 'selected' : '' }}>
                                                 Aposentado</option>
-                                            <option value="3" {{ old('conjuge3.contratacao') == 3 ? 'selected' : '' }}>
+                                            <option value="3"
+                                                {{ old('conjuge3.contratacao') == 3 ? 'selected' : '' }}>
                                                 Sócio Proprietário</option>
-                                            <option value="4" {{ old('conjuge3.contratacao') == 4 ? 'selected' : '' }}>
+                                            <option value="4"
+                                                {{ old('conjuge3.contratacao') == 4 ? 'selected' : '' }}>
                                                 Autônomo</option>
-                                            <option value="5" {{ old('conjuge3.contratacao') == 5 ? 'selected' : '' }}>
+                                            <option value="5"
+                                                {{ old('conjuge3.contratacao') == 5 ? 'selected' : '' }}>
                                                 Profissional liberal</option>
                                         </select>
                                     </div>
@@ -1728,106 +1809,7 @@
                         {{-- comprador 3 --}}
 
 
-                        <div class="card card-navy ">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    Valores da Operação
-                                </h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <label>Valor Imóvel</label>
-                                        <input type="text" value="{{ old('processo.valor_operacao') }}"
-                                            name="processo[valor_operacao]" placeholder="R$"
-                                            class="form-control form-control-border decimal">
-                                    </div>
-                                    <div class="col-4">
-                                        <label>Valor a financiar</label>
-                                        <input type="text" value="{{ old('processo.valor_financiar') }}"
-                                            name="processo[valor_financiar]" placeholder="R$"
-                                            class="form-control form-control-border decimal">
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" onchange="campoFgts()" type="checkbox"
-                                                id="utilizar_fgts" name="processo[utiliza_fgts]" value="1">
-                                            <label for="utilizar_fgts" class="custom-control-label">Utilizar
-                                                FGTS</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" onchange="campoDespesas()"
-                                                id="financiar_despesas" name="processo[financiar_despesas]" value="1">
-                                            <label for="financiar_despesas" class="custom-control-label">Financiar
-                                                Despesas</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-
-                                    <div class="col-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="financiar_tarifa"
-                                                name="processo[financiar_tarifa]" value="1">
-                                            <label for="financiar_tarifa" class="custom-control-label">Financiar Tarifa
-                                                de
-                                                Avaliação</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-2">
-                                    <div class="col-4 valor_fgts" style="display:none">
-                                        <label>Valor FGTS</label>
-                                        <input type="text" value="{{ old('processo.fgts') }}" name="processo[fgts]"
-                                            placeholder="Valor FGTS" class="form-control form-control-border decimal">
-                                    </div>
-
-                                    <div class="col-4 valor_despesas" style="display:none">
-                                        <label>Valor Despesas</label>
-                                        <input type="text" value="{{ old('processo.despesas') }}"
-                                            name="processo[valor_despesas]" placeholder="Valor Despesas"
-                                            class="form-control form-control-border decimal">
-                                    </div>
-                                </div>
-
-                                <div class="row mt-2">
-
-                                    <div class="col-6">
-                                        <label>Recursos Próprios</label>
-                                        <input type="text" value="{{ old('processo.recursos_proprios') }}"
-                                            name="processo[recursos_proprios]" placeholder="Valor Recursos Próprios"
-                                            class="form-control form-control-border decimal">
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label>Valor total financiado</label>
-                                        <input type="text" value="{{ old('processo.valor_total_financiado') }}"
-                                            name="processo[valor_total_financiado]" placeholder="Valor total financiado"
-                                            class="form-control form-control-border decimal">
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="row mt-3">
-
-
-                                    <div class="col-6">
-                                        <label>Prazo</label>
-                                        <input type="text" value="{{ old('processo.meses_financiamento') }}"
-                                            name="processo[meses_financiamento]" placeholder="Meses"
-                                            class="form-control form-control-border">
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
+                      
 
                         <div class="card card-navy " id="vendedor1">
                             <div class="card-header">
@@ -1852,8 +1834,9 @@
                                     <div class="row mt-3">
                                         <div class="col-4">
                                             <label>Nome</label>
-                                            <input value="{{ old('vendedor.nome') }}" type="text" name="vendedor[nome]"
-                                                placeholder="Nome do vendedor" class="form-control form-control-border">
+                                            <input value="{{ old('vendedor.nome') }}" type="text"
+                                                name="vendedor[nome]" placeholder="Nome do vendedor"
+                                                class="form-control form-control-border">
                                         </div>
                                         <div class="col-4">
                                             <label>Estado Civil</label>
@@ -1875,12 +1858,16 @@
                                                 <option value="5"
                                                     {{ old('vendedor.estado_civil') == 5 ? 'selected' : '' }}>Viúvo(a)
                                                 </option>
+                                                <option value="6"
+                                                    {{ old('vendedor.estado_civil') == 6 ? 'selected' : '' }}>Separado(a)
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-4">
                                             <label>CPF</label>
-                                            <input type="text" value="{{ old('vendedor.cpf') }}" name="vendedor[cpf]"
-                                                placeholder="CPF" class="form-control form-control-border cpf">
+                                            <input type="text" value="{{ old('vendedor.cpf') }}"
+                                                name="vendedor[cpf]" placeholder="CPF"
+                                                class="form-control form-control-border cpf">
                                         </div>
                                     </div>
 
@@ -1951,9 +1938,10 @@
                                             </div>
                                             <div class="col-4">
                                                 <label for="">Tipo procurador</label>
-                                                <select name="vendedor[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-1')"
-                                                class="custom-select form-control form-control-border"
-                                                id="tipo-procurador">
+                                                <select name="vendedor[tipo_procurador]"
+                                                    onchange="tipoProcurador('sessao-procurador-1')"
+                                                    class="custom-select form-control form-control-border"
+                                                    id="tipo-procurador">
                                                     <option>Selecione</option>
                                                     <option value="0">Pessoa Física</option>
                                                     <option value="1">Pessoa Jurídica</option>
@@ -1976,8 +1964,10 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="">Celular Procurador</label>
-                                                <input type="text" value="{{ old('vendedor.telefone_procurador') }}"
-                                                    name="vendedor[telefone_procurador]" placeholder="Celular Procurador"
+                                                <input type="text"
+                                                    value="{{ old('vendedor.telefone_procurador') }}"
+                                                    name="vendedor[telefone_procurador]"
+                                                    placeholder="Celular Procurador"
                                                     class="form-control form-control-border celular">
                                             </div>
                                         </div>
@@ -1991,13 +1981,15 @@
                                     <div class="row mt-3">
                                         <div class="col-4">
                                             <label>Razão social</label>
-                                            <input type="text" value="{{ old('vendedor.nome') }}" name="vendedor[nome]"
-                                                placeholder="Razão Social" class="form-control form-control-border">
+                                            <input type="text" value="{{ old('vendedor.nome') }}"
+                                                name="vendedor[nome]" placeholder="Razão Social"
+                                                class="form-control form-control-border">
                                         </div>
                                         <div class="col-4">
                                             <label>CNPJ</label>
-                                            <input type="text" value="{{ old('vendedor.cnpj') }}" name="vendedor[cnpj]"
-                                                placeholder="CNPJ" class="form-control form-control-border cnpj">
+                                            <input type="text" value="{{ old('vendedor.cnpj') }}"
+                                                name="vendedor[cnpj]" placeholder="CNPJ"
+                                                class="form-control form-control-border cnpj">
                                         </div>
 
                                     </div>
@@ -2061,9 +2053,10 @@
                                             </div>
                                             <div class="col-4">
                                                 <label for="">Tipo procurador</label>
-                                                <select name="vendedor[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-2')"
-                                                class="custom-select form-control form-control-border"
-                                                id="tipo-procurador">
+                                                <select name="vendedor[tipo_procurador]"
+                                                    onchange="tipoProcurador('sessao-procurador-2')"
+                                                    class="custom-select form-control form-control-border"
+                                                    id="tipo-procurador">
                                                     <option>Selecione</option>
                                                     <option value="0">Pessoa Física</option>
                                                     <option value="1">Pessoa Jurídica</option>
@@ -2086,8 +2079,10 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="">Celular Procurador</label>
-                                                <input type="text" value="{{ old('vendedor.telefone_procurador') }}"
-                                                    name="vendedor[telefone_procurador]" placeholder="Celular Procurador"
+                                                <input type="text"
+                                                    value="{{ old('vendedor.telefone_procurador') }}"
+                                                    name="vendedor[telefone_procurador]"
+                                                    placeholder="Celular Procurador"
                                                     class="form-control form-control-border celular">
                                             </div>
                                         </div>
@@ -2100,8 +2095,8 @@
                         <div class="row justify-content-end mb-2">
                             <div class="col-12 col-md-3 pull-right">
 
-                                <button type="button" class="btn btn-block btn-outline-primary" onclick="addVendedor2()"><i
-                                        class='fas fa-plus'></i> Vendedor</button>
+                                <button type="button" class="btn btn-block btn-outline-primary"
+                                    onclick="addVendedor2()"><i class='fas fa-plus'></i> Vendedor</button>
                             </div>
                         </div>
 
@@ -2153,12 +2148,16 @@
                                                 <option value="5"
                                                     {{ old('vendedor2.estado_civil') == 5 ? 'selected' : '' }}>Viúvo(a)
                                                 </option>
+                                                <option value="6"
+                                                    {{ old('vendedor2.estado_civil') == 6 ? 'selected' : '' }}>Separado(a)
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-4">
                                             <label>CPF</label>
-                                            <input type="text" value="{{ old('vendedor2.cpf') }}" name="vendedor2[cpf]"
-                                                placeholder="CPF" class="form-control form-control-border cpf">
+                                            <input type="text" value="{{ old('vendedor2.cpf') }}"
+                                                name="vendedor2[cpf]" placeholder="CPF"
+                                                class="form-control form-control-border cpf">
                                         </div>
                                     </div>
 
@@ -2228,9 +2227,10 @@
                                             </div>
                                             <div class="col-4">
                                                 <label for="">Tipo procurador</label>
-                                                <select name="vendedor2[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-1-outro')"
-                                                class="custom-select form-control form-control-border"
-                                                id="tipo-procurador">
+                                                <select name="vendedor2[tipo_procurador]"
+                                                    onchange="tipoProcurador('sessao-procurador-1-outro')"
+                                                    class="custom-select form-control form-control-border"
+                                                    id="tipo-procurador">
                                                     <option>Selecione</option>
                                                     <option value="0">Pessoa Física</option>
                                                     <option value="1">Pessoa Jurídica</option>
@@ -2253,8 +2253,10 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="">Celular Procurador</label>
-                                                <input type="text" value="{{ old('vendedor2.telefone_procurador') }}"
-                                                    name="vendedor2[telefone_procurador]" placeholder="Celular Procurador"
+                                                <input type="text"
+                                                    value="{{ old('vendedor2.telefone_procurador') }}"
+                                                    name="vendedor2[telefone_procurador]"
+                                                    placeholder="Celular Procurador"
                                                     class="form-control form-control-border celular">
                                             </div>
                                         </div>
@@ -2338,9 +2340,10 @@
                                             </div>
                                             <div class="col-4">
                                                 <label for="">Tipo procurador</label>
-                                                <select name="vendedor2[tipo_procurador]" onchange="tipoProcurador('sessao-procurador-2-outro')"
-                                                class="custom-select form-control form-control-border"
-                                                id="tipo-procurador">
+                                                <select name="vendedor2[tipo_procurador]"
+                                                    onchange="tipoProcurador('sessao-procurador-2-outro')"
+                                                    class="custom-select form-control form-control-border"
+                                                    id="tipo-procurador">
                                                     <option>Selecione</option>
                                                     <option value="0">Pessoa Física</option>
                                                     <option value="1">Pessoa Jurídica</option>
@@ -2363,8 +2366,10 @@
                                             </div>
                                             <div class="col-6">
                                                 <label for="">Celular Procurador</label>
-                                                <input type="text" value="{{ old('vendedor2.telefone_procurador') }}"
-                                                    name="vendedor2[telefone_procurador]" placeholder="Celular Procurador"
+                                                <input type="text"
+                                                    value="{{ old('vendedor2.telefone_procurador') }}"
+                                                    name="vendedor2[telefone_procurador]"
+                                                    placeholder="Celular Procurador"
                                                     class="form-control form-control-border celular">
                                             </div>
                                         </div>
@@ -2385,8 +2390,8 @@
                                 <div class="row mt-3">
                                     <div class="col-3">
                                         <label>CEP</label>
-                                        <input type="text" value="{{ old('imovel.cpf') }}" id="cep4" name="imovel[cep]"
-                                            onkeyup="pesquisacep(4)" placeholder="CEP do imóvel"
+                                        <input type="text" value="{{ old('imovel.cpf') }}" id="cep4"
+                                            name="imovel[cep]" onkeyup="pesquisacep(4)" placeholder="CEP do imóvel"
                                             class="form-control form-control-border cep">
                                     </div>
                                     <div class="col-5">
@@ -2477,9 +2482,11 @@
                                         <select name="imovel[novo_usado]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('imovel.novo_usado') == 1 ? 'selected' : '' }}>Novo
+                                            <option value="1"
+                                                {{ old('imovel.novo_usado') == 1 ? 'selected' : '' }}>Novo
                                             </option>
-                                            <option value="2" {{ old('imovel.novo_usado') == 2 ? 'selected' : '' }}>
+                                            <option value="2"
+                                                {{ old('imovel.novo_usado') == 2 ? 'selected' : '' }}>
                                                 Usado
                                             </option>
                                         </select>
@@ -2534,6 +2541,109 @@
                             </div>
                         </div>
 
+                          <div class="card card-navy ">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Valores da Operação
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label>Valor Imóvel</label>
+                                        <input type="text" value="{{ old('processo.valor_operacao') }}"
+                                            name="processo[valor_operacao]" placeholder="R$"
+                                            class="form-control form-control-border decimal">
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Valor a financiar</label>
+                                        <input type="text" value="{{ old('processo.valor_financiar') }}"
+                                            name="processo[valor_financiar]" placeholder="R$"
+                                            class="form-control form-control-border decimal">
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" onchange="campoFgts()" type="checkbox"
+                                                id="utilizar_fgts" name="processo[utiliza_fgts]" value="1">
+                                            <label for="utilizar_fgts" class="custom-control-label">Utilizar
+                                                FGTS</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox"
+                                                onchange="campoDespesas()" id="financiar_despesas"
+                                                name="processo[financiar_despesas]" value="1">
+                                            <label for="financiar_despesas" class="custom-control-label">Financiar
+                                                Despesas</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+
+                                    <div class="col-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" id="financiar_tarifa"
+                                                name="processo[financiar_tarifa]" value="1">
+                                            <label for="financiar_tarifa" class="custom-control-label">Financiar Tarifa
+                                                de
+                                                Avaliação</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <div class="col-4 valor_fgts" style="display:none">
+                                        <label>Valor FGTS</label>
+                                        <input type="text" value="{{ old('processo.fgts') }}"
+                                            name="processo[fgts]" placeholder="Valor FGTS"
+                                            class="form-control form-control-border decimal">
+                                    </div>
+
+                                    <div class="col-4 valor_despesas" style="display:none">
+                                        <label>Valor Despesas</label>
+                                        <input type="text" value="{{ old('processo.despesas') }}"
+                                            name="processo[valor_despesas]" placeholder="Valor Despesas"
+                                            class="form-control form-control-border decimal">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+
+                                    <div class="col-6">
+                                        <label>Recursos Próprios</label>
+                                        <input type="text" value="{{ old('processo.recursos_proprios') }}"
+                                            name="processo[recursos_proprios]" placeholder="Valor Recursos Próprios"
+                                            class="form-control form-control-border decimal">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label>Valor total financiado</label>
+                                        <input type="text" value="{{ old('processo.valor_total_financiado') }}"
+                                            name="processo[valor_total_financiado]" placeholder="Valor total financiado"
+                                            class="form-control form-control-border decimal">
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="row mt-3">
+
+
+                                    <div class="col-6">
+                                        <label>Prazo</label>
+                                        <input type="text" value="{{ old('processo.meses_financiamento') }}"
+                                            name="processo[meses_financiamento]" placeholder="Meses"
+                                            class="form-control form-control-border">
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
                         <div class="card card-navy ">
                             <div class="card-header">
                                 <h3 class="card-title">
@@ -2547,7 +2657,8 @@
                                         <select name="processo[banco]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('processo.banco') == 1 ? 'selected' : '' }}>Itaú
+                                            <option value="1" {{ old('processo.banco') == 1 ? 'selected' : '' }}>
+                                                Itaú
                                             </option>
                                             <option value="2" {{ old('processo.banco') == 2 ? 'selected' : '' }}>
                                                 Bradesco</option>
@@ -2561,9 +2672,9 @@
                                     </div>
                                     <div class="col-6">
                                         <label>Dia da prestação</label>
-                                        <input type="number" value="{{ old('processo.dia_prestacao') }}" min="1"
-                                            max="31" name="processo[dia_prestacao]" placeholder="Dia da prestação"
-                                            class="form-control form-control-border">
+                                        <input type="number" value="{{ old('processo.dia_prestacao') }}"
+                                            min="1" max="31" name="processo[dia_prestacao]"
+                                            placeholder="Dia da prestação" class="form-control form-control-border">
                                     </div>
 
                                 </div>
@@ -2587,13 +2698,17 @@
                                         <select name="processo[indexador]"
                                             class="custom-select form-control form-control-border">
                                             <option value="">Selecione</option>
-                                            <option value="1" {{ old('processo.amortizacao') == 1 ? 'selected' : '' }}>
+                                            <option value="1"
+                                                {{ old('processo.amortizacao') == 1 ? 'selected' : '' }}>
                                                 Poupança</option>
-                                            <option value="2" {{ old('processo.amortizacao') == 2 ? 'selected' : '' }}>
+                                            <option value="2"
+                                                {{ old('processo.amortizacao') == 2 ? 'selected' : '' }}>
                                                 TR</option>
-                                            <option value="3" {{ old('processo.amortizacao') == 3 ? 'selected' : '' }}>
+                                            <option value="3"
+                                                {{ old('processo.amortizacao') == 3 ? 'selected' : '' }}>
                                                 IPCA</option>
-                                            <option value="4" {{ old('processo.amortizacao') == 4 ? 'selected' : '' }}>
+                                            <option value="4"
+                                                {{ old('processo.amortizacao') == 4 ? 'selected' : '' }}>
                                                 Taxa Fixa</option>
                                         </select>
                                     </div>
@@ -2622,6 +2737,13 @@
                                             <option value="">Selecione</option>
 
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <label for="">Observações</label>
+                                        <textarea name="processo[observacoes]" class="form-control form-control-border" cols="30" rows="5"></textarea>
                                     </div>
                                 </div>
 
@@ -2655,7 +2777,6 @@
         label {
             font-size: 12px !important;
         }
-
     </style>
 
     <script>
@@ -2708,20 +2829,21 @@
 
             }
         }
+
         function tipoProcurador(target) {
             let val = $('.' + target + ' #tipo-procurador').val();
             console.log(val)
             if (val == 0) {
                 $('.' + target + ' #target-tipo').removeClass('cnpj');
                 $('.' + target + ' #target-tipo').addClass('cpf');
-                $('.' + target + ' #target-tipo').attr('placeholder','CPF Procurador');
+                $('.' + target + ' #target-tipo').attr('placeholder', 'CPF Procurador');
                 $('.' + target + ' #label-target-tipo').html('CPF Procurador');
 
                 rodaMascaras()
             } else if (val == 1) {
                 $('.' + target + ' #target-tipo').removeClass('cpf');
                 $('.' + target + ' #target-tipo').addClass('cnpj');
-                $('.' + target + ' #target-tipo').attr('placeholder','CNPJ Procurador');
+                $('.' + target + ' #target-tipo').attr('placeholder', 'CNPJ Procurador');
                 $('.' + target + ' #label-target-tipo').html('CNPJ Procurador');
 
                 rodaMascaras()
@@ -2765,6 +2887,16 @@
         function addComprador2() {
             $('.comprador2').show();
             $(".btn-comprador3").show();
+            $('.btn-comprador2').hide();
+            $('.btn-remove-comprador2').show();
+            $('#seleciona-comprador-2').val(0);
+        }
+
+        function removerComprador2() {
+            $('.comprador2').hide();
+            $(".btn-comprador3").hide();
+            $('.btn-comprador2').show();
+            $('.btn-remove-comprador2').hide();
             $('#seleciona-comprador-2').val(1);
         }
 
@@ -2917,6 +3049,7 @@
         };
 
         function buscaCorretores() {
+            $('#id_corretor').attr('disabled', 'disabled');
             let parceiro = $('#id_parceiro').val();
 
             if (isNaN(parceiro)) return;
@@ -2942,7 +3075,10 @@
                         option.setAttribute('value', el.id);
                         option.innerHTML = el.name;
                         $('#id_corretor').append(option);
+
                     })
+                    $('#id_corretor').removeAttr('disabled', 'disabled');
+
                 });
         }
 
@@ -2951,5 +3087,4 @@
             $('#vendedor2').show()
         }
     </script>
-
 @endsection

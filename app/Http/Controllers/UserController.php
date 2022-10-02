@@ -10,9 +10,11 @@ use App\Models\User;
 use App\Models\Parceiro;
 use Illuminate\Support\Facades\Hash;
 use App\Models;
+use App\Models\Log;
 use App\Models\RelCorretorGerente;
 use DateTime;
 use RelCompradorProcesso;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -275,13 +277,52 @@ class UserController extends Controller
         $lista = User::where([
             ['id_permissao', '=', '2'],
             ['id_parceiro', '=', $idParceiro],
+            ['status', '1']
         ])
             ->orWhere([
                 ['id_permissao', '=', '3'],
                 ['id_parceiro', '=', $idParceiro],
+                ['status', '1']
             ])->orderBy('name', 'asc')
             ->get();
 
         return response($lista);
+    }
+
+    public function alterarSenha()
+    {
+        return view('usuarios.senha', []);
+    }
+
+    public function alterarSenhaPrimeiroLogin(Request $request)
+    {
+        $data = $request->all();
+
+        $usuario = Auth::user();
+
+        try {
+            $data['email'] = $usuario['email'];
+            Log::create([
+                'log' => json_encode($data)
+            ]);
+        } catch (\Throwable $th) {
+            return Redirect('altera-senha')->with('error', 'Erro ao alterar a senha');
+        }
+
+        $senha = $data['senha'];
+        $confirmaSenha = $data['confirmaSenha'];
+
+        if ($senha != $confirmaSenha) {
+            return Redirect('altera-senha')->with('error', 'As senhas não conferem');
+        }
+
+        $update = [
+            'password' => Hash::make($senha),
+            'primeiro_login' => 0
+        ];
+
+        $usuario->update($update);
+
+        return redirect('home/');
     }
 }

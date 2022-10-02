@@ -121,7 +121,6 @@ class ParceiroController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-
         if ($id == $data['id']) {
             $parceiro = Parceiro::findOrFail($id);
 
@@ -161,7 +160,8 @@ class ParceiroController extends Controller
         //
     }
 
-    function limpaCPF_CNPJ($valor){
+    function limpaCPF_CNPJ($valor)
+    {
         $valor = trim($valor);
         $valor = str_replace(".", "", $valor);
         $valor = str_replace(",", "", $valor);
@@ -172,7 +172,8 @@ class ParceiroController extends Controller
         return $valor;
     }
 
-    function limpaTelefone($valor){
+    function limpaTelefone($valor)
+    {
         $valor = trim($valor);
         $valor = str_replace("-", "", $valor);
         $valor = str_replace("(", "", $valor);

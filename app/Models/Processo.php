@@ -35,6 +35,7 @@ class Processo extends Model
         'indexador',
         'id_corretor',
         'id_vendedor2',
-        'updated_at'
+        'updated_at',
+        'observacoes'
     ];
 }

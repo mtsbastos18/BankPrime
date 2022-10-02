@@ -26,34 +26,36 @@
                                     <div class="col-12">
                                         <select name="processo[status]" readonly
                                             class="custom-select form-control form-control-border" id="">
-                                            <option value="1" @if ($processo->status == 1) selected @endif>Em andamento
+                                            <option value="1" @if ($processo->status == 1) selected @endif>Em
+                                                andamento
                                             </option>
-                                            <option value="2" @if ($processo->status == 2) selected @endif> Aguardando
+                                            <option value="2" @if ($processo->status == 2) selected @endif>
+                                                Aguardando
                                                 aprovação</option>
-                                            <option value="3" @if ($processo->status == 3) selected @endif> Declinou
+                                            <option value="3" @if ($processo->status == 3) selected @endif>
+                                                Declinou
                                             </option>
-                                            <option value="4" @if ($processo->status == 4) selected @endif> Registrado
+                                            <option value="4" @if ($processo->status == 4) selected @endif>
+                                                Registrado
                                             </option>
-                                            <option value="5" @if ($processo->status == 5) selected @endif> Cancelado
+                                            <option value="5" @if ($processo->status == 5) selected @endif>
+                                                Cancelado
                                             </option>
-                                            <option value="6" @if ($processo->status == 6) selected @endif> Em análise de Crédito
+                                            <option value="6" @if ($processo->status == 6) selected @endif> Em
+                                                análise
+                                                de Crédito
                                             </option>
-                                            <option value="7" @if ($processo->status == 7) selected @endif> Em Registro
+                                            <option value="7" @if ($processo->status == 7) selected @endif> Em
+                                                Registro
                                             </option>
-                                            <option value="8" @if ($processo->status == 8) selected @endif> Crédito Aprovado
+                                            <option value="8" @if ($processo->status == 8) selected @endif>
+                                                Crédito
+                                                Aprovado
                                             </option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="row mt-3">
-                                    <div class="col-12">
-                                        <label for="">Url de acompanhamento</label>
-                                        <input type="text" onclick="myFunction()" class="form-control form-control-border"
-                                            id="link-cliente" readonly
-                                            value="{{ url('/acompanhamento-cliente', $processo->id) }}">
-                                    </div>
-                                </div>
 
 
                             </div>
@@ -84,6 +86,7 @@
                                             {{ $comprador->estado_civil == 3 ? 'União estável' : '' }}
                                             {{ $comprador->estado_civil == 4 ? 'Divorciado(a)' : '' }}
                                             {{ $comprador->estado_civil == 5 ? 'Viúvo(a)' : '' }}
+                                            {{ $comprador->estado_civil == 6 ? 'Separado(a)' : '' }}
                                         </p>
                                     </div>
 
@@ -96,8 +99,12 @@
                                     </div>
                                     <div class="col-6">
                                         <label>Sexo</label>
-                                        @if ($comprador->sexo == 1) <p>Masculino</p> @endif
-                                        @if ($comprador->sexo == 2) <p>Feminino</p> @endif
+                                        @if ($comprador->sexo == 1)
+                                            <p>Masculino</p>
+                                        @endif
+                                        @if ($comprador->sexo == 2)
+                                            <p>Feminino</p>
+                                        @endif
 
                                     </div>
                                 </div>
@@ -115,16 +122,19 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Documento</label>
                                         <p>{{ $comprador->tipo_documento }}</p>
 
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Nº Documento</label>
                                         <p>{{ $comprador->num_documento }}</p>
                                     </div>
-
+                                    <div class="col-4">
+                                        <label>Profissão</label>
+                                        <p>{{ $comprador->profissao }}</p>
+                                    </div>
                                 </div>
 
 
@@ -148,14 +158,18 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-3" @if ($comprador->estado_civil != 2 && $comprador->estado_civil != 3)
-                                    style="display:none;"
-                                    @endif>
+                                <div class="row mt-3" @if ($comprador->estado_civil != 2 && $comprador->estado_civil != 3) style="display:none;" @endif>
                                     <div class="col-6">
                                         <label>Regime de bens</label>
-                                        @if ($comprador->regime_bens == 1) <p>Comunhão parcial de bens</p> @endif
-                                        @if ($comprador->regime_bens == 2) <p>Comunhão Universal de Bens</p> @endif
-                                        @if ($comprador->regime_bens == 3) <p>Separação de bens</p> @endif
+                                        @if ($comprador->regime_bens == 1)
+                                            <p>Comunhão parcial de bens</p>
+                                        @endif
+                                        @if ($comprador->regime_bens == 2)
+                                            <p>Comunhão Universal de Bens</p>
+                                        @endif
+                                        @if ($comprador->regime_bens == 3)
+                                            <p>Separação de bens</p>
+                                        @endif
                                     </div>
 
                                     <div class="col-6">
@@ -247,11 +261,21 @@
                                 <div class="row mt-3">
                                     <div class="col-6">
                                         <label>Tipo contratação</label>
-                                        @if ($profissaoComprador->contratacao == 1) <p>Assalariado</p> @endif
-                                        @if ($profissaoComprador->contratacao == 2) <p>Aposentado</p> @endif
-                                        @if ($profissaoComprador->contratacao == 3) <p>Sócio Proprietário</p> @endif
-                                        @if ($profissaoComprador->contratacao == 4) <p>Autônomo</p> @endif
-                                        @if ($profissaoComprador->contratacao == 5) <p>Profissional liberal</p> @endif
+                                        @if ($profissaoComprador->contratacao == 1)
+                                            <p>Assalariado</p>
+                                        @endif
+                                        @if ($profissaoComprador->contratacao == 2)
+                                            <p>Aposentado</p>
+                                        @endif
+                                        @if ($profissaoComprador->contratacao == 3)
+                                            <p>Sócio Proprietário</p>
+                                        @endif
+                                        @if ($profissaoComprador->contratacao == 4)
+                                            <p>Autônomo</p>
+                                        @endif
+                                        @if ($profissaoComprador->contratacao == 5)
+                                            <p>Profissional liberal</p>
+                                        @endif
                                     </div>
                                     <div class="col-6">
                                         <label>Data admissão</label>
@@ -286,20 +310,33 @@
                                     </h3>
                                 </div>
                                 <div class="card-body">
+                                    <div class="row mt-2">
+                                        <div class="col-6">
+                                            <label>CPF </label>
+                                            <p class="cpf">{{ $conjugeComprador->cpf }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Data de Nascimento</label>
+                                            <p class="cpf">
+                                                {{ date_format(new DateTime($conjugeComprador->data_nascimento), 'd/m/Y') }}
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <label>Nome</label>
                                             <p>{{ $conjugeComprador->nome }}</p>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-6">
                                             <label>Sexo</label>
-                                            @if ($conjugeComprador->sexo == 1) <p>Masculino</p> @endif
-                                            @if ($conjugeComprador->sexo == 2) <p>Feminino</p> @endif
+                                            @if ($conjugeComprador->sexo == 1)
+                                                <p>Masculino</p>
+                                            @endif
+                                            @if ($conjugeComprador->sexo == 2)
+                                                <p>Feminino</p>
+                                            @endif
                                         </div>
-                                        <div class="col-4">
-                                            <label>Nome da mãe</label>
-                                            <p>{{ $conjugeComprador->nome_mae }}</p>
-                                        </div>
+
                                     </div>
 
                                     <div class="row mt-3">
@@ -385,11 +422,21 @@
                                     <div class="row mt-3">
                                         <div class="col-6">
                                             <label>Tipo contratação</label>
-                                            @if ($conjugeComprador->contratacao == 1) <p>Assalariado</p> @endif
-                                            @if ($conjugeComprador->contratacao == 2) <p>Aposentado</p> @endif
-                                            @if ($conjugeComprador->contratacao == 3) <p>Sócio Proprietário</p> @endif
-                                            @if ($conjugeComprador->contratacao == 4) <p>Autônomo</p> @endif
-                                            @if ($conjugeComprador->contratacao == 5) <p>Profissional Liberal</p> @endif
+                                            @if ($conjugeComprador->contratacao == 1)
+                                                <p>Assalariado</p>
+                                            @endif
+                                            @if ($conjugeComprador->contratacao == 2)
+                                                <p>Aposentado</p>
+                                            @endif
+                                            @if ($conjugeComprador->contratacao == 3)
+                                                <p>Sócio Proprietário</p>
+                                            @endif
+                                            @if ($conjugeComprador->contratacao == 4)
+                                                <p>Autônomo</p>
+                                            @endif
+                                            @if ($conjugeComprador->contratacao == 5)
+                                                <p>Profissional Liberal</p>
+                                            @endif
                                         </div>
                                         <div class="col-6">
                                             <label>Data admissão</label>
@@ -438,8 +485,12 @@
                                         </div>
                                         <div class="col-4">
                                             <label>Sexo</label>
-                                            @if ($comprador2->sexo == 1) <p>Masculino</p> @endif
-                                            @if ($comprador2->sexo == 2) <p>Feminino</p> @endif
+                                            @if ($comprador2->sexo == 1)
+                                                <p>Masculino</p>
+                                            @endif
+                                            @if ($comprador2->sexo == 2)
+                                                <p>Feminino</p>
+                                            @endif
 
                                         </div>
 
@@ -458,16 +509,19 @@
                                     </div>
 
                                     <div class="row mt-3">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <label>Documento</label>
                                             <p>{{ $comprador2->tipo_documento }}</p>
 
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <label>Nº Documento</label>
                                             <p>{{ $comprador2->num_documento }}</p>
                                         </div>
-
+                                        <div class="col-4">
+                                            <label>Profissão</label>
+                                            <p>{{ $comprador->profissao }}</p>
+                                        </div>
                                     </div>
 
 
@@ -494,9 +548,15 @@
                                     <div class="row mt-3">
                                         <div class="col-6">
                                             <label>Regime de bens</label>
-                                            @if ($comprador2->regime_bens == 1) <p>Comunhão parcial de bens</p> @endif
-                                            @if ($comprador2->regime_bens == 2) <p>Comunhão Universal de Bens</p> @endif
-                                            @if ($comprador2->regime_bens == 3) <p>Separação de bens</p> @endif
+                                            @if ($comprador2->regime_bens == 1)
+                                                <p>Comunhão parcial de bens</p>
+                                            @endif
+                                            @if ($comprador2->regime_bens == 2)
+                                                <p>Comunhão Universal de Bens</p>
+                                            @endif
+                                            @if ($comprador2->regime_bens == 3)
+                                                <p>Separação de bens</p>
+                                            @endif
                                         </div>
 
                                         <div class="col-6">
@@ -588,11 +648,21 @@
                                     <div class="row mt-3">
                                         <div class="col-6">
                                             <label>Tipo contratação</label>
-                                            @if ($profissaoComprador2->contratacao == 1) <p>Assalariado</p> @endif
-                                            @if ($profissaoComprador2->contratacao == 2) <p>Aposentado</p> @endif
-                                            @if ($profissaoComprador2->contratacao == 3) <p>Sócio Proprietário</p> @endif
-                                            @if ($profissaoComprador2->contratacao == 4) <p>Autônomo</p> @endif
-                                            @if ($profissaoComprador2->contratacao == 5) <p>Profissional liberal</p> @endif
+                                            @if ($profissaoComprador2->contratacao == 1)
+                                                <p>Assalariado</p>
+                                            @endif
+                                            @if ($profissaoComprador2->contratacao == 2)
+                                                <p>Aposentado</p>
+                                            @endif
+                                            @if ($profissaoComprador2->contratacao == 3)
+                                                <p>Sócio Proprietário</p>
+                                            @endif
+                                            @if ($profissaoComprador2->contratacao == 4)
+                                                <p>Autônomo</p>
+                                            @endif
+                                            @if ($profissaoComprador2->contratacao == 5)
+                                                <p>Profissional liberal</p>
+                                            @endif
                                         </div>
                                         <div class="col-6">
                                             <label>Data admissão</label>
@@ -624,24 +694,37 @@
                                 <div class="card card-navy ">
                                     <div class="card-header">
                                         <h3 class="card-title">
-                                            Dados Pessoais do cônjuge do Comprador 1
+                                            Dados Pessoais do cônjuge do Comprador 2
                                         </h3>
                                     </div>
                                     <div class="card-body">
+                                        <div class="row mt-2">
+                                            <div class="col-6">
+                                                <label>CPF </label>
+                                                <p class="cpf">{{ $conjugeComprador2->cpf }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Data de Nascimento</label>
+                                                <p class="cpf">
+                                                    {{ date_format(new DateTime($conjugeComprador2->data_nascimento), 'd/m/Y') }}
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <label>Nome</label>
                                                 <p>{{ $conjugeComprador2->nome }}</p>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-6">
                                                 <label>Sexo</label>
-                                                @if ($conjugeComprador2->sexo == 1) <p>Masculino</p> @endif
-                                                @if ($conjugeComprador2->sexo == 2) <p>Feminino</p> @endif
+                                                @if ($conjugeComprador2->sexo == 1)
+                                                    <p>Masculino</p>
+                                                @endif
+                                                @if ($conjugeComprador2->sexo == 2)
+                                                    <p>Feminino</p>
+                                                @endif
                                             </div>
-                                            <div class="col-4">
-                                                <label>Nome da mãe</label>
-                                                <p>{{ $conjugeComprador2->nome_mae }}</p>
-                                            </div>
+
                                         </div>
 
                                         <div class="row mt-3">
@@ -727,11 +810,21 @@
                                         <div class="row mt-3">
                                             <div class="col-6">
                                                 <label>Tipo contratação</label>
-                                                @if ($conjugeComprador2->contratacao == 1) <p>Assalariado</p> @endif
-                                                @if ($conjugeComprador2->contratacao == 2) <p>Aposentado</p> @endif
-                                                @if ($conjugeComprador2->contratacao == 3) <p>Sócio Proprietário</p> @endif
-                                                @if ($conjugeComprador2->contratacao == 4) <p>Autônomo</p> @endif
-                                                @if ($conjugeComprador2->contratacao == 5) <p>Profissional Liberal</p> @endif
+                                                @if ($conjugeComprador2->contratacao == 1)
+                                                    <p>Assalariado</p>
+                                                @endif
+                                                @if ($conjugeComprador2->contratacao == 2)
+                                                    <p>Aposentado</p>
+                                                @endif
+                                                @if ($conjugeComprador2->contratacao == 3)
+                                                    <p>Sócio Proprietário</p>
+                                                @endif
+                                                @if ($conjugeComprador2->contratacao == 4)
+                                                    <p>Autônomo</p>
+                                                @endif
+                                                @if ($conjugeComprador2->contratacao == 5)
+                                                    <p>Profissional Liberal</p>
+                                                @endif
                                             </div>
                                             <div class="col-6">
                                                 <label>Data admissão</label>
@@ -762,6 +855,524 @@
                             @endif
                         @endif
                         {{-- comprador2 --}}
+                        
+
+
+
+
+                        <div class="card card-navy ">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Dados dos vendedores
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Tipo de vendedor</label>
+                                        @if ($vendedor->tipo == 1)
+                                            <p>Pessoa Física</p>
+                                        @endif
+                                        @if ($vendedor->tipo == 2)
+                                            <p>Pessoa Jurídica</p>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="pessoa-fisica"
+                                    @if ($vendedor->tipo == 2) style="display: none;" @endif>
+                                    <div class="row mt-3">
+                                        <div class="col-4">
+                                            <label>Nome</label>
+                                            <p>{{ $vendedor->nome }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Estado Civil</label>
+                                            @if ($vendedor->estado_civil == 1)
+                                                <p>Solteiro(a)</p>
+                                            @endif
+                                            @if ($vendedor->estado_civil == 2)
+                                                <p>Casado(a)</p>
+                                            @endif
+                                            @if ($vendedor->estado_civil == 3)
+                                                <p>União estável</p>
+                                            @endif
+                                            @if ($vendedor->estado_civil == 4)
+                                                <p>Divorciado(a)</p>
+                                            @endif
+                                            @if ($vendedor->estado_civil == 5)
+                                                <p>Viúvo(a)</p>
+                                            @endif
+                                            @if ($vendedor->estado_civil == 6)
+                                                <p>Separado(a)</p>
+                                            @endif
+                                        </div>
+                                        <div class="col-4">
+                                            <label>CPF</label>
+                                            <p>{{ $vendedor->cpf }}</p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mt-3">
+                                        <div class="col-4">
+                                            <label>Telefone</label>
+                                            <p>{{ $vendedor->telefone }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Email</label>
+                                            <p>{{ $vendedor->email }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Profissão</label>
+                                            <p>{{ $vendedor->profissao }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-4">
+                                            <label for="banco">Banco</label>
+                                            <p>{{ $vendedor->banco }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="agencia">Agência</label>
+                                            <p>{{ $vendedor->agencia }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="conta">Conta</label>
+                                            <p>{{ $vendedor->conta }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <label for="">Possui procurador?</label>
+
+                                            @if ($vendedor->procurador == 1)
+                                                <p>Sim</p>
+                                            @endif
+                                            @if ($vendedor->procurador == 0)
+                                                <p>Não</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="sessao-procurador-1"
+                                        @if ($vendedor->procurador == 0) style="display:none;" @endif>
+
+
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <label for="">Nome Procurador</label>
+                                                <p>{{ $vendedor->nome_procurador }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">CPF Procurador</label>
+                                                <p>{{ $vendedor->cpf_procurador }}</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <label for="">E-mail Procurador</label>
+                                                <p>{{ $vendedor->email_procurador }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Celular Procurador</label>
+                                                <p>{{ $vendedor->telefone_procurador }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="pessoa-juridica"
+                                    @if ($vendedor->tipo == 1) style="display: none;" @endif>
+                                    <div class="row mt-3">
+                                        <div class="col-4">
+                                            <label>Razão social</label>
+                                            <p>{{ $vendedor->nome }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label>CNPJ</label>
+                                            <p>{{ $vendedor->cnpj }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <label>Telefone</label>
+                                            <p>{{ $vendedor->telefone }}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Email</label>
+                                            <p>{{ $vendedor->email }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-4">
+                                            <label for="banco">Banco</label>
+                                            <p>{{ $vendedor->banco }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="agencia">Agência</label>
+                                            <p>{{ $vendedor->agencia }}</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="conta">Conta</label>
+                                            <p>{{ $vendedor->conta }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <label for="">Possui procurador?</label>
+
+                                            @if ($vendedor->procurador == 1)
+                                                <p>Sim</p>
+                                            @endif
+                                            @if ($vendedor->procurador == 0)
+                                                <p>Não</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="sessao-procurador-2"
+                                        @if ($vendedor->procurador == 0) style="display:none;" @endif>
+
+
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <label for="">Nome Procurador</label>
+                                                <p>{{ $vendedor->nome_procurador }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">CPF Procurador</label>
+                                                <p>{{ $vendedor->cpf_procurador }}</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <label for="">E-mail Procurador</label>
+                                                <p>{{ $vendedor->email_procurador }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Celular Procurador</label>
+                                                <p>{{ $vendedor->telefone_procurador }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @if ($vendedor2)
+                            <div class="card card-navy ">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        Dados do vendedor 2
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label>Tipo de vendedor</label>
+                                            @if ($vendedor2->tipo == 1)
+                                                <p>Pessoa Física</p>
+                                            @endif
+                                            @if ($vendedor2->tipo == 2)
+                                                <p>Pessoa Jurídica</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="pessoa-fisica"
+                                        @if ($vendedor2->tipo == 2) style="display: none;" @endif>
+                                        <div class="row mt-3">
+                                            <div class="col-4">
+                                                <label>Nome</label>
+                                                <p>{{ $vendedor2->nome }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Estado Civil</label>
+                                                @if ($vendedor2->estado_civil == 1)
+                                                    <p>Solteiro(a)</p>
+                                                @endif
+                                                @if ($vendedor2->estado_civil == 2)
+                                                    <p>Casado(a)</p>
+                                                @endif
+                                                @if ($vendedor2->estado_civil == 3)
+                                                    <p>União estável</p>
+                                                @endif
+                                                @if ($vendedor2->estado_civil == 4)
+                                                    <p>Divorciado(a)</p>
+                                                @endif
+                                                @if ($vendedor2->estado_civil == 5)
+                                                    <p>Viúvo(a)</p>
+                                                @endif
+                                                @if ($vendedor2->estado_civil == 6)
+                                                    <p>Separado(a)</p>
+                                                @endif
+                                            </div>
+                                            <div class="col-4">
+                                                <label>CPF</label>
+                                                <p>{{ $vendedor2->cpf }}</p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row mt-3">
+                                            <div class="col-4">
+                                                <label>Telefone</label>
+                                                <p>{{ $vendedor2->telefone }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Email</label>
+                                                <p>{{ $vendedor2->email }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Profissão</label>
+                                                <p>{{ $vendedor2->profissao }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="col-4">
+                                                <label for="banco">Banco</label>
+                                                <p>{{ $vendedor2->banco }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="agencia">Agência</label>
+                                                <p>{{ $vendedor2->agencia }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="conta">Conta</label>
+                                                <p>{{ $vendedor2->conta }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <label for="">Possui procurador?</label>
+
+                                                @if ($vendedor2->procurador == 1)
+                                                    <p>Sim</p>
+                                                @endif
+                                                @if ($vendedor2->procurador == 0)
+                                                    <p>Não</p>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="sessao-procurador-1"
+                                            @if ($vendedor2->procurador == 0) style="display:none;" @endif>
+
+
+                                            <div class="row mt-3">
+                                                <div class="col-6">
+                                                    <label for="">Nome Procurador</label>
+                                                    <p>{{ $vendedor2->nome_procurador }}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="">CPF Procurador</label>
+                                                    <p>{{ $vendedor2->cpf_procurador }}</p>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-6">
+                                                    <label for="">E-mail Procurador</label>
+                                                    <p>{{ $vendedor2->email_procurador }}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="">Celular Procurador</label>
+                                                    <p>{{ $vendedor2->telefone_procurador }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+                                    <div class="pessoa-juridica"
+                                        @if ($vendedor2->tipo == 1) style="display: none;" @endif>
+                                        <div class="row mt-3">
+                                            <div class="col-4">
+                                                <label>Razão social</label>
+                                                <p>{{ $vendedor2->nome }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>CNPJ</label>
+                                                <p>{{ $vendedor2->cnpj }}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-6">
+                                                <label>Telefone</label>
+                                                <p>{{ $vendedor2->telefone }}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Email</label>
+                                                <p>{{ $vendedor2->email }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-4">
+                                                <label for="banco">Banco</label>
+                                                <p>{{ $vendedor2->banco }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="agencia">Agência</label>
+                                                <p>{{ $vendedor2->agencia }}</p>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="conta">Conta</label>
+                                                <p>{{ $vendedor2->conta }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12">
+                                                <label for="">Possui procurador?</label>
+
+                                                @if ($vendedor2->procurador == 1)
+                                                    <p>Sim</p>
+                                                @endif
+                                                @if ($vendedor2->procurador == 0)
+                                                    <p>Não</p>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="sessao-procurador-2"
+                                            @if ($vendedor2->procurador == 0) style="display:none;" @endif>
+
+
+                                            <div class="row mt-3">
+                                                <div class="col-6">
+                                                    <label for="">Nome Procurador</label>
+                                                    <p>{{ $vendedor2->nome_procurador }}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="">CPF Procurador</label>
+                                                    <p>{{ $vendedor2->cpf_procurador }}</p>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div class="col-6">
+                                                    <label for="">E-mail Procurador</label>
+                                                    <p>{{ $vendedor2->email_procurador }}</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="">Celular Procurador</label>
+                                                    <p>{{ $vendedor2->telefone_procurador }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
+                        <div class="card card-navy ">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Dados do imóvel
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mt-3">
+                                    <div class="col-3">
+                                        <label>CEP</label>
+                                        <p>{{ $imovel->cep }}</p>
+                                    </div>
+                                    <div class="col-5">
+                                        <label>Endereço</label>
+                                        <p>{{ $imovel->endereco }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>Número</label>
+                                        <p>{{ $imovel->numero }}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <label>Complemento</label>
+                                        <p>{{ $imovel->complemento }} </p>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+
+                                    <div class="col-4">
+                                        <label>Bairro</label>
+                                        <p>{{ $imovel->bairro }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Cidade</label>
+                                        <p>{{ $imovel->cidade }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Estado</label>
+                                        @foreach ($ufs as $k => $v)
+                                            @if ($imovel->estado == $k)
+                                                <p>{{ $v }}</p>
+                                            @endif
+                                        @endforeach
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-3">
+
+                                    <div class="col-4">
+                                        <label>Vagas na garagem</label>
+                                        <p>{{ $imovel->vagas }}</p>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label>Número(s) vaga(s)</label>
+                                        <p>{{ $imovel->numero_vaga }}</p>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="row mt-3">
+                                    <div class="col-4">
+                                        <label>Contato de avaliação</label>
+                                        <p>{{ $imovel->contato_avaliacao }}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Telefone do contato</label>
+                                        <p>{{ $imovel->telefone_contato }}</p>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label>Tipo </label>
+                                        @if ($imovel->novo_usado == 1)
+                                            <p>Novo</p>
+                                        @endif
+                                        @if ($imovel->novo_usado == 2)
+                                            <p>Usado</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card card-navy ">
                             <div class="card-header">
                                 <h3 class="card-title">
@@ -791,8 +1402,9 @@
                                     <div class="col-2">
                                         <div class="custom-control custom-checkbox">
                                             @if ($processo->financiar_despesas == 1)
-                                                <input class="custom-control-input" type="checkbox" id="financiar_despesas"
-                                                    name="processo[financiar_despesas]" value="1" disabled checked>
+                                                <input class="custom-control-input" type="checkbox"
+                                                    id="financiar_despesas" name="processo[financiar_despesas]"
+                                                    value="1" disabled checked>
                                             @endif
                                             <label for="financiar_despesas" class="custom-control-label">Financiar
                                                 Despesas</label>
@@ -869,7 +1481,8 @@
                                     <div class="col-1">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel2"
-                                                name="processo[tipo_imovel]" disabled value="2" {{ $checked2 }}>
+                                                name="processo[tipo_imovel]" disabled value="2"
+                                                {{ $checked2 }}>
                                             <label for="tipo_imovel2" class="custom-control-label">Comercial</label>
                                         </div>
                                     </div>
@@ -877,7 +1490,8 @@
                                     <div class="col-1">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel3"
-                                                name="processo[tipo_imovel]" disabled value="3" {{ $checked3 }}>
+                                                name="processo[tipo_imovel]" disabled value="3"
+                                                {{ $checked3 }}>
                                             <label for="tipo_imovel3" class="custom-control-label">Terreno</label>
                                         </div>
                                     </div>
@@ -885,7 +1499,8 @@
                                     <div class="col-1">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel4"
-                                                name="processo[tipo_imovel]" disabled value="4" {{ $checked4 }}>
+                                                name="processo[tipo_imovel]" disabled value="4"
+                                                {{ $checked4 }}>
                                             <label for="tipo_imovel4" class="custom-control-label">Construção</label>
                                         </div>
                                     </div>
@@ -893,7 +1508,8 @@
                                     <div class="col-2">
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" id="tipo_imovel5"
-                                                name="processo[tipo_imovel]" disabled value="5" {{ $checked5 }}>
+                                                name="processo[tipo_imovel]" disabled value="5"
+                                                {{ $checked5 }}>
                                             <label for="tipo_imovel5" class="custom-control-label">Terreno +
                                                 Construção</label>
                                         </div>
@@ -916,548 +1532,105 @@
                         </div>
 
 
-
-
-
                         <div class="card card-navy ">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Dados dos vendedores
+                                    Dados da operação
                                 </h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        <label>Tipo de vendedor</label>
-                                        @if ($vendedor->tipo == 1) <p>Pessoa Física</p> @endif
-                                        @if ($vendedor->tipo == 2) <p>Pessoa Jurídica</p> @endif
+                                        <label>Banco</label>
+
+                                        @if ($processo->banco == 1)
+                                            <p>Itaú</p>
+                                        @endif
+                                        @if ($processo->banco == 2)
+                                            <p>Bradesco</p>
+                                        @endif
+                                        @if ($processo->banco == 3)
+                                            <p>Santander</p>
+                                        @endif
+                                        @if ($processo->banco == 4)
+                                            <p>Caixa</p>
+                                        @endif
+                                        @if ($processo->banco == 5)
+                                            <p>Banrisul</p>
+                                        @endif
                                     </div>
+                                    <div class="col-6">
+                                        <label>Dia da prestação</label>
+                                        <p>{{ $processo->dia_prestacao }}</p>
+                                    </div>
+
                                 </div>
-
-                                <div class="pessoa-fisica" @if ($vendedor->tipo == 2) style="display: none;" @endif>
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <label>Nome</label>
-                                            <p>{{ $vendedor->nome }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>Estado Civil</label>
-                                            @if ($vendedor->estado_civil == 1) <p>Solteiro(a)</p> @endif
-                                            @if ($vendedor->estado_civil == 2) <p>Casado(a)</p> @endif
-                                            @if ($vendedor->estado_civil == 3) <p>União estável</p> @endif
-                                            @if ($vendedor->estado_civil == 4) <p>Divorciado(a)</p> @endif
-                                            @if ($vendedor->estado_civil == 5) <p>Viúvo(a)</p> @endif
-                                        </div>
-                                        <div class="col-4">
-                                            <label>CPF</label>
-                                            <p>{{ $vendedor->cpf }}</p>
-                                        </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <label>Sistema de amortização</label>
+                                        @if ($processo->amortizacao == 'sac')
+                                            <p>Sac</p>
+                                        @endif
+                                        @if ($processo->amortizacao == 'price')
+                                            <p>Price</p>
+                                        @endif
                                     </div>
-
-
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <label>Telefone</label>
-                                            <p>{{ $vendedor->telefone }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>Email</label>
-                                            <p>{{ $vendedor->email }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>Profissão</label>
-                                            <p>{{ $vendedor->profissao }}</p>
-                                        </div>
+                                    <div class="col-6">
+                                        <label>Indexador</label>
+                                        @if ($processo->indexador == 1)
+                                            <p>Poupança</p>
+                                        @endif
+                                        @if ($processo->indexador == 2)
+                                            <p>TR</p>
+                                        @endif
+                                        @if ($processo->indexador == 3)
+                                            <p>IPCA</p>
+                                        @endif
+                                        @if ($processo->indexador == 4)
+                                            <p>Taxa Fixa</p>
+                                        @endif
                                     </div>
-
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <label for="banco">Banco</label>
-                                            <p>{{ $vendedor->banco }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="agencia">Agência</label>
-                                            <p>{{ $vendedor->agencia }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="conta">Conta</label>
-                                            <p>{{ $vendedor->conta }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-12">
-                                            <label for="">Possui procurador?</label>
-
-                                            @if ($vendedor->procurador == 1) <p>Sim</p> @endif
-                                            @if ($vendedor->procurador == 0) <p>Não</p> @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="sessao-procurador-1" @if ($vendedor->procurador == 0)
-                                        style="display:none;" @endif>
-
-
-                                        <div class="row mt-3">
-                                            <div class="col-6">
-                                                <label for="">Nome Procurador</label>
-                                                <p>{{ $vendedor->nome_procurador }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="">CPF Procurador</label>
-                                                <p>{{ $vendedor->cpf_procurador }}</p>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-3">
-                                            <div class="col-6">
-                                                <label for="">E-mail Procurador</label>
-                                                <p>{{ $vendedor->email_procurador }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="">Celular Procurador</label>
-                                                <p>{{ $vendedor->telefone_procurador }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
 
 
                                 </div>
-
-                                <div class="pessoa-juridica" @if ($vendedor->tipo == 1) style="display: none;" @endif>
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <label>Razão social</label>
-                                            <p>{{ $vendedor->nome }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>CNPJ</label>
-                                            <p>{{ $vendedor->cnpj }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-6">
-                                            <label>Telefone</label>
-                                            <p>{{ $vendedor->telefone }}</p>
-                                        </div>
-                                        <div class="col-6">
-                                            <label>Email</label>
-                                            <p>{{ $vendedor->email }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-4">
-                                            <label for="banco">Banco</label>
-                                            <p>{{ $vendedor->banco }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="agencia">Agência</label>
-                                            <p>{{ $vendedor->agencia }}</p>
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="conta">Conta</label>
-                                            <p>{{ $vendedor->conta }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-12">
-                                            <label for="">Possui procurador?</label>
-
-                                            @if ($vendedor->procurador == 1) <p>Sim</p> @endif
-                                            @if ($vendedor->procurador == 0) <p>Não</p> @endif
-                                        </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <label>Parceiro</label>
+                                        @foreach ($parceiros as $p)
+                                            @if ($p->id != 1)
+                                                @if ($processo->id_parceiro == $p->id)
+                                                    <p>{{ $p->apelido }}
+                                                    </p>
+                                                @endif
+                                            @endif
+                                        @endforeach
                                     </div>
 
-                                    <div class="sessao-procurador-2" @if ($vendedor->procurador == 0)
-                                        style="display:none;" @endif>
-
-
-                                        <div class="row mt-3">
-                                            <div class="col-6">
-                                                <label for="">Nome Procurador</label>
-                                                <p>{{ $vendedor->nome_procurador }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="">CPF Procurador</label>
-                                                <p>{{ $vendedor->cpf_procurador }}</p>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-3">
-                                            <div class="col-6">
-                                                <label for="">E-mail Procurador</label>
-                                                <p>{{ $vendedor->email_procurador }}</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="">Celular Procurador</label>
-                                                <p>{{ $vendedor->telefone_procurador }}</p>
-                                            </div>
-                                        </div>
+                                    <div class="col-6">
+                                        <label>Corretor</label>
+                                        @foreach ($corretores as $c)
+                                            @if ($processo->id_corretor == $c->id)
+                                                <p>{{ $c->name }}
+                                                </p>
+                                            @endif
+                                        @endforeach
                                     </div>
-
-
-
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <label for="">Observações</label>
+                                        <p>{{ $processo->observacoes }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        @if ($vendedor2)
-                            <div class="card card-navy ">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        Dados do vendedor 2
-                                    </h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <label>Tipo de vendedor</label>
-                                            @if ($vendedor2->tipo == 1) <p>Pessoa Física</p> @endif
-                                            @if ($vendedor2->tipo == 2) <p>Pessoa Jurídica</p> @endif
-                                        </div>
-                                    </div>
+                    </form>
 
-                                    <div class="pessoa-fisica" @if ($vendedor2->tipo == 2) style="display: none;" @endif>
-                                        <div class="row mt-3">
-                                            <div class="col-4">
-                                                <label>Nome</label>
-                                                <p>{{ $vendedor2->nome }}</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <label>Estado Civil</label>
-                                                @if ($vendedor2->estado_civil == 1) <p>Solteiro(a)</p> @endif
-                                                @if ($vendedor2->estado_civil == 2) <p>Casado(a)</p> @endif
-                                                @if ($vendedor2->estado_civil == 3) <p>União estável</p> @endif
-                                                @if ($vendedor2->estado_civil == 4) <p>Divorciado(a)</p> @endif
-                                                @if ($vendedor2->estado_civil == 5) <p>Viúvo(a)</p> @endif
-                                            </div>
-                                            <div class="col-4">
-                                                <label>CPF</label>
-                                                <p>{{ $vendedor2->cpf }}</p>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row mt-3">
-                                            <div class="col-4">
-                                                <label>Telefone</label>
-                                                <p>{{ $vendedor2->telefone }}</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <label>Email</label>
-                                                <p>{{ $vendedor2->email }}</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <label>Profissão</label>
-                                                <p>{{ $vendedor2->profissao }}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mt-3">
-                                            <div class="col-4">
-                                                <label for="banco">Banco</label>
-                                                <p>{{ $vendedor2->banco }}</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="agencia">Agência</label>
-                                                <p>{{ $vendedor2->agencia }}</p>
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="conta">Conta</label>
-                                                <p>{{ $vendedor2->conta }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-12">
-                                                <label for="">Possui procurador?</label>
-
-                                                @if ($vendedor2->procurador == 1) <p>Sim</p> @endif
-                                                @if ($vendedor2->procurador == 0) <p>Não</p> @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="sessao-procurador-1" @if ($vendedor2->procurador == 0)
-                                            style="display:none;"
-                        @endif>
-
-
-                        <div class="row mt-3">
-                            <div class="col-6">
-                                <label for="">Nome Procurador</label>
-                                <p>{{ $vendedor2->nome_procurador }}</p>
-                            </div>
-                            <div class="col-6">
-                                <label for="">CPF Procurador</label>
-                                <p>{{ $vendedor2->cpf_procurador }}</p>
-
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-6">
-                                <label for="">E-mail Procurador</label>
-                                <p>{{ $vendedor2->email_procurador }}</p>
-                            </div>
-                            <div class="col-6">
-                                <label for="">Celular Procurador</label>
-                                <p>{{ $vendedor2->telefone_procurador }}</p>
-                            </div>
-                        </div>
-                </div>
-
-
-
-
-            </div>
-
-            <div class="pessoa-juridica" @if ($vendedor2->tipo == 1) style="display: none;" @endif>
-                <div class="row mt-3">
-                    <div class="col-4">
-                        <label>Razão social</label>
-                        <p>{{ $vendedor2->nome }}</p>
-                    </div>
-                    <div class="col-4">
-                        <label>CNPJ</label>
-                        <p>{{ $vendedor2->cnpj }}</p>
-                    </div>
-
-                </div>
-                <div class="row mt-3">
-                    <div class="col-6">
-                        <label>Telefone</label>
-                        <p>{{ $vendedor2->telefone }}</p>
-                    </div>
-                    <div class="col-6">
-                        <label>Email</label>
-                        <p>{{ $vendedor2->email }}</p>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-4">
-                        <label for="banco">Banco</label>
-                        <p>{{ $vendedor2->banco }}</p>
-                    </div>
-                    <div class="col-4">
-                        <label for="agencia">Agência</label>
-                        <p>{{ $vendedor2->agencia }}</p>
-                    </div>
-                    <div class="col-4">
-                        <label for="conta">Conta</label>
-                        <p>{{ $vendedor2->conta }}</p>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <label for="">Possui procurador?</label>
-
-                        @if ($vendedor2->procurador == 1) <p>Sim</p> @endif
-                        @if ($vendedor2->procurador == 0) <p>Não</p> @endif
-                    </div>
-                </div>
-
-                <div class="sessao-procurador-2" @if ($vendedor2->procurador == 0)
-                    style="display:none;" @endif>
-
-
-                    <div class="row mt-3">
-                        <div class="col-6">
-                            <label for="">Nome Procurador</label>
-                            <p>{{ $vendedor2->nome_procurador }}</p>
-                        </div>
-                        <div class="col-6">
-                            <label for="">CPF Procurador</label>
-                            <p>{{ $vendedor2->cpf_procurador }}</p>
-
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-6">
-                            <label for="">E-mail Procurador</label>
-                            <p>{{ $vendedor2->email_procurador }}</p>
-                        </div>
-                        <div class="col-6">
-                            <label for="">Celular Procurador</label>
-                            <p>{{ $vendedor2->telefone_procurador }}</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-    @endif
-
-
-    <div class="card card-navy ">
-        <div class="card-header">
-            <h3 class="card-title">
-                Dados do imóvel
-            </h3>
-        </div>
-        <div class="card-body">
-            <div class="row mt-3">
-                <div class="col-3">
-                    <label>CEP</label>
-                    <p>{{ $imovel->cep }}</p>
-                </div>
-                <div class="col-5">
-                    <label>Endereço</label>
-                    <p>{{ $imovel->endereco }}</p>
-                </div>
-                <div class="col-2">
-                    <label>Número</label>
-                    <p>{{ $imovel->numero }}</p>
-                </div>
-                <div class="col-2">
-                    <label>Complemento</label>
-                    <p>{{ $imovel->complemento }} </p>
                 </div>
             </div>
-            <div class="row mt-3">
-
-                <div class="col-4">
-                    <label>Bairro</label>
-                    <p>{{ $imovel->bairro }}</p>
-                </div>
-                <div class="col-4">
-                    <label>Cidade</label>
-                    <p>{{ $imovel->cidade }}</p>
-                </div>
-                <div class="col-4">
-                    <label>Estado</label>
-                    @foreach ($ufs as $k => $v)
-                        @if ($imovel->estado == $k)
-                            <p>{{ $v }}</p>
-                        @endif
-                    @endforeach
-                </div>
-
-            </div>
-
-            <div class="row mt-3">
-
-                <div class="col-4">
-                    <label>Vagas na garagem</label>
-                    <p>{{ $imovel->vagas }}</p>
-                </div>
-
-                <div class="col-6">
-                    <label>Número(s) vaga(s)</label>
-                    <p>{{ $imovel->numero_vaga }}</p>
-                </div>
-
-
-
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-4">
-                    <label>Contato de avaliação</label>
-                    <p>{{ $imovel->contato_avaliacao }}</p>
-                </div>
-                <div class="col-4">
-                    <label>Telefone do contato</label>
-                    <p>{{ $imovel->telefone_contato }}</p>
-                </div>
-
-                <div class="col-4">
-                    <label>Tipo </label>
-                    @if ($imovel->novo_usado == 1) <p>Novo</p> @endif
-                    @if ($imovel->novo_usado == 2) <p>Usado</p> @endif
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card card-navy ">
-        <div class="card-header">
-            <h3 class="card-title">
-                Dados da operação
-            </h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-6">
-                    <label>Banco</label>
-
-                    @if ($processo->banco == 1) <p>Itaú</p> @endif
-                    @if ($processo->banco == 2)
-                        <p>Bradesco</p>
-                    @endif
-                    @if ($processo->banco == 3)
-                        <p>Santander</p>
-                    @endif
-                    @if ($processo->banco == 4)
-                        <p>Caixa</p>
-                    @endif
-                    @if ($processo->banco == 5)
-                        <p>Banrisul</p>
-                    @endif
-                </div>
-                <div class="col-6">
-                    <label>Dia da prestação</label>
-                    <p>{{ $processo->dia_prestacao }}</p>
-                </div>
-
-            </div>
-            <div class="row mt-3">
-                <div class="col-6">
-                    <label>Sistema de amortização</label>
-                    @if ($processo->amortizacao == 'sac') <p>Sac</p> @endif
-                    @if ($processo->amortizacao == 'price')
-                        <p>Price</p>
-                    @endif
-                </div>
-                <div class="col-6">
-                    <label>Indexador</label>
-                    @if ($processo->indexador == 1) <p>Poupança</p> @endif
-                    @if ($processo->indexador == 2) <p>TR</p> @endif
-                    @if ($processo->indexador == 3) <p>IPCA</p> @endif
-                    @if ($processo->indexador == 4) <p>Taxa Fixa</p> @endif
-                </div>
-
-
-            </div>
-            <div class="row mt-3">
-                <div class="col-6">
-                    <label>Parceiro</label>
-                    @foreach ($parceiros as $p)
-                        @if ($p->id != 1)
-                            @if ($processo->id_parceiro == $p->id)
-                                <p>{{ $p->apelido }}
-                                </p>
-                            @endif
-                        @endif
-                    @endforeach
-                </div>
-
-                <div class="col-6">
-                    <label>Corretor</label>
-                    @foreach ($corretores as $c)
-                        @if ($processo->id_corretor == $c->id)
-                            <p>{{ $c->name }}
-                            </p>
-
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    </form>
-
-    </div>
-    </div>
-    <!-- /.row -->
-    </div><!-- /.container-fluid -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
 @endsection
@@ -1473,7 +1646,6 @@
     label {
         font-size: 12px !important;
     }
-
 </style>
 
 <script>

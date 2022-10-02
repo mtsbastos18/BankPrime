@@ -119,7 +119,7 @@ label {
 $("#id_parceiro").on('change',function(){
     let filtro = $(this).val();
 
-    $("#filtra-busca").attr('href','/usuarios/' + filtro);
+    $("#filtra-busca").attr('href','/sistema/usuarios/' + filtro);
 })
 $(document).ready(function() {
             $('.table').DataTable({

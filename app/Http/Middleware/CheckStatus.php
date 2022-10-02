@@ -19,9 +19,12 @@ class CheckStatus
     {
         $response = $next($request);
         //If the status is not approved redirect to login 
-        if(Auth::check() && Auth::user()->status != 1){
+        if (Auth::check() && Auth::user()->status != 1) {
             Auth::logout();
             return redirect('/login')->with('erro_login', 'Your error text');
+        }
+        if (Auth::check() && Auth::user()->primeiro_login == 1) {
+            return redirect('/altera-senha');
         }
         return $response;
     }

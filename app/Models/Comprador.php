@@ -9,7 +9,7 @@ class Comprador extends Model
 {
     use HasFactory;
     protected $table = 'compradores';
-    
+
     protected $fillable = [
         'nome',
         'cpf',
@@ -26,6 +26,7 @@ class Comprador extends Model
         'data_emissao',
         'regime_bens',
         'data_casamento',
+        'profissao'
     ];
 }
 
@@ -47,3 +48,5 @@ class Comprador extends Model
 //             $table->date('data_emissao');
 //             $table->string('regime_bens')->nullable();
 //             $table->date('data_casamento')->nullable();
+// ALTER TABLE `bankprime2`.`compradores` 
+// ADD COLUMN `profissao` VARCHAR(255) NULL AFTER `updated_at`;

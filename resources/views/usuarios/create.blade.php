@@ -38,10 +38,8 @@
                                             class="custom-select form-control form-control-border" required>
                                             <option value="">Selecione</option>
                                             @foreach ($permissoes as $p)
-
                                                 <option {{ old('id_permissao') == $p->id ? 'selected' : '' }}
                                                     value="{{ $p->id }}">{{ $p->permissao }}</option>
-
                                             @endforeach
                                         </select>
                                     </div>
@@ -85,8 +83,8 @@
                                     </div>
                                     <div class="col-6">
                                         <label>E-mail</label>
-                                        <input type="text" value="{{ old('email') }}" name="email" placeholder="E-mail"
-                                            class="form-control form-control-border">
+                                        <input type="text" value="{{ old('email') }}" name="email"
+                                            placeholder="E-mail" class="form-control form-control-border" required>
                                     </div>
 
                                 </div>
@@ -134,7 +132,6 @@
         label {
             font-size: 12px !important;
         }
-
     </style>
 
     <script>
