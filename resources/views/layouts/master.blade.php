@@ -240,6 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <p>Minhas Propostas</p>
                             </a>
                         </li>
+                        @if (auth()->user()->id_permissao == 1 || auth()->user()->id_permissao == 4)
                         <li class="nav-item manu-open">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tools"></i>
@@ -263,6 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </li>
                             </ul>
                         </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
